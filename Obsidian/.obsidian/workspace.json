@@ -11,8 +11,12 @@
             "id": "b5b800926c7c06ed",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Ideas.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Ideas.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Ideas.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -119,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Welcome.md"
+                "file": "Ideas.md"
               }
             }
           }
@@ -141,8 +147,9 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "389fac0c2afa423d",
+  "active": "b5b800926c7c06ed",
   "lastOpenFiles": [
-    "Welcome.md"
+    "Welcome.md",
+    "Ideas.md"
   ]
 }
