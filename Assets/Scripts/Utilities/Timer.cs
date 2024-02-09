@@ -12,9 +12,9 @@ namespace Utilities {
         public Action OnTimerStart = delegate { };
         public Action OnTimerStop = delegate { };
 
-        protected Timer(float initialTime) {
+        protected Timer(float initialTime, bool startRunning = false) {
             this._initialTime = initialTime;
-            IsRunning = false;
+            IsRunning = startRunning;
         }
 
         public void Start() {
@@ -45,7 +45,7 @@ namespace Utilities {
 
     [Serializable]
     public class CountDownTimer : Timer {
-        public CountDownTimer(float initialTime) : base(initialTime) { }
+        public CountDownTimer(float initialTime, bool startRunning = false) : base(initialTime, startRunning) { }
 
         public override void Update(float deltaTime) {
             if (IsRunning && _time > 0f) {
@@ -74,11 +74,17 @@ namespace Utilities {
                 OnTimerStart.Invoke();
             }
         }
+
+        public void Restart(float newTime) {
+            _initialTime = newTime;
+            Reset();
+            Resume();
+        }
     }
 
     [Serializable]
     public class StopwatchTimer : Timer {
-        public StopwatchTimer() : base(0f) { }
+        public StopwatchTimer(bool startRunning = false) : base(0f, startRunning) { }
 
         public override void Update(float deltaTime) {
             if (IsRunning) {

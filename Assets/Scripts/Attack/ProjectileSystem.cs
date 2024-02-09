@@ -21,8 +21,8 @@ namespace Attack {
 
         private void FixedUpdate() {
             attackTimer.Update(Time.fixedDeltaTime);
-            if (attackTimer.IsFinished && Input.instance.playerControls.Gameplay.MousePosition.enabled) {
-                //Attack();
+            if (attackTimer.IsFinished && Input.instance.playerControls.Gameplay.Fire.triggered) {
+                Attack();
                 ResetAttackTimer();
             }
         }
@@ -40,8 +40,7 @@ namespace Attack {
 
         private void ResetAttackTimer() {
             if (stats.GetStat(StatType.AttackSpeed, out float attackCooldown)) {
-                attackTimer.Reset(attackCooldown);
-                attackTimer.Start();
+                attackTimer.Restart(attackCooldown);
             } else {
                 Debug.LogError("Stats does not contain an AttackSpeed entry!");
                 Destroy(this);
