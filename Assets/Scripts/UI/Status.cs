@@ -7,14 +7,21 @@ using UnityEditor;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace UI {
+    [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(LayoutGroup))]
     public class Status : MonoBehaviour {
         [Header("Editor")]
         [SerializeField] private Health health;
         [SerializeField] private Stats stats;
+        [Tooltip("Prefab to spawn - should have a TMP_Text component somewhere (can be in children)")]
         [SerializeField] private GameObject statPrefab;
+        [Tooltip("Canvas Group must also have a layout group attached to allow stats to align correctly")]
         [SerializeField] private CanvasGroup canvasGroup;
+
+        [Header("Debug")]
         [SerializeField] private TMP_Text[] statText;
         [SerializeField] private bool isOpen = false;
 
