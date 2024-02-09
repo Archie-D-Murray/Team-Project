@@ -31,8 +31,8 @@ namespace UI {
                 Destroy(this);
                 return;
             }
-            statText = new TMP_Text[stats.statDict.Count];
-            foreach ((StatType type, int i) item in stats.statDict.Keys.Select((type, i) => (type, i))) {
+            statText = new TMP_Text[stats.StatDict.Count];
+            foreach ((StatType type, int i) item in stats.StatDict.Keys.Select((type, i) => (type, i))) {
                 statText[item.i] = Instantiate(statPrefab, canvasGroup.transform).GetComponentInChildren<TMP_Text>();
                 statText[item.i].text = stats.GetStatDisplay(item.type);
             }
@@ -59,16 +59,25 @@ namespace UI {
 
         private void UpdateStats() {
             // Magic iteration that gives both index and variable using a tuple
-            foreach ((StatType type, int i) item in stats.statDict.Keys.Select((type, i) => (type, i))) {
+            foreach ((StatType type, int i) item in stats.StatDict.Keys.Select((type, i) => (type, i))) {
                 statText[item.i].text = stats.GetStatDisplay(item.type);
             }
         }
     }
 
-    public enum StatType { Speed, Damage, Magic }
+    public enum StatType { Speed, Damage, Magic, AttackSpeed }
 
     public class Stats : MonoBehaviour {
-        public Dictionary<StatType, float> statDict;
+
+        #region Enum => String cache
+        private const string AttackSpeed = "Attack Speed";
+        private const string Speed = "Speed";
+        private const string Damage = "Damage";
+        private const string Magic = "Magic";
+        #endregion
+
+        private Dictionary<StatType, float> statDict;
+        public Dictionary<StatType, float> StatDict => statDict;
 
         public string GetStatDisplay(StatType type) {
             return $"{GetStatName(type)}: {statDict[type]}";
@@ -76,11 +85,16 @@ namespace UI {
 
         public string GetStatName(StatType type) {
             return type switch {
-                StatType.Speed => "Speed",
-                StatType.Damage => "Damage",
-                StatType.Magic => "Magic",
+                StatType.AttackSpeed => AttackSpeed,
+                StatType.Speed => Speed,
+                StatType.Damage => Damage,
+                StatType.Magic => Magic,
                 _ => string.Empty
             };
+        }
+
+        public bool GetStat(StatType type, out float stat) { 
+            return statDict.TryGetValue(type, out stat);
         }
     }
 }
