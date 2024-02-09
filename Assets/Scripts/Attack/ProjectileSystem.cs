@@ -1,5 +1,3 @@
-using System;
-
 using Attack.Components;
 
 using UI;
