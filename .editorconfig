@@ -193,14 +193,6 @@ dotnet_naming_rule.methods_should_be_pascalcase.severity = suggestion
 dotnet_naming_rule.methods_should_be_pascalcase.symbols = methods
 dotnet_naming_rule.methods_should_be_pascalcase.style = pascalcase
 
-dotnet_naming_rule.properties_should_be_pascalcase.severity = suggestion
-dotnet_naming_rule.properties_should_be_pascalcase.symbols = properties
-dotnet_naming_rule.properties_should_be_pascalcase.style = pascalcase
-
-dotnet_naming_rule.events_should_be_pascalcase.severity = suggestion
-dotnet_naming_rule.events_should_be_pascalcase.symbols = events
-dotnet_naming_rule.events_should_be_pascalcase.style = pascalcase
-
 dotnet_naming_rule.local_variables_should_be_camelcase.severity = suggestion
 dotnet_naming_rule.local_variables_should_be_camelcase.symbols = local_variables
 dotnet_naming_rule.local_variables_should_be_camelcase.style = camelcase
@@ -213,14 +205,6 @@ dotnet_naming_rule.parameters_should_be_camelcase.severity = suggestion
 dotnet_naming_rule.parameters_should_be_camelcase.symbols = parameters
 dotnet_naming_rule.parameters_should_be_camelcase.style = camelcase
 
-dotnet_naming_rule.public_fields_should_be_pascalcase.severity = suggestion
-dotnet_naming_rule.public_fields_should_be_pascalcase.symbols = public_fields
-dotnet_naming_rule.public_fields_should_be_pascalcase.style = pascalcase
-
-dotnet_naming_rule.private_fields_should_be__camelcase.severity = suggestion
-dotnet_naming_rule.private_fields_should_be__camelcase.symbols = private_fields
-dotnet_naming_rule.private_fields_should_be__camelcase.style = _camelcase
-
 dotnet_naming_rule.private_static_fields_should_be_s_camelcase.severity = none
 dotnet_naming_rule.private_static_fields_should_be_s_camelcase.symbols = private_static_fields
 dotnet_naming_rule.private_static_fields_should_be_s_camelcase.style = _camelcase
@@ -232,14 +216,6 @@ dotnet_naming_rule.public_constant_fields_should_be_pascalcase.style = pascalcas
 dotnet_naming_rule.private_constant_fields_should_be_pascalcase.severity = suggestion
 dotnet_naming_rule.private_constant_fields_should_be_pascalcase.symbols = private_constant_fields
 dotnet_naming_rule.private_constant_fields_should_be_pascalcase.style = pascalcase
-
-dotnet_naming_rule.public_static_readonly_fields_should_be_pascalcase.severity = suggestion
-dotnet_naming_rule.public_static_readonly_fields_should_be_pascalcase.symbols = public_static_readonly_fields
-dotnet_naming_rule.public_static_readonly_fields_should_be_pascalcase.style = pascalcase
-
-dotnet_naming_rule.private_static_readonly_fields_should_be_pascalcase.severity = suggestion
-dotnet_naming_rule.private_static_readonly_fields_should_be_pascalcase.symbols = private_static_readonly_fields
-dotnet_naming_rule.private_static_readonly_fields_should_be_pascalcase.style = pascalcase
 
 dotnet_naming_rule.enums_should_be_pascalcase.severity = suggestion
 dotnet_naming_rule.enums_should_be_pascalcase.symbols = enums
