@@ -7,34 +7,36 @@ using UnityEngine;
 using Utilities;
 
 namespace Attack {
-    public class ProjectileSystem : MonoBehaviour, IAttackSystem {
+    public class ProjectileSystem : IAttackSystem {
         private CountDownTimer attackTimer = new CountDownTimer(0f);
         private Stats stats;
+        private Transform origin;
 
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private float projectileSpeed = 10f;
 
-        private void Start() {
-            stats = GetComponent<Stats>();
+        public ProjectileSystem(Stats stats, GameObject projectilePrefab, Transform origin) {
+            this.stats = stats;
+            this.projectilePrefab = projectilePrefab;
+            this.origin = origin;
             ResetAttackTimer();
         }
 
-        private void FixedUpdate() {
+        public void FixedUpdate() {
             attackTimer.Update(Time.fixedDeltaTime);
             if (attackTimer.IsFinished && Input.instance.playerControls.Gameplay.Fire.triggered) {
-                Attack();
+                Attack(origin);
                 ResetAttackTimer();
             }
         }
 
-        public void Attack() {
+        public void Attack(Transform origin) {
             if (stats.GetStat(StatType.Damage, out float damage)) {
-                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.LookRotation(transform.up));
+                GameObject projectile = Object.Instantiate(projectilePrefab, origin.position, Quaternion.LookRotation(origin.up));
                 projectile.AddComponent<EntityDamager>().Init(damage);
                 projectile.AddComponent<LinearProjectileMover>().Init(projectileSpeed);
             } else {
-                Debug.LogError("Stats does not contain a Damage entry!");
-                Destroy(this);
+                throw new System.Exception("Stats does not contain a Damage entry!");
             }
         }
 
@@ -42,9 +44,7 @@ namespace Attack {
             if (stats.GetStat(StatType.AttackSpeed, out float attackCooldown)) {
                 attackTimer.Restart(attackCooldown);
             } else {
-                Debug.LogError("Stats does not contain an AttackSpeed entry!");
-                Destroy(this);
-                return;
+                throw new System.Exception("Stats does not contain a Damage entry!");
             }
         }
     }
