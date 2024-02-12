@@ -80,6 +80,12 @@ namespace Utilities {
             Reset();
             Resume();
         }
+
+        public void Restart(float newTime) {
+            _initialTime = newTime;
+            _time = 0f;
+            IsRunning = true;
+        }
     }
 
     [Serializable]
