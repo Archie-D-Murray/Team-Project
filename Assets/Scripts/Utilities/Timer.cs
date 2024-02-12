@@ -74,6 +74,12 @@ namespace Utilities {
                 OnTimerStart.Invoke();
             }
         }
+
+        public void Restart(float newTime) {
+            _initialTime = newTime;
+            _time = 0f;
+            IsRunning = true;
+        }
     }
 
     [Serializable]
