@@ -12,12 +12,26 @@ namespace UI {
         public Action<float> onDamage;
         public Action onDeath;
 
-        private float currentHealth;
-        private float maxHealth;
+        [SerializeField] private float currentHealth;
+        [SerializeField] private float maxHealth;
 
         private void Awake() {
             Stats stats = GetComponent<Stats>();
+            if (stats.GetStat(StatType.Health, out float health)) { 
+                maxHealth = health;
+                currentHealth = health;
+            } else {
+                Debug.LogError("Health was not present in Stats!");
+                Destroy(this);
+                return;
+            }
             stats.updateStat += UpdateMaxHealth;
+        }
+
+        private void Update() {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.X)) {
+                Damage(10);
+            }
         }
 
         private void UpdateMaxHealth(StatType type, float health) {

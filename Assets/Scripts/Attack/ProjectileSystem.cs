@@ -15,10 +15,10 @@ namespace Attack {
         private CountDownTimer attackTimer = new CountDownTimer(0f);
         private Stats stats;
         private Transform origin;
-        private Bow bow;
+        private BowData bow;
         private GameObject projectilePrefab;
 
-        public ProjectileSystem(Stats stats, GameObject projectilePrefab, Transform origin, Bow bow) {
+        public ProjectileSystem(Stats stats, GameObject projectilePrefab, Transform origin, BowData bow) {
             this.stats = stats;
             this.projectilePrefab = projectilePrefab;
             this.origin = origin;

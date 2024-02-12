@@ -42,13 +42,13 @@ namespace UI {
         }
 
         private void SetupCanvas() {
+            canvasGroup = GetComponent<CanvasGroup>();
+
             if (!canvasGroup) {
                 Debug.LogError("Canvas group not assigned");
                 Destroy(this); 
                 return;
             }
-
-            canvasGroup = GetComponent<CanvasGroup>();
             canvasGroup.alpha = isOpen ? 1 : 0;
             canvasGroup.interactable = isOpen;
             canvasGroup.blocksRaycasts = isOpen;
@@ -68,9 +68,10 @@ namespace UI {
                 Destroy(this); 
                 return;
             }
-            statSlots = new StatSlot[stats.statDict.Count];
-            foreach ((StatType type, int i) item in stats.statDict.Keys.Select((type, i) => (type, i))) {
+            statSlots = new StatSlot[stats.statDict.Length];
+            foreach ((StatType type, int i) item in stats.statDict.Select((stat, i) => (stat.type, i))) {
                 GameObject statSlot = Instantiate(statPrefab, statLayout.transform);
+                statSlots[item.i] = new StatSlot();
                 statSlots[item.i].readout = statSlot.GetComponentInChildren<TMP_Text>();
                 statSlots[item.i].readout.text = stats.GetStatDisplay(item.type);
                 statSlots[item.i].icon = statSlot.GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<StatusIcon>());
@@ -81,29 +82,21 @@ namespace UI {
         public void Show() {
             UpdateStats();
             canvasGroup.FadeCanvas(0.1f, false, this);
+            isOpen = true;
         }
 
         public void Hide() {
             canvasGroup.FadeCanvas(0.1f, true, this);
+            isOpen = false;
         }
 
         private void UpdateStats() {
             // Magic iteration that gives both index and variable using a tuple
-            foreach ((StatType type, int i) item in stats.statDict.Keys.Select((type, i) => (type, i))) {
+            foreach ((StatType type, int i) item in stats.statDict.Select((stat, i) => (stat.type, i))) {
                 statSlots[item.i].readout.text = stats.GetStatDisplay(item.type);
             }
         }
     }
 
     public enum StatType { Health, Speed, Damage, Magic, AttackSpeed }
-
-    [Serializable] public class StatIcon {
-        public StatType type;
-        public Sprite icon;
-    }
-
-    [Serializable] public class StatSlot {
-        public TMP_Text readout;
-        public Image icon;
-    }
 }

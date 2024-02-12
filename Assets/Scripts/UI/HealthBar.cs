@@ -18,13 +18,13 @@ namespace UI {
 
         private void Start() {
             healthBar = GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.type == Image.Type.Filled);
-            healthText = healthBar.GetComponentInChildren<TMP_Text>();
+            healthText = GetComponentInChildren<TMP_Text>();
             if (!healthBar || !healthText) {
-                Debug.LogError("Could not find filled healthBar in children to use as health bar!");
+                Debug.LogError($"Could not find {(healthBar ? "healthBar" : "healthText")} in children");
                 Destroy(this);
                 return;
             }
-            if (health == null) {
+            if (!health) {
                 Debug.LogError("Health was not assigned in the editor!");
                 Destroy(this);
                 return;

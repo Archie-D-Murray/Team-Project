@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using UnityEngine;
 
 namespace UI {
-    public class Stats : MonoBehaviour {
+    public partial class Stats : MonoBehaviour {
 
         #region Enum => String cache
         private const string Health = "Health";
@@ -14,11 +13,11 @@ namespace UI {
         private const string Magic = "Magic";
         #endregion
 
-        public Dictionary<StatType, float> statDict => statDict;
+        public Stat[] statDict;
         public Action<StatType, float> updateStat;
 
         public string GetStatDisplay(StatType type) {
-            return $"{GetStatName(type)}: {statDict[type]}";
+            return $"{GetStatName(type)}: {FindStat(type)?.value ?? float.NaN}";
         }
 
         public string GetStatName(StatType type) {
@@ -33,16 +32,22 @@ namespace UI {
         }
 
         public bool GetStat(StatType type, out float stat) { 
-            return statDict.TryGetValue(type, out stat);
+            Stat statInstance = FindStat(type);
+            stat = float.NaN;
+
+            if (statInstance != null) {
+                stat = statInstance.value;
+            }
+
+            return statInstance != null;
         }
 
+        private Stat FindStat(StatType type) => Array.Find(statDict, (Stat stat) => stat.type == type);
+
         public void UpdateStat(StatType type, float amount, bool setToValue = false) {
-            if (!statDict.ContainsKey(type)) {
-                Debug.LogError($"Stat type {type} was not an entry in stats!");
-                return;
-            }
-            statDict[type] = setToValue ? amount : statDict[type] + amount;
-            updateStat?.Invoke(type, statDict[type]);
+            Stat stat = FindStat(type);
+            stat.value = setToValue ? amount : stat.value + amount;
+            updateStat?.Invoke(type, stat.value);
         }
     }
 }
