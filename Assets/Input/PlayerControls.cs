@@ -21,7 +21,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public @PlayerControls()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""playerControls"",
+    ""name"": ""PlayerControls"",
     ""maps"": [
         {
             ""name"": ""Gameplay"",
@@ -213,6 +213,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Status"",
                     ""type"": ""Button"",
                     ""id"": ""76d42d7c-cd38-444d-b0f5-97e5c5a7b447"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""bf569eb1-1892-4418-982b-6d40458e9b6c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -648,6 +657,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Status"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aee9d658-0221-423d-8234-e565fe38c21d"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -671,6 +691,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_Status = m_UI.FindAction("Status", throwIfNotFound: true);
+        m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -797,6 +818,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_Status;
+    private readonly InputAction m_UI_Inventory;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
@@ -812,6 +834,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @Status => m_Wrapper.m_UI_Status;
+        public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -854,6 +877,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Status.started += instance.OnStatus;
             @Status.performed += instance.OnStatus;
             @Status.canceled += instance.OnStatus;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -891,6 +917,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Status.started -= instance.OnStatus;
             @Status.performed -= instance.OnStatus;
             @Status.canceled -= instance.OnStatus;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -926,5 +955,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnStatus(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

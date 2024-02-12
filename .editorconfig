@@ -193,6 +193,10 @@ dotnet_naming_rule.methods_should_be_pascalcase.severity = suggestion
 dotnet_naming_rule.methods_should_be_pascalcase.symbols = methods
 dotnet_naming_rule.methods_should_be_pascalcase.style = pascalcase
 
+dotnet_naming_rule.properties_should_be_camelcase.severity = suggestion
+dotnet_naming_rule.properties_should_be_camelcase.symbols = properties
+dotnet_naming_rule.properties_should_be_camelcase.style = camelcase
+
 dotnet_naming_rule.local_variables_should_be_camelcase.severity = suggestion
 dotnet_naming_rule.local_variables_should_be_camelcase.symbols = local_variables
 dotnet_naming_rule.local_variables_should_be_camelcase.style = camelcase

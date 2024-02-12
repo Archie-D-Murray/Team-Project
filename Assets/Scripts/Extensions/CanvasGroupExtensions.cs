@@ -12,10 +12,10 @@ public static class CanvasGroupExtensions {
     private static IEnumerator CanvasFade(CanvasGroup canvasGroup, float duration, bool fadeToTransparent) {
         CountDownTimer timer = new CountDownTimer(duration);
         timer.Start();
-        while (timer.IsRunning) {
+        while (timer.isRunning) {
             canvasGroup.alpha = timer.Progress();
             timer.Update(Time.fixedDeltaTime);
-            yield return Yielders.WaitForFixedUpdate;
+            yield return Yielders.waitForFixedUpdate;
         }
         if (fadeToTransparent) {
             canvasGroup.interactable = false;

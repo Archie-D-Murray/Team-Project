@@ -28,7 +28,7 @@ namespace Attack {
 
         private void FixedUpdate() {
             attackTimer.Update(Time.fixedDeltaTime);
-            if (attackTimer.IsFinished && Input.instance.playerControls.Gameplay.MousePosition.enabled) {
+            if (attackTimer.isFinished && Input.instance.playerControls.Gameplay.MousePosition.enabled) {
                 Attack();
                 ResetAttackTimer();
             }
