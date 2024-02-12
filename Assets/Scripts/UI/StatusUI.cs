@@ -1,6 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+
+using Entity;
 
 using Tags.UI.Status;
 
@@ -43,13 +44,13 @@ namespace UI {
         }
 
         private void SetupCanvas() {
+            canvasGroup = GetComponent<CanvasGroup>();
+
             if (!canvasGroup) {
                 Debug.LogError("Canvas group not assigned");
                 Destroy(this); 
                 return;
             }
-
-            canvasGroup = GetComponent<CanvasGroup>();
             canvasGroup.alpha = isOpen ? 1 : 0;
             canvasGroup.interactable = isOpen;
             canvasGroup.blocksRaycasts = isOpen;
@@ -69,9 +70,10 @@ namespace UI {
                 Destroy(this); 
                 return;
             }
-            statSlots = new StatSlot[stats.statDict.Count];
-            foreach ((StatType type, int i) item in stats.statDict.Keys.Select((type, i) => (type, i))) {
+            statSlots = new StatSlot[stats.statDict.Length];
+            foreach ((StatType type, int i) item in stats.statDict.Select((stat, i) => (stat.type, i))) {
                 GameObject statSlot = Instantiate(statPrefab, statLayout.transform);
+                statSlots[item.i] = new StatSlot();
                 statSlots[item.i].readout = statSlot.GetComponentInChildren<TMP_Text>();
                 statSlots[item.i].readout.text = stats.GetStatDisplay(item.type);
                 statSlots[item.i].icon = statSlot.GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<StatusIcon>());
@@ -82,71 +84,19 @@ namespace UI {
         public void Show() {
             UpdateStats();
             canvasGroup.FadeCanvas(0.1f, false, this);
+            isOpen = true;
         }
 
         public void Hide() {
             canvasGroup.FadeCanvas(0.1f, true, this);
+            isOpen = false;
         }
 
         private void UpdateStats() {
             // Magic iteration that gives both index and variable using a tuple
-            foreach ((StatType type, int i) item in stats.statDict.Keys.Select((type, i) => (type, i))) {
+            foreach ((StatType type, int i) item in stats.statDict.Select((stat, i) => (stat.type, i))) {
                 statSlots[item.i].readout.text = stats.GetStatDisplay(item.type);
             }
-        }
-    }
-
-    public enum StatType { Health, Speed, Damage, Magic, AttackSpeed }
-
-    [Serializable] public class StatIcon {
-        public StatType type;
-        public Sprite icon;
-    }
-
-    [Serializable] public class StatSlot {
-        public TMP_Text readout;
-        public Image icon;
-    }
-
-    public class Stats : MonoBehaviour {
-
-        #region Enum => String cache
-        private const string Health = "Health";
-        private const string AttackSpeed = "Attack Speed";
-        private const string Speed = "Speed";
-        private const string Damage = "Damage";
-        private const string Magic = "Magic";
-        #endregion
-
-        public Dictionary<StatType, float> statDict => statDict;
-        public Action<StatType, float> updateStat;
-
-        public string GetStatDisplay(StatType type) {
-            return $"{GetStatName(type)}: {statDict[type]}";
-        }
-
-        public string GetStatName(StatType type) {
-            return type switch {
-                StatType.Health => Health,
-                StatType.AttackSpeed => AttackSpeed,
-                StatType.Speed => Speed,
-                StatType.Damage => Damage,
-                StatType.Magic => Magic,
-                _ => string.Empty
-            };
-        }
-
-        public bool GetStat(StatType type, out float stat) { 
-            return statDict.TryGetValue(type, out stat);
-        }
-
-        public void UpdateStat(StatType type, float amount, bool setToValue = false) {
-            if (!statDict.ContainsKey(type)) {
-                Debug.LogError($"Stat type {type} was not an entry in stats!");
-                return;
-            }
-            statDict[type] = setToValue ? amount : statDict[type] + amount;
-            updateStat?.Invoke(type, statDict[type]);
         }
     }
 }

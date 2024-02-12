@@ -24,9 +24,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
+                    "name": "Attack",
                     "type": "Button",
-                    "id": "b8053559-2e92-45d0-9777-8083a7542e11",
+                    "id": "3f3e2da9-1b78-4938-adce-3d6d4a7a281e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -102,12 +102,12 @@
                 },
                 {
                     "name": "",
-                    "id": "94d8d4cb-b041-4da2-a97a-57b53c28ead4",
+                    "id": "fa749848-43b5-4556-8711-93f9045023c3",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Fire",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

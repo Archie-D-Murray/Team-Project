@@ -25,15 +25,13 @@ namespace UI {
         [SerializeField] private GridLayoutGroup inventoryLayout;
         [SerializeField] private bool isOpen = false;
         
-        private ItemSlot[] itemSlots;
-
+        [SerializeField] private ItemSlot[] itemSlots;
         private void Start() {
             if (!inventory) {
                 Debug.LogError("Health or Stats or Inventory were not assigned in editor!");
                 Destroy(this);
                 return;
             }
-
             SetupCanvas();
             InitInventory();
         }
@@ -76,6 +74,7 @@ namespace UI {
         public void Show() {
             UpdateInventory();
             canvasGroup.FadeCanvas(0.1f, false, this);
+            isOpen = true;
         }
 
         private void UpdateInventory() {
@@ -86,9 +85,10 @@ namespace UI {
 
         public void Hide() {
             canvasGroup.FadeCanvas(0.1f, true, this);
+            isOpen = false;
         }
 
-        class ItemSlot {
+        [Serializable] class ItemSlot {
             public string name;
             public Sprite sprite;
             public int count;
@@ -97,9 +97,10 @@ namespace UI {
             public TMP_Text itemText, itemCount;
 
             public ItemSlot(string name, Sprite sprite, int count, Image icon, TMP_Text itemText, TMP_Text itemCount) {
+                Debug.Log($"Creating item slot: {(isEmpty ? "empty" : name)}");
                 this.name = name;
-                this.sprite = sprite;
                 this.count = count;
+                this.sprite = sprite;
                 this.icon = icon;
                 this.itemText = itemText;
                 this.itemCount = itemCount;
@@ -116,22 +117,23 @@ namespace UI {
             }
 
             public bool EqualTo(Item item) {
-                return item.itemName == name;
+                return item.itemData.itemName == name;
             }
 
             public void Update(Item item) {
-                if (item.itemName == name && item.count == count) {
-                    return;
-                }
-                if (item == null) {
+                if (item.itemData) {
+                    if (item.itemData.itemName == name && item.count == count) {
+                        return;
+                    } else {
+                        name = item.itemData.name;
+                        count = item.count;
+                        icon.sprite = item.itemData.icon.ToSprite();
+                        UpdateUIElements();
+                    } 
+                } else {
                     icon.color = Color.clear;
                     itemText.alpha = 0f;
                     itemCount.alpha = 0f;
-                } else {
-                    name = item.name;
-                    count = item.count;
-                    icon.sprite = item.icon.ToSprite();
-                    UpdateUIElements();
                 }
             }
 
@@ -143,7 +145,7 @@ namespace UI {
             public static ItemSlot Empty(Image icon, TMP_Text itemText, TMP_Text itemCount) => new ItemSlot("", null, -1, icon, itemText, itemCount);
 
             public static ItemSlot FromItem(Item item, GameObject gameObject) {
-                Image icon = gameObject.GetComponents<Image>().FirstOrDefault((Image image) => image.sprite == null);
+                Image icon = gameObject.GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<ItemIcon>());
                 TMP_Text name = null, count = null;
                 foreach (TMP_Text text in gameObject.GetComponentsInChildren<TMP_Text>()) {
                     if (text.gameObject.HasComponent<ItemCount>()) {
@@ -152,11 +154,13 @@ namespace UI {
                         name = text;
                     }
                 }
-                if (name == null ||  count == null) {
-                    Debug.LogError("Could not find Count or Name TMP_Text components on prefab!");
+                if (!name || !count || !icon) {
+                    Debug.LogError("Could not find Count or Name TMP_Text or Image Icon components on prefab!");
                     return null;
                 }
-                return item == null ? Empty(icon, name, count) : new ItemSlot(item.name, item.icon.ToSprite(), item.count, icon, name, count);
+                return item.itemData
+                    ? new ItemSlot(item.itemData.name, item.itemData.icon.ToSprite(), item.count, icon, name, count)
+                    : Empty(icon, name, count);
             }
         }
     }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cfb68d9d346834989a378e8a94ddcc, type: 3}
+  m_Name: New Bow
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 53d33bff0a9374b6db003552e5767cdb, type: 3}
+  itemName: Bow
+  maxCount: 0
+  damageModifier: 1
+  drawTimeModifier: 1
+  projectileSpeed: 1

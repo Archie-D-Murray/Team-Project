@@ -1,8 +1,8 @@
 using Attack.Components;
 
-using Items;
+using Entity;
 
-using UI;
+using Items;
 
 using UnityEngine;
 
@@ -13,12 +13,12 @@ namespace Attack {
         private CountDownTimer attackTimer = new CountDownTimer(0f);
         private Stats stats;
         private Transform origin;
-        private Bow bow;
+        private BowData bow;
         private GameObject projectilePrefab;
 
-        public ProjectileSystem(Stats stats, GameObject projectilePrefab, Transform origin, Bow bow) {
+        public ProjectileSystem(Stats stats, Transform origin, BowData bow) {
             this.stats = stats;
-            this.projectilePrefab = projectilePrefab;
+            this.projectilePrefab = bow.projectile;
             this.origin = origin;
             this.bow = bow;
             ResetAttackTimer();
@@ -26,7 +26,7 @@ namespace Attack {
 
         public void FixedUpdate() {
             attackTimer.Update(Time.fixedDeltaTime);
-            if (attackTimer.isFinished && Input.instance.playerControls.Gameplay.MousePosition.enabled) {
+            if (attackTimer.isFinished && Input.instance.playerControls.Gameplay.Attack.IsPressed()) {
                 Attack();
                 ResetAttackTimer();
             }
@@ -34,9 +34,16 @@ namespace Attack {
 
         public void Attack(Transform origin) {
             if (stats.GetStat(StatType.Damage, out float damage)) {
-                GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, Quaternion.LookRotation(origin.up));
-                projectile.AddComponent<EntityDamager>().Init(damage * bow.damageModifier);
-                projectile.AddComponent<LinearProjectileMover>().Init(bow.projectileSpeed);
+                Quaternion rotation = Quaternion.AngleAxis(
+                    Vector2.SignedAngle(
+                        Vector2.up, 
+                        (Input.instance.main.ScreenToWorldPoint(Input.instance.playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - origin.position).normalized),
+                    Vector3.forward
+                );
+                GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, rotation);
+                projectile.GetOrAddComponent<EntityDamager>().Init(damage * bow.damageModifier);
+                projectile.GetOrAddComponent<LinearProjectileMover>().Init(bow.projectileSpeed);
+                projectile.GetOrAddComponent<AutoDestroy>().Init(bow.missileDuration);
             } else {
                 Debug.LogError("Stats does not contain a Damage entry!");
             }
