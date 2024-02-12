@@ -12,9 +12,9 @@ namespace Utilities {
         public Action OnTimerStart = delegate { };
         public Action OnTimerStop = delegate { };
 
-        protected Timer(float initialTime) {
+        protected Timer(float initialTime, bool startRunning = false) {
             _initialTime = initialTime;
-            isRunning = false;
+            isRunning = startRunning;
         }
 
         public void Start() {
@@ -73,12 +73,6 @@ namespace Utilities {
             if (fireEvents) {
                 OnTimerStart.Invoke();
             }
-        }
-
-        public void Restart(float newTime) {
-            _initialTime = newTime;
-            Reset();
-            Resume();
         }
 
         public void Restart(float newTime) {

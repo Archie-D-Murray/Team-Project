@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Attack {
     public interface IAttackSystem {
-        void Attack();
+        void Attack(Transform origin);
         void FixedUpdate();
     }
 }
