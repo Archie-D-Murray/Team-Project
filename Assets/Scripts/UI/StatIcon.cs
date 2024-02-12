@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Entity;
+
 using UnityEngine;
 
 namespace UI {

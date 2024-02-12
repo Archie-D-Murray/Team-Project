@@ -1,5 +1,7 @@
 using System.Linq;
 
+using Entity;
+
 using TMPro;
 
 using UnityEngine;

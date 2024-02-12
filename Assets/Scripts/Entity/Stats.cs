@@ -2,8 +2,8 @@
 
 using UnityEngine;
 
-namespace UI {
-    public partial class Stats : MonoBehaviour {
+namespace Entity {
+    public class Stats : MonoBehaviour {
 
         #region Enum => String cache
         private const string Health = "Health";

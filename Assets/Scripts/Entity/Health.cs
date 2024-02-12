@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace UI {
+namespace Entity {
     [RequireComponent(typeof(Stats))]
     public class Health : MonoBehaviour {
         public float getPercentHealth => Mathf.Clamp01(currentHealth / maxHealth);
@@ -26,12 +26,6 @@ namespace UI {
                 return;
             }
             stats.updateStat += UpdateMaxHealth;
-        }
-
-        private void Update() {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.X)) {
-                Damage(10);
-            }
         }
 
         private void UpdateMaxHealth(StatType type, float health) {

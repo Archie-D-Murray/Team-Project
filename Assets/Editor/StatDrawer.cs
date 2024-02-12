@@ -2,7 +2,7 @@ using UnityEditor;
 
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(UI.Stats.Stat))]
+[CustomPropertyDrawer(typeof(Entity.Stat))]
 public class StatDrawer : PropertyDrawer {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
         EditorGUI.BeginProperty (position, label, property);

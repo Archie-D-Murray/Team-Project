@@ -158,11 +158,9 @@ namespace UI {
                     Debug.LogError("Could not find Count or Name TMP_Text or Image Icon components on prefab!");
                     return null;
                 }
-                if (item.itemData) {
-                    return new ItemSlot(item.itemData.name, item.itemData.icon.ToSprite(), item.count, icon, name, count); 
-                } else { 
-                    return Empty(icon, name, count);
-                }
+                return item.itemData
+                    ? new ItemSlot(item.itemData.name, item.itemData.icon.ToSprite(), item.count, icon, name, count)
+                    : Empty(icon, name, count);
             }
         }
     }

@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 
+using Entity;
+
 using Tags.UI.Status;
 
 using TMPro;
@@ -97,6 +99,4 @@ namespace UI {
             }
         }
     }
-
-    public enum StatType { Health, Speed, Damage, Magic, AttackSpeed }
 }

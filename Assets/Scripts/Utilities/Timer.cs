@@ -77,7 +77,7 @@ namespace Utilities {
 
         public void Restart(float newTime) {
             _initialTime = newTime;
-            _time = 0f;
+            _time = newTime;
             isRunning = true;
         }
     }
