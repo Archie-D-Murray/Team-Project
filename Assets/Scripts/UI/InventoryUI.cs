@@ -121,19 +121,17 @@ namespace UI {
             }
 
             public void Update(Item item) {
-                if (item.itemData) {
-                    if (item.itemData.itemName == name && item.count == count) {
-                        return;
-                    } else {
-                        name = item.itemData.name;
-                        count = item.count;
-                        icon.sprite = item.itemData.icon.ToSprite();
-                        UpdateUIElements();
-                    } 
-                } else {
+                if (!item.itemData) {
                     icon.color = Color.clear;
                     itemText.alpha = 0f;
                     itemCount.alpha = 0f;
+                    return;
+                }
+                if (!(item.itemData.itemName == name && item.count == count)) {
+                    name = item.itemData.name;
+                    count = item.count;
+                    icon.sprite = item.itemData.icon.ToSprite();
+                    UpdateUIElements();
                 }
             }
 
