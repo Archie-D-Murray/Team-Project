@@ -27,7 +27,7 @@ namespace Attack {
         public void FixedUpdate() {
             attackTimer.Update(Time.fixedDeltaTime);
             if (attackTimer.isFinished && Input.instance.playerControls.Gameplay.Attack.IsPressed()) {
-                Attack();
+                Attack(origin);
                 ResetAttackTimer();
             }
         }
