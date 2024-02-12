@@ -7,39 +7,39 @@ namespace Utilities {
         [SerializeField] protected float _initialTime;
         [SerializeField] protected float _time;
 
-        public bool IsRunning { get; protected set; }
+        public bool isRunning { get; protected set; }
         public virtual float Progress() => _time / _initialTime;
         public Action OnTimerStart = delegate { };
         public Action OnTimerStop = delegate { };
 
-        protected Timer(float initialTime, bool startRunning = false) {
-            this._initialTime = initialTime;
-            IsRunning = startRunning;
+        protected Timer(float initialTime) {
+            _initialTime = initialTime;
+            isRunning = false;
         }
 
         public void Start() {
             _time = _initialTime;
-            if (!IsRunning) {
-                IsRunning = true;
+            if (!isRunning) {
+                isRunning = true;
                 OnTimerStart.Invoke();
             }
         }
 
         public void Stop() {
-            if (IsRunning) {
-                IsRunning = false;
+            if (isRunning) {
+                isRunning = false;
                 OnTimerStop.Invoke();
             }
         }
 
         public void Finish() {
-            IsRunning = false;
+            isRunning = false;
             _time = _initialTime;
             OnTimerStop?.Invoke();
         }
 
-        public void Resume() => IsRunning = true;
-        public void Pause() => IsRunning = false;
+        public void Resume() => isRunning = true;
+        public void Pause() => isRunning = false;
         public abstract void Update(float deltaTime);
     }
 
@@ -48,11 +48,11 @@ namespace Utilities {
         public CountDownTimer(float initialTime, bool startRunning = false) : base(initialTime, startRunning) { }
 
         public override void Update(float deltaTime) {
-            if (IsRunning && _time > 0f) {
+            if (isRunning && _time > 0f) {
                 _time = Mathf.Max(_time - deltaTime, 0f);
             }
 
-            if (IsRunning && _time == 0f) {
+            if (isRunning && _time == 0f) {
                 Stop();
             }
         }
@@ -65,7 +65,7 @@ namespace Utilities {
             return 1f - base.Progress();
         }
 
-        public bool IsFinished => _time == 0f;
+        public bool isFinished => _time == 0f;
         public void Reset() => _time = _initialTime;
         public void Reset(float newTime, bool fireEvents = false) {
             _initialTime = newTime;
@@ -84,7 +84,7 @@ namespace Utilities {
         public void Restart(float newTime) {
             _initialTime = newTime;
             _time = 0f;
-            IsRunning = true;
+            isRunning = true;
         }
     }
 
@@ -93,7 +93,7 @@ namespace Utilities {
         public StopwatchTimer(bool startRunning = false) : base(0f, startRunning) { }
 
         public override void Update(float deltaTime) {
-            if (IsRunning) {
+            if (isRunning) {
                 _time += deltaTime;
             }
         }

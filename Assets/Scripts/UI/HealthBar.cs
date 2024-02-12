@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI {
-    public class HealthBar : MonoBehaviour {
+    public class Healthbar : MonoBehaviour {
         [Header("Debug")]
         [SerializeField] private Image healthBar;
         [SerializeField] private TMP_Text healthText;
@@ -43,6 +43,7 @@ namespace UI {
             healthText.text = $"{health.getCurrentHealth} / {health.getMaxHealth} ({health.getPercentHealth:0%})";
         }
     }
+    [RequireComponent(typeof(Stats))]
     public class Health : MonoBehaviour {
         public float getPercentHealth => Mathf.Clamp01(currentHealth / maxHealth);
         public float getCurrentHealth => currentHealth;
@@ -53,6 +54,20 @@ namespace UI {
 
         private float currentHealth;
         private float maxHealth;
+
+        private void Awake() {
+            Stats stats = GetComponent<Stats>();
+            stats.updateStat += UpdateMaxHealth;
+        }
+
+        private void UpdateMaxHealth(StatType type, float health) {
+            if (type != StatType.Health) {
+                return;
+            }
+            float diff = health - currentHealth;
+            maxHealth = health;
+            Damage(diff);
+        }
 
         public void Damage(float damage) {
             if (currentHealth == 0.0f) { //Don't damage dead things!
