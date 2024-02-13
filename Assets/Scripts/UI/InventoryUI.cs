@@ -18,12 +18,14 @@ namespace UI {
         [Tooltip("Inventory")]
         [SerializeField] private Inventory inventory;
         [SerializeField] private GameObject itemSlotPrefab;
+        [SerializeField] private bool hideOnStart = true;
 
         [Header("Debug")]
         [Tooltip("Canvas Group for whole UI")]
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private GridLayoutGroup inventoryLayout;
-        [SerializeField] private bool isOpen = false;
+        private bool isOpen => canvasGroup.alpha == 1f;
+
         
         [SerializeField] private ItemSlot[] itemSlots;
         private void Start() {
@@ -45,9 +47,9 @@ namespace UI {
                 return;
             }
             
-            canvasGroup.alpha = isOpen ? 1 : 0;
-            canvasGroup.interactable = isOpen;
-            canvasGroup.blocksRaycasts = isOpen;
+            canvasGroup.alpha = hideOnStart ? 0f : 1f;
+            canvasGroup.interactable = !hideOnStart;
+            canvasGroup.blocksRaycasts = !hideOnStart;
             Input.instance.playerControls.UI.Inventory.started += (InputAction.CallbackContext context) => {
                 if (isOpen) {
                     Hide(); 
@@ -74,7 +76,6 @@ namespace UI {
         public void Show() {
             UpdateInventory();
             canvasGroup.FadeCanvas(0.1f, false, this);
-            isOpen = true;
         }
 
         private void UpdateInventory() {
@@ -85,7 +86,6 @@ namespace UI {
 
         public void Hide() {
             canvasGroup.FadeCanvas(0.1f, true, this);
-            isOpen = false;
         }
 
         [Serializable] class ItemSlot {

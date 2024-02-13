@@ -23,14 +23,15 @@ namespace UI {
         [Tooltip("Prefab to spawn - should have a TMP_Text and Image components somewhere (can be in children)")]
         [SerializeField] private GameObject statPrefab;
         [SerializeField] private StatIcon[] statIcons = new StatIcon[Enum.GetValues(typeof(StatType)).Length];
+        [SerializeField] private bool hideOnStart = true;
 
         [Header("Debug")]
         [Tooltip("Stat layout group")]
         [SerializeField] private StatSlot[] statSlots;
         [SerializeField] private VerticalLayoutGroup statLayout;
-        [SerializeField] private bool isOpen;
         [Tooltip("Canvas Group for whole UI")]
         [SerializeField] private CanvasGroup canvasGroup;
+        private bool isOpen => canvasGroup.alpha == 1f;
 
         private void Start() {
             if (!health || !stats) {
@@ -51,9 +52,9 @@ namespace UI {
                 Destroy(this); 
                 return;
             }
-            canvasGroup.alpha = isOpen ? 1 : 0;
-            canvasGroup.interactable = isOpen;
-            canvasGroup.blocksRaycasts = isOpen;
+            canvasGroup.alpha = hideOnStart ? 0f : 1f;
+            canvasGroup.interactable = !hideOnStart;
+            canvasGroup.blocksRaycasts = !hideOnStart;
             Input.instance.playerControls.UI.Status.started += (InputAction.CallbackContext context) => {
                 if (isOpen) {
                     Hide(); 
@@ -83,13 +84,15 @@ namespace UI {
 
         public void Show() {
             UpdateStats();
-            canvasGroup.FadeCanvas(0.1f, false, this);
-            isOpen = true;
+            if (!isOpen) {
+                canvasGroup.FadeCanvas(0.1f, false, this);
+            }
         }
 
         public void Hide() {
-            canvasGroup.FadeCanvas(0.1f, true, this);
-            isOpen = false;
+            if (isOpen) {
+                canvasGroup.FadeCanvas(0.1f, true, this);
+            }
         }
 
         private void UpdateStats() {
