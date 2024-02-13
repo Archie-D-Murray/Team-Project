@@ -7,7 +7,7 @@ public static class GameObjectExtensions {
 
     public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component {
         T component = gameObject.GetComponent<T>();
-        return component.OrNull() == null ? component : gameObject.AddComponent<T>();
+        return component.OrNull() == null ? gameObject.AddComponent<T>() : component;
     }
     
 
