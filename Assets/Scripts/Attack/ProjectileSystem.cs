@@ -1,3 +1,5 @@
+using System;
+
 using Attack.Components;
 
 using Entity;
@@ -9,7 +11,7 @@ using UnityEngine;
 using Utilities;
 
 namespace Attack {
-    public class ProjectileSystem : IAttackSystem {
+    [Serializable] public class ProjectileSystem : IAttackSystem {
         private CountDownTimer attackTimer = new CountDownTimer(0f);
         private Stats stats;
         private Transform origin;
@@ -33,7 +35,7 @@ namespace Attack {
         }
 
         public void Attack(Transform origin) {
-            if (stats.GetStat(StatType.Damage, out float damage)) {
+            if (stats.GetStat(StatType.DAMAGE, out float damage)) {
                 Quaternion rotation = Quaternion.AngleAxis(
                     Vector2.SignedAngle(
                         Vector2.up, 
@@ -45,17 +47,25 @@ namespace Attack {
                 projectile.GetOrAddComponent<LinearProjectileMover>().Init(bow.projectileSpeed);
                 projectile.GetOrAddComponent<AutoDestroy>().Init(bow.missileDuration);
             } else {
-                Debug.LogError("Stats does not contain a Damage entry!");
+                Debug.LogError("Stats does not contain a DAMAGE entry!");
             }
         }
 
         private void ResetAttackTimer() {
-            if (stats.GetStat(StatType.AttackSpeed, out float attackCooldown)) {                
+            if (stats.GetStat(StatType.ATTACK_SPEED, out float attackCooldown)) {                
                 attackTimer.Restart(attackCooldown * bow.drawTimeModifier);
             } else {
-                Debug.LogError("Stats does not contain an AttackSpeed entry!");
+                Debug.LogError("Stats does not contain an ATTACK_SPEED entry!");
                 return;
             }
+        }
+
+        public void SetWeapon(ItemData bow) {
+            if (bow is not BowData) {
+                Debug.LogError("Tried to pass non bow to SetWeapon on ProjectileSystem!");
+                return;
+            }
+            this.bow = bow as BowData;
         }
     }
 }

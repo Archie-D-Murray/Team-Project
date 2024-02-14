@@ -7,6 +7,8 @@ using Tags.UI.Item;
 
 using TMPro;
 
+using UnityEditor.Rendering;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -23,6 +25,7 @@ namespace UI {
         [Header("Debug")]
         [Tooltip("Canvas Group for whole UI")]
         [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField] private ItemPreview preview;
         [SerializeField] private GridLayoutGroup inventoryLayout;
         private bool isOpen => canvasGroup.alpha == 1f;
 
@@ -30,7 +33,7 @@ namespace UI {
         [SerializeField] private ItemSlot[] itemSlots;
         private void Start() {
             if (!inventory) {
-                Debug.LogError("Health or Stats or Inventory were not assigned in editor!");
+                Debug.LogError("HEALTH or Stats or Inventory were not assigned in editor!");
                 Destroy(this);
                 return;
             }
@@ -40,8 +43,10 @@ namespace UI {
 
         private void SetupCanvas() {
             canvasGroup = GetComponent<CanvasGroup>();
+            preview = GetComponentInChildren<ItemPreview>();
+            preview.Init(inventory, this);
 
-            if (!canvasGroup) {
+            if (!canvasGroup || !preview) {
                 Debug.LogError("Canvas group not assigned");
                 Destroy(this);
                 return;
@@ -54,7 +59,7 @@ namespace UI {
                 if (isOpen) {
                     Hide(); 
                 } else { 
-                    Show(); 
+                    Show();
                 }
             };
         }
@@ -69,7 +74,7 @@ namespace UI {
             itemSlots = new ItemSlot[Inventory.MAX_ITEMS];
             for (int i = 0; i < itemSlots.Length; i++) {
                 GameObject itemSlot = Instantiate(itemSlotPrefab, inventoryLayout.transform);
-                itemSlots[i] = ItemSlot.FromItem(inventory.items[i], itemSlot);
+                itemSlots[i] = ItemSlot.FromItem(inventory.items[i], itemSlot, preview);
             }
         }
 
@@ -78,10 +83,11 @@ namespace UI {
             canvasGroup.FadeCanvas(0.1f, false, this);
         }
 
-        private void UpdateInventory() {
+        public void UpdateInventory() {
             for (int i = 0; i < inventory.items.Length; i++) {
-                itemSlots[i].Update(inventory.items[i]);
+                itemSlots[i].Update(inventory.items[i], preview);
             }
+            preview.Hide();
         }
 
         public void Hide() {
@@ -95,8 +101,9 @@ namespace UI {
             public bool isEmpty = false;
             public Image icon;
             public TMP_Text itemText, itemCount;
+            public Button button;
 
-            public ItemSlot(string name, Sprite sprite, int count, Image icon, TMP_Text itemText, TMP_Text itemCount) {
+            public ItemSlot(string name, Sprite sprite, int count, Image icon, TMP_Text itemText, TMP_Text itemCount, Button button) {
                 Debug.Log($"Creating item slot: {(isEmpty ? "empty" : name)}");
                 this.name = name;
                 this.count = count;
@@ -104,6 +111,7 @@ namespace UI {
                 this.icon = icon;
                 this.itemText = itemText;
                 this.itemCount = itemCount;
+                this.button = button;
                 isEmpty = count == -1;
                 if (!isEmpty) {
                     icon.sprite = sprite;
@@ -120,16 +128,20 @@ namespace UI {
                 return item.itemData.itemName == name;
             }
 
-            public void Update(Item item) {
+            public void Update(Item item, ItemPreview preview) {
                 if (!item.itemData) {
                     icon.color = Color.clear;
                     itemText.alpha = 0f;
                     itemCount.alpha = 0f;
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() => preview.SetItem(null));
                     return;
                 }
                 if (!(item.itemData.itemName == name && item.count == count)) {
                     name = item.itemData.name;
                     count = item.count;
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() => preview.SetItem(item));
                     icon.sprite = item.itemData.icon.ToSprite();
                     UpdateUIElements();
                 }
@@ -140,9 +152,9 @@ namespace UI {
                 itemCount.text = count.ToString();
             }
 
-            public static ItemSlot Empty(Image icon, TMP_Text itemText, TMP_Text itemCount) => new ItemSlot("", null, -1, icon, itemText, itemCount);
+            public static ItemSlot Empty(Image icon, TMP_Text itemText, TMP_Text itemCount, Button button) => new ItemSlot("", null, -1, icon, itemText, itemCount, button);
 
-            public static ItemSlot FromItem(Item item, GameObject gameObject) {
+            public static ItemSlot FromItem(Item item, GameObject gameObject, ItemPreview preview) {
                 Image icon = gameObject.GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<ItemIcon>());
                 TMP_Text name = null, count = null;
                 foreach (TMP_Text text in gameObject.GetComponentsInChildren<TMP_Text>()) {
@@ -152,13 +164,17 @@ namespace UI {
                         name = text;
                     }
                 }
-                if (!name || !count || !icon) {
-                    Debug.LogError("Could not find Count or Name TMP_Text or Image Icon components on prefab!");
+                Button button = gameObject.GetComponentInChildren<Button>();
+                if (!name || !count || !icon || !button) {
+                    Debug.LogError("Could not find Count or Name TMP_Text or Image Icon or Button components on prefab!");
                     return null;
                 }
+                if (item.itemData) {
+                    button.onClick.AddListener(() => preview.SetItem(item));
+                }
                 return item.itemData
-                    ? new ItemSlot(item.itemData.name, item.itemData.icon.ToSprite(), item.count, icon, name, count)
-                    : Empty(icon, name, count);
+                    ? new ItemSlot(item.itemData.name, item.itemData.icon.ToSprite(), item.count, icon, name, count, button)
+                    : Empty(icon, name, count, button);
             }
         }
     }

@@ -9,11 +9,14 @@ public static class CanvasGroupExtensions {
         monoBehaviour.StartCoroutine(CanvasFade(canvasGroup, duration, fadeToTransparent));
     }
 
+    public static void FadeAlpha(this CanvasGroup canvasGroup, float duration, bool fadeToTransparent, MonoBehaviour monoBehaviour) {
+        monoBehaviour.StartCoroutine(AlphaFade(canvasGroup, duration, fadeToTransparent));
+    }
     private static IEnumerator CanvasFade(CanvasGroup canvasGroup, float duration, bool fadeToTransparent) {
         CountDownTimer timer = new CountDownTimer(duration);
         timer.Start();
         while (timer.isRunning) {
-            canvasGroup.alpha = timer.Progress();
+            canvasGroup.alpha = fadeToTransparent ? 1f - timer.Progress() : timer.Progress();
             timer.Update(Time.fixedDeltaTime);
             yield return Yielders.waitForFixedUpdate;
         }
@@ -26,5 +29,16 @@ public static class CanvasGroupExtensions {
             canvasGroup.blocksRaycasts = true;
             canvasGroup.alpha = 1f;
         }
+    }
+
+    private static IEnumerator AlphaFade(CanvasGroup canvasGroup , float duration, bool fadeToTransparent) {
+        CountDownTimer timer = new CountDownTimer(duration);
+        timer.Start();
+        while (timer.isRunning) {
+            canvasGroup.alpha = fadeToTransparent ? 1f - timer.Progress() : timer.Progress();
+            timer.Update(Time.fixedDeltaTime);
+            yield return Yielders.waitForFixedUpdate;
+        }
+        canvasGroup.alpha = fadeToTransparent ? 0f : 1f;
     }
 }

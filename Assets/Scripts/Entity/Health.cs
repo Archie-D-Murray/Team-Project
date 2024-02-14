@@ -17,11 +17,11 @@ namespace Entity {
 
         private void Awake() {
             Stats stats = GetComponent<Stats>();
-            if (stats.GetStat(StatType.Health, out float health)) { 
+            if (stats.GetStat(StatType.HEALTH, out float health)) { 
                 maxHealth = health;
                 currentHealth = health;
             } else {
-                Debug.LogError("Health was not present in Stats!");
+                Debug.LogError("HEALTH was not present in Stats!");
                 Destroy(this);
                 return;
             }
@@ -29,7 +29,7 @@ namespace Entity {
         }
 
         private void UpdateMaxHealth(StatType type, float health) {
-            if (type != StatType.Health) {
+            if (type != StatType.HEALTH) {
                 return;
             }
             float diff = health - currentHealth;

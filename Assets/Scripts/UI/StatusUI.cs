@@ -35,7 +35,7 @@ namespace UI {
 
         private void Start() {
             if (!health || !stats) {
-                Debug.LogError("Health or Stats or Inventory were not assigned in editor!");
+                Debug.LogError("HEALTH or Stats or Inventory were not assigned in editor!");
                 Destroy(this);
                 return;
             }
@@ -85,13 +85,13 @@ namespace UI {
         public void Show() {
             UpdateStats();
             if (!isOpen) {
-                canvasGroup.FadeCanvas(0.1f, false, this);
+                canvasGroup.FadeAlpha(0.1f, false, this);
             }
         }
 
         public void Hide() {
             if (isOpen) {
-                canvasGroup.FadeCanvas(0.1f, true, this);
+                canvasGroup.FadeAlpha(0.1f, true, this);
             }
         }
 

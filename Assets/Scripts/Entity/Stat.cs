@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Entity {
-    public enum StatType { Health, Speed, Damage, Magic, AttackSpeed }
+    public enum StatType { HEALTH, SPEED, DAMAGE, MAGIC, ATTACK_SPEED, MANA }
     [Serializable] public class Stat {
         public StatType type;
         public float value;

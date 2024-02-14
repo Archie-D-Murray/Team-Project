@@ -6,11 +6,12 @@ namespace Entity {
     public class Stats : MonoBehaviour {
 
         #region Enum => String cache
-        private const string Health = "Health";
-        private const string AttackSpeed = "Attack Speed";
-        private const string Speed = "Speed";
-        private const string Damage = "Damage";
-        private const string Magic = "Magic";
+        private const string Health = "Max HEALTH";
+        private const string AttackSpeed = "Attack SPEED";
+        private const string Speed = "SPEED";
+        private const string Damage = "DAMAGE";
+        private const string Magic = "MAGIC";
+        private const string Mana = "Max MANA";
         #endregion
 
         public Stat[] statDict;
@@ -22,11 +23,12 @@ namespace Entity {
 
         public string GetStatName(StatType type) {
             return type switch {
-                StatType.Health => Health,
-                StatType.AttackSpeed => AttackSpeed,
-                StatType.Speed => Speed,
-                StatType.Damage => Damage,
-                StatType.Magic => Magic,
+                StatType.HEALTH => Health,
+                StatType.ATTACK_SPEED => AttackSpeed,
+                StatType.SPEED => Speed,
+                StatType.DAMAGE => Damage,
+                StatType.MAGIC => Magic,
+                StatType.MANA => Mana,
                 _ => string.Empty
             };
         }

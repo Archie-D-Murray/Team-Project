@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI {
-    public class Healthbar : MonoBehaviour {
+    public class HealthBar : MonoBehaviour {
         [Header("Debug")]
         [SerializeField] private Image healthBar;
         [SerializeField] private TMP_Text healthText;
@@ -27,11 +27,12 @@ namespace UI {
                 return;
             }
             if (!health) {
-                Debug.LogError("Health was not assigned in the editor!");
+                Debug.LogError("HEALTH was not assigned in the editor!");
                 Destroy(this);
                 return;
             }
             currentHealth = health.getPercentHealth;
+            healthText.text = $"{health.getCurrentHealth} / {health.getMaxHealth} ({health.getPercentHealth:0%})";
             health.onDamage += OnDamage;
         }
 

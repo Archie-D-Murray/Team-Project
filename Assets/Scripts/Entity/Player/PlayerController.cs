@@ -13,7 +13,7 @@ namespace Entity.Player {
     public class PlayerController : MonoBehaviour {
         [Serializable] private enum PlayerClass { Ranged, Melee, Mage }
 
-        private IAttackSystem attackSystem;
+        [SerializeField] private IAttackSystem attackSystem;
 
         [SerializeField] private PlayerClass playerClass;
 
@@ -37,6 +37,10 @@ namespace Entity.Player {
 
         private void FixedUpdate() {
             attackSystem.FixedUpdate();
+        }
+
+        public void SetBow(BowData bowData) {
+            attackSystem.SetWeapon(bowData);
         }
     }
 }

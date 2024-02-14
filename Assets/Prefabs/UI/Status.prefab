@@ -88,8 +88,8 @@ CanvasGroup:
   m_GameObject: {fileID: 4203112342183476541}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &3392320022419847796
 MonoBehaviour:
@@ -134,16 +134,18 @@ MonoBehaviour:
   statPrefab: {fileID: 1903839283401362928, guid: 125ab9a2310545244947f927ef55f0f0, type: 3}
   statIcons:
   - type: 0
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 53d33bff0a9374b6db003552e5767cdb, type: 3}
   - type: 1
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 4f5364a9fe7e04741862d2af49136835, type: 3}
   - type: 2
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 2af1a7323d104499d992be9a2d8dc933, type: 3}
   - type: 3
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 0490d28a1206e4c4cb4954be7b678980, type: 3}
   - type: 4
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 5c838469e8ab742f081032f02a904a31, type: 3}
+  - type: 5
+    icon: {fileID: 21300000, guid: 35f90efdb1e6d4fb29c4108de82bf1b2, type: 3}
+  hideOnStart: 1
   statSlots: []
   statLayout: {fileID: 0}
-  isOpen: 0
   canvasGroup: {fileID: 0}
