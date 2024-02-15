@@ -51,5 +51,10 @@ namespace Entity {
                 onDeath?.Invoke();
             }
         }
+
+        public void Heal(float amount) {
+            amount = Mathf.Max(0f, amount);
+            currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+        }
     }
 }
