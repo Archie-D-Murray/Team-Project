@@ -28,7 +28,7 @@ namespace Attack {
 
         public void FixedUpdate() {
             attackTimer.Update(Time.fixedDeltaTime);
-            if (attackTimer.isFinished && Input.instance.playerControls.Gameplay.Attack.IsPressed()) {
+            if (attackTimer.isFinished && Utilities.Input.instance.playerControls.Gameplay.Attack.IsPressed()) {
                 Attack(origin);
                 ResetAttackTimer();
             }
@@ -39,7 +39,7 @@ namespace Attack {
                 Quaternion rotation = Quaternion.AngleAxis(
                     Vector2.SignedAngle(
                         Vector2.up, 
-                        (Input.instance.main.ScreenToWorldPoint(Input.instance.playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - origin.position).normalized),
+                        (Utilities.Input.instance.main.ScreenToWorldPoint(Utilities.Input.instance.playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - origin.position).normalized),
                     Vector3.forward
                 );
                 GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, rotation);

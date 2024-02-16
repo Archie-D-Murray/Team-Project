@@ -21,7 +21,7 @@ namespace UI {
 
         private Inventory inventory;
         private InventoryUI inventoryUI;
-        private PlayerController playerController;
+        private Entity.Player.PlayerController playerController;
         private CanvasGroup canvasGroup;
 
         public void Init(Inventory inventory, InventoryUI inventoryUI) {
@@ -47,7 +47,7 @@ namespace UI {
         }
 
         public void Start() {
-            playerController = FindFirstObjectByType<PlayerController>();
+            playerController = FindFirstObjectByType<Entity.Player.PlayerController>();
             itemIcon = GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<ItemIcon>());
             foreach (TMP_Text text in GetComponentsInChildren<TMP_Text>()) {
                 if (text.gameObject.HasComponent<ItemCount>()) {

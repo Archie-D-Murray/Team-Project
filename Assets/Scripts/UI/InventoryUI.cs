@@ -7,6 +7,8 @@ using Tags.UI.Item;
 
 using TMPro;
 
+using Utilities;
+
 using UnityEditor.Rendering;
 
 using UnityEngine;
@@ -55,7 +57,7 @@ namespace UI {
             canvasGroup.alpha = hideOnStart ? 0f : 1f;
             canvasGroup.interactable = !hideOnStart;
             canvasGroup.blocksRaycasts = !hideOnStart;
-            Input.instance.playerControls.UI.Inventory.started += (InputAction.CallbackContext context) => {
+            Utilities.Input.instance.playerControls.UI.Inventory.started += (InputAction.CallbackContext context) => {
                 if (isOpen) {
                     Hide(); 
                 } else { 
