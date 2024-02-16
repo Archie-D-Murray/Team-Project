@@ -6,14 +6,14 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 5f;
     private Vector2 inputDirection;
     private Vector2 velocity;
     private bool canMove = true;
 
-    [SerializeField] private float dashSpeed;
-    [SerializeField] private float dashDuration;
-    [SerializeField] private float dashCooldown;
+    [SerializeField] private float dashSpeed = 9f;
+    [SerializeField] private float dashDuration = 0.5f;
+    [SerializeField] private float dashCooldown = 3f;
     private float dashTimer;
 
 
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D coll;
     private Animator animator;
 
-    [SerializeField] private float timeCooldown;
+    [SerializeField] private float timeCooldown = 3f;
     private float timeTimer = 0;
     private Vector3[] previousPos;
 
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetupPreviousPos()
     {
-        previousPos = new Vector3[600];
+        previousPos = new Vector3[150];
         for (int i = 0; i < previousPos.Length; i++)
         {
             previousPos[i] = transform.position;
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         coll.excludeLayers = exclusionLayers;
         animator.SetTrigger("dash");
-        velocity = inputDirection * dashSpeed;
+        velocity = inputDirection.normalized * dashSpeed;
         yield return new WaitForSeconds(dashDuration);
         dashTimer = dashCooldown;
         canMove = true;
@@ -91,16 +91,15 @@ public class PlayerController : MonoBehaviour
     private void RewindTime()
     {
         timeTimer = timeCooldown;
-        transform.position = previousPos[previousPos.Length - 1];
+        transform.position = previousPos[0];
     }
 
     private void InsertNewPosition()
     {
         for (int i = 0; i < previousPos.Length-1; i++)
         {
-            previousPos[i + 1] = previousPos[i];
+            previousPos[i] = previousPos[i + 1];
         }
-        previousPos[0] = transform.position;
-        Debug.Log(previousPos[previousPos.Length-1]);
+        previousPos[previousPos.Length-1] = transform.position;
     }
 }
