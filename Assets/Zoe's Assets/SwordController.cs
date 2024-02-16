@@ -15,7 +15,7 @@ public class SwordController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.F))
         {
             for (int i = 0; i < enemies.Count; i++)
             {
