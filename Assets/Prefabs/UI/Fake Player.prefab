@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3780731355504485009}
   - component: {fileID: 5344098855370453900}
   - component: {fileID: 8692698154824162891}
+  - component: {fileID: 2485932393442230642}
   - component: {fileID: 6982425685818391303}
   - component: {fileID: 131898738855150416}
   - component: {fileID: 7212136595852524070}
-  - component: {fileID: 2485932393442230642}
   m_Layer: 0
   m_Name: Fake Player
   m_TagString: Untagged
@@ -76,6 +76,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 0
+--- !u!114 &2485932393442230642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032309065199935536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8212ff00b78aa764ea1793c798ffb2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMana: 0
+  maxMana: 0
+  manaRegen: 0
 --- !u!114 &6982425685818391303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,18 +199,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClass: 0
---- !u!114 &2485932393442230642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8032309065199935536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8212ff00b78aa764ea1793c798ffb2fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentMana: 0
-  maxMana: 0
-  manaRegen: 0
