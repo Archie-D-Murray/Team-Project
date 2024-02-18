@@ -67,10 +67,10 @@ namespace Entity {
             if (statModifers.ContainsKey(type)) {
                 statModifers[type].value += amount;
                 statModifers[type].duration = duration;
-                Array.Find(statDict, (Stat stat) => stat.type == type).Add(amount);
+                FindStat(type)?.Add(amount);
             } else {
                 statModifers.Add(type, new StatModifier(amount, duration));
-                Array.Find(statDict, (Stat stat) => stat.type == type)?.Add(amount);
+                FindStat(type)?.Add(amount);
             }
         }
 
@@ -85,7 +85,7 @@ namespace Entity {
                 item.Value.Update(delta);
             }
             toRemove.ForEach((StatType type) => {
-                Array.Find(statDict, (Stat stat) => stat.type == type).Remove(statModifers[type].value);
+                FindStat(type).Remove(statModifers[type].value);
                 statModifers.Remove(type);
             });
             lastUpdate = Time.time;
