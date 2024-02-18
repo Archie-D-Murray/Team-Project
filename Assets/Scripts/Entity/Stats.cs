@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -16,6 +18,15 @@ namespace Entity {
 
         public Stat[] statDict;
         public Action<StatType, float> updateStat;
+        public Dictionary<StatType, StatModifier> statModifers = new Dictionary<StatType, StatModifier>();
+
+        private float lastUpdate = 0;
+        private List<StatType> toRemove = new List<StatType>();
+
+        private void Start() {
+            lastUpdate = Time.time;
+            InvokeRepeating(nameof(UpdateStatModifiers), 0.0f, 0.25f);
+        }
 
         public string GetStatDisplay(StatType type) {
             return $"{GetStatName(type)}: {FindStat(type)?.value ?? float.NaN}";
@@ -50,6 +61,34 @@ namespace Entity {
             Stat stat = FindStat(type);
             stat.value = setToValue ? amount : stat.value + amount;
             updateStat?.Invoke(type, stat.value);
+        }
+
+        public void AddStatModifer(StatType type, float amount, float duration) {
+            if (statModifers.ContainsKey(type)) {
+                statModifers[type].value += amount;
+                statModifers[type].duration = duration;
+                Array.Find(statDict, (Stat stat) => stat.type == type).Add(amount);
+            } else {
+                statModifers.Add(type, new StatModifier(amount, duration));
+                Array.Find(statDict, (Stat stat) => stat.type == type)?.Add(amount);
+            }
+        }
+
+        private void UpdateStatModifiers() {
+            float delta = Time.time - lastUpdate;
+            toRemove.Clear();
+            foreach (KeyValuePair<StatType, StatModifier> item in statModifers) {
+                if (item.Value.isFinished) {
+                    toRemove.Add(item.Key);
+                    continue;
+                }
+                item.Value.Update(delta);
+            }
+            toRemove.ForEach((StatType type) => {
+                Array.Find(statDict, (Stat stat) => stat.type == type).Remove(statModifers[type].value);
+                statModifers.Remove(type);
+            });
+            lastUpdate = Time.time;
         }
     }
 }

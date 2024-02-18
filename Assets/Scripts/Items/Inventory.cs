@@ -20,5 +20,23 @@ namespace Items {
                 }
             }
         }
+
+        public void AddItem(Item item, int count = 1) {
+            int index = Array.IndexOf(items, item);
+            if (index >= 0) {
+                if (item.count + count < item.itemData.maxCount) {
+                    item.count += count;
+                    return;
+                }
+            } else {
+                for (int i = 0; i < count; i++) {
+                    if (!items[i].itemData) {
+                        items[i] = item;
+                        return;
+                    }
+                }
+            }
+            Debug.LogWarning($"Could not add item {item.itemData.name} to inventory!");
+        }
     }
 }
