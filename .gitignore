@@ -9,6 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+[Aa]ssets/[Pp]lugins/
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
@@ -78,5 +79,5 @@ Cargo.lock
 *.pdb
 
 #Builds/Video Logs
-*.mp4
 *.zip
+Assets/Plugins/CodeAssist/
