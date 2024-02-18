@@ -10,6 +10,7 @@ namespace Entity {
         public float getMaxHealth => maxHealth;
 
         public Action<float> onDamage;
+        public Action<float> onHeal;
         public Action onDeath;
 
         [SerializeField] private float currentHealth;
@@ -55,6 +56,7 @@ namespace Entity {
         public void Heal(float amount) {
             amount = Mathf.Max(0f, amount);
             currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+            onHeal?.Invoke(amount);
         }
     }
 }

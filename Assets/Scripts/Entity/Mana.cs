@@ -10,6 +10,7 @@ namespace Entity {
         public float getMaxMana => maxMana;
 
         public Action<float> onManaUse;
+        public Action<float> onManaRecover;
         public Action oom;
 
         private bool doingRegen = false;
@@ -56,14 +57,14 @@ namespace Entity {
             }
         }
 
-        public void UseMana(float damage) {
-            if (currentMana == 0.0f) { //Don't damage dead things!
+        public void UseMana(float manaCost) {
+            if (currentMana == 0.0f) { //Currently OOM
                 return;
             }
-            damage = Mathf.Max(damage, 0.0f);
-            if (damage != 0.0f) {
-                currentMana = Mathf.Max(0.0f, currentMana - damage);
-                onManaUse?.Invoke(damage);
+            manaCost = Mathf.Max(manaCost, 0.0f);
+            if (manaCost != 0.0f) {
+                currentMana = Mathf.Max(0.0f, currentMana - manaCost);
+                onManaUse?.Invoke(manaCost);
             }
             if (currentMana == 0.0f) {
                 Debug.Log($"{name} has no mana");
@@ -71,8 +72,16 @@ namespace Entity {
             }
         }
 
+        public void RecoverMana(float amount) {
+            amount = Mathf.Max(amount, 0.0f);
+            if (amount != 0.0f) {
+                currentMana = Mathf.Min(maxMana, currentMana + amount);
+                onManaRecover?.Invoke(amount);
+            }
+        }
+
         public void ManaRegen() {
-            currentMana = Mathf.Min(maxMana, currentMana + manaRegen);
+            RecoverMana(manaRegen);    
         }
 
         private void OnEnable() {

@@ -33,7 +33,8 @@ namespace UI {
             }
             currentHealth = health.getPercentHealth;
             healthText.text = $"{health.getCurrentHealth} / {health.getMaxHealth} ({health.getPercentHealth:0%})";
-            health.onDamage += OnDamage;
+            health.onDamage += UpdateReadout;
+            health.onHeal += UpdateReadout;
         }
 
         private void FixedUpdate() {
@@ -41,7 +42,7 @@ namespace UI {
             healthBar.fillAmount = currentHealth;
         }
 
-        private void OnDamage(float damage) {
+        public void UpdateReadout(float _) {
             healthText.text = $"{health.getCurrentHealth} / {health.getMaxHealth} ({health.getPercentHealth:0%})";
         }
     }
