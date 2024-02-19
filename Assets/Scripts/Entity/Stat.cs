@@ -13,5 +13,13 @@ namespace Entity {
         public override int GetHashCode() {
             return HashCode.Combine(type);
         }
+
+        public void Add(float amount) {
+            value += amount;
+        }
+
+        public void Remove(float amount) {
+            value -= amount;
+        }
     }
 }
