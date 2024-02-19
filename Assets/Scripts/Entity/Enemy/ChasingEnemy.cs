@@ -1,15 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entity;
+
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ChasingEnemy : EnemyScript
 {
-    private GameObject playerObject;
+    private Transform playerTransform;
     [SerializeField] private float aggroRange;
+    NavMeshAgent agent;
     // Start is called before the first frame update
     protected override void Start()
     {
-        playerObject = GameObject.Find("Player");
+        base.Start(); // Still need to get component references so need to call base
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateUpAxis = false;
+        agent.updateRotation = false;
+
+        if (stats.GetStat(StatType.SPEED, out float speed)) {
+            agent.speed = speed;
+        }
+
+        stats.updateStat += (StatType type, float amount) => { 
+            if (type != StatType.SPEED) { return; }
+            agent.speed = amount;
+        };
+
+        playerTransform = FindObjectOfType<PlayerController>().OrNull()?.transform ?? null;
+        if (!playerTransform) {
+            Debug.LogError("Could not find player!");
+            Destroy(this);
+        }
         enemySpeed = 1;
         enemyHealth = 50;
         enemyDamage = 30;
@@ -18,11 +38,11 @@ public class ChasingEnemy : EnemyScript
 
     protected override void EnemyMovement() 
     {
-        distanceToPlayer = Vector2.Distance(transform.position, playerObject.transform.position);
+        distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
-        if (distanceToPlayer < aggroRange) 
+        if (distanceToPlayer < aggroRange && Vector3.Distance(agent.destination, playerTransform.position) > 0.05f) 
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, playerObject.transform.position, enemySpeed * Time.deltaTime);
+            agent.destination = playerTransform.position;
         }
     }
 
