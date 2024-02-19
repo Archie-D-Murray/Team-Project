@@ -17,6 +17,6 @@ MonoBehaviour:
   maxCount: 1
   damageModifier: 1
   drawTimeModifier: 1
-  projectileSpeed: 10
-  missileDuration: 1
+  projectileSpeed: 500
+  missileDuration: 2
   projectile: {fileID: 8508758827916593260, guid: b16a5b4e91459d94aa8491fdb4bbf7f7, type: 3}

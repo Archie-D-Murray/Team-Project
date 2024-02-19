@@ -31,10 +31,10 @@ public class EnemyScript : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         stats = GetComponent<Stats>();
         health = GetComponent<Health>();
-        enemySpeed = 0;
-        enemyHealth = 20;
-
-        health.onDeath += () => animator.SetTrigger("Death");
+        health.onDeath += () => {
+            // Could spawn particles, give player xp, etc...
+            Destroy(gameObject);
+        };
     }
 
     // Update is called once per frame
@@ -80,20 +80,6 @@ public class EnemyScript : MonoBehaviour
                 health.Damage(damage);
                 timer.Restart(1f / attackSpeed);
             }
-        }
-    }
-
-    private void TakeDamage(int damageDealt) 
-    {
-        enemyHealth -= damageDealt;
-    }
-
-
-    private void CheckHealth() 
-    {
-        if(enemyHealth <= 0) 
-        {
-            Destroy(this.gameObject);
         }
     }
 

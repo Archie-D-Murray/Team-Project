@@ -15,7 +15,6 @@ public class ChasingEnemy : EnemyScript
         agent = GetComponent<NavMeshAgent>();
         agent.updateUpAxis = false;
         agent.updateRotation = false;
-
         if (stats.GetStat(StatType.SPEED, out float speed)) {
             agent.speed = speed;
         }
@@ -30,9 +29,6 @@ public class ChasingEnemy : EnemyScript
             Debug.LogError("Could not find player!");
             Destroy(this);
         }
-        enemySpeed = 1;
-        enemyHealth = 50;
-        enemyDamage = 30;
         aggroRange = 5;
     }
 
@@ -45,11 +41,4 @@ public class ChasingEnemy : EnemyScript
             agent.destination = playerTransform.position;
         }
     }
-
-    protected override void EnemyAttacks() 
-    {
-        //none
-    }
-
-
 }
