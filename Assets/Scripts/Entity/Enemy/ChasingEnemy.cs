@@ -41,4 +41,8 @@ public class ChasingEnemy : EnemyScript
             agent.destination = playerTransform.position;
         }
     }
+
+    protected new void OnTriggerEnter2D(Collider2D collision) {
+        base.OnTriggerEnter2D(collision);
+    }
 }

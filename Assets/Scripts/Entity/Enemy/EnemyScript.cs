@@ -6,8 +6,7 @@ using UnityEngine;
 using Entity;
 using Utilities;
 
-public class EnemyScript : MonoBehaviour
-{
+public class EnemyScript : MonoBehaviour {
     [SerializeField] protected float enemySpeed;
     [SerializeField] protected float enemyHealth;
     [SerializeField] protected int enemyDamage;
@@ -22,11 +21,10 @@ public class EnemyScript : MonoBehaviour
     protected Stats stats;
     protected Health health;
     protected Animator animator;
-    protected CountDownTimer timer = new CountDownTimer(0f);
+    [SerializeField] protected CountDownTimer timer = new CountDownTimer(0f);
 
     // Start is called before the first frame update
-    protected virtual void Start()
-    {
+    protected virtual void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         stats = GetComponent<Stats>();
@@ -35,11 +33,11 @@ public class EnemyScript : MonoBehaviour
             // Could spawn particles, give player xp, etc...
             Destroy(gameObject);
         };
+        playerLayer = 1 << LayerMask.NameToLayer("Player");
     }
 
     // Update is called once per frame
-    private void Update()
-    {
+    private void Update() {
         EnemyMovement();
         EnemyAttacks();
     }
@@ -49,22 +47,19 @@ public class EnemyScript : MonoBehaviour
     }
 
 
-    protected virtual void EnemyMovement() 
-    {
+    protected virtual void EnemyMovement() {
 
         //none
 
     }
 
-    protected virtual void EnemyAttacks() 
-    {
+    protected virtual void EnemyAttacks() {
         //none
     }
 
-    
 
-    private void OnTriggerEnter2D(Collider2D collision) 
-    {
+
+    protected void OnTriggerEnter2D(Collider2D collision) {
         // if(collision.CompareTag("Player Attack")) 
         // {
         //     //example damage
@@ -72,13 +67,14 @@ public class EnemyScript : MonoBehaviour
         //     //need help implmenting the other scripts
         //     TakeDamage(damage);
         // }
-        if (collision.gameObject.layer != playerLayer.value) {
+        if (1 << collision.gameObject.layer != playerLayer.value) {
             return;
         }
         if (collision.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage) && timer.isFinished) {
             if (stats.GetStat(StatType.ATTACK_SPEED, out float attackSpeed)) {
                 health.Damage(damage);
-                timer.Restart(1f / attackSpeed);
+                timer.Restart(1f / Mathf.Max(0.001f, attackSpeed));
+            } else {
             }
         }
     }

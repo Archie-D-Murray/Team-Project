@@ -20,10 +20,14 @@ namespace Attack {
 
         public ProjectileSystem(Stats stats, Transform origin, BowData bow) {
             this.stats = stats;
-            this.projectilePrefab = bow.projectile;
             this.origin = origin;
-            this.bow = bow;
-            ResetAttackTimer();
+            if (bow && bow is BowData) {
+                this.projectilePrefab = bow.projectile;
+                this.bow = bow;
+                ResetAttackTimer();
+            } else {
+                Debug.LogError("Projectile System was initialised incorrectly!");
+            }
         }
 
         public void FixedUpdate() {
@@ -53,19 +57,23 @@ namespace Attack {
 
         private void ResetAttackTimer() {
             if (stats.GetStat(StatType.ATTACK_SPEED, out float attackCooldown)) {                
-                attackTimer.Restart(attackCooldown * bow.drawTimeModifier);
+                attackTimer.Restart(1f / (attackCooldown * bow.drawTimeModifier));
             } else {
                 Debug.LogError("Stats does not contain an ATTACK_SPEED entry!");
                 return;
             }
         }
 
-        public void SetWeapon(ItemData bow) {
-            if (bow is not BowData) {
+        public void SetWeapon<T>(T bow) where T : ItemData {
+            if (bow is not BowData || !bow) {
                 Debug.LogError("Tried to pass non bow to SetWeapon on ProjectileSystem!");
                 return;
             }
             this.bow = bow as BowData;
+        }
+
+        public ItemData GetWeapon() {
+            return bow;
         }
     }
 }

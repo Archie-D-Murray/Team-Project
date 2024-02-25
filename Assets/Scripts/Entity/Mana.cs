@@ -2,9 +2,11 @@ using System;
 
 using UnityEngine;
 
+using Data;
+
 namespace Entity {
     [RequireComponent(typeof(Stats))]
-    public class Mana : MonoBehaviour {
+    public class Mana : MonoBehaviour, ISerialize {
         public float getPercentMana => Mathf.Clamp01(currentMana / maxMana);
         public float getCurrentMana => currentMana;
         public float getMaxMana => maxMana;
@@ -94,6 +96,16 @@ namespace Entity {
             if (doingRegen) {
                 CancelInvoke(nameof(ManaRegen));
             }
+        }
+
+        public void OnSerialize(ref GameData data) {
+            if (!gameObject.HasComponent<PlayerController>()) { return; }
+            data.playerCurrentMana = currentMana;
+        }
+
+        public void OnDeserialize(GameData data) {
+            if (!gameObject.HasComponent<PlayerController>()) { return; }
+            currentMana = data.playerCurrentMana;
         }
     }
 }

@@ -6,6 +6,11 @@ namespace Entity {
         public StatType type;
         public float value;
 
+        public Stat(StatType type, float value) {
+            this.type = type;
+            this.value = value;
+        }
+
         public override bool Equals(object obj) {
             return type == (obj as Stat).type;
         }

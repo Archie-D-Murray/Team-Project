@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using UnityEngine;
 
+using Data;
+
 namespace Entity {
-    public class Stats : MonoBehaviour {
+    public class Stats : MonoBehaviour, ISerialize {
+        private static Stat[] DefaultStats = new Stat[5] { 
+            new Stat(StatType.HEALTH      ,  10f),  
+            new Stat(StatType.SPEED       ,   5f),
+            new Stat(StatType.DAMAGE      ,   1f),
+            new Stat(StatType.MAGIC       ,   0f),
+            new Stat(StatType.ATTACK_SPEED,   1f)
+        };
 
         #region Enum => String cache
         private const string Health = "Max HEALTH";
@@ -16,7 +24,7 @@ namespace Entity {
         private const string Mana = "Max MANA";
         #endregion
 
-        public Stat[] statDict;
+        public Stat[] statDict = Stats.DefaultStats;
         public Action<StatType, float> updateStat;
         public Dictionary<StatType, StatModifier> statModifers = new Dictionary<StatType, StatModifier>();
 
@@ -89,6 +97,22 @@ namespace Entity {
                 statModifers.Remove(type);
             });
             lastUpdate = Time.time;
+        }
+
+        public void OnSerialize(ref GameData data) {
+            if (!gameObject.HasComponent<PlayerController>()) { return; }
+            data.stats = new List<Stat>(statDict.Length);
+            foreach (Stat stat in statDict) {
+                data.stats.Add(stat);
+            }
+        }
+
+        public void OnDeserialize(GameData data) {
+            if (!gameObject.HasComponent<PlayerController>()) { return; }
+            statDict = new Stat[data.stats.Count];
+            for (int i = 0; i < data.stats.Count; i++) {
+                statDict[i] = data.stats[i];
+            }
         }
     }
 }

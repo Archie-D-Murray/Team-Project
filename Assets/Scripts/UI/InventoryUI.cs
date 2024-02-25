@@ -106,7 +106,6 @@ namespace UI {
             public Button button;
 
             public ItemSlot(string name, Sprite sprite, int count, Image icon, TMP_Text itemText, TMP_Text itemCount, Button button) {
-                Debug.Log($"Creating item slot: {(isEmpty ? "empty" : name)}");
                 this.name = name;
                 this.count = count;
                 this.sprite = sprite;

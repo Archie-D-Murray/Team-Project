@@ -83,15 +83,15 @@ namespace UI {
                     Debug.Log("Item doesn't do anything");
                     return;
                 case ItemType.CONSUMABLE:
-                    if (item.itemData is not ConsumableItemData) {
+                    if (item.itemData is not ConsumableData) {
                         Debug.LogError($"Item data for {item.itemData.name} is not a ConsumbleItemData instance!\n{Environment.StackTrace}");
                         break;
                     }
-                    shouldHide = Consume(item.itemData as ConsumableItemData, playerHealth, playerMana, playerStats);
+                    shouldHide = Consume(item.itemData as ConsumableData, playerHealth, playerMana, playerStats);
                     break;
                 case ItemType.RANGED:
                     Debug.Log("Set bow!");
-                    playerController.SetBow(item.itemData as BowData);
+                    playerController.SetWeapon<BowData>(item.itemData as BowData);
                     break;
                 case ItemType.MELEE:
                     Debug.Log("Not implemented yet!");
@@ -109,7 +109,7 @@ namespace UI {
             }
         }
 
-        private bool Consume(ConsumableItemData data, Health playerHealth, Mana playerMana, Stats playerStats) {
+        private bool Consume(ConsumableData data, Health playerHealth, Mana playerMana, Stats playerStats) {
             if (data.isStats) {
                 playerStats.AddStatModifer(data.targetStat, data.amount, data.duration);
             } else {
@@ -134,7 +134,10 @@ namespace UI {
             if (!item.itemData) {
                 Debug.Log("Preview showing when no item is selected...");
                 return;
-            }            
+            }
+            if (item.type == ItemType.MELEE || item.type == ItemType.RANGED || item.type == ItemType.MAGE) {
+                playerController.SetWeapon<ItemData>(null);
+            }
             inventory.RemoveItem(item, item.count);
             inventoryUI.UpdateInventory();
             Hide();

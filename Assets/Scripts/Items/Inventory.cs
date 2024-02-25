@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using Data;
+
 namespace Items {
-    public class Inventory : MonoBehaviour {
+    public class Inventory : MonoBehaviour, ISerialize {
         public const int MAX_ITEMS = 10;
         public Item[] items = new Item[MAX_ITEMS];
 
@@ -37,6 +39,19 @@ namespace Items {
                 }
             }
             Debug.LogWarning($"Could not add item {item.itemData.name} to inventory!");
+        }
+
+        public void OnSerialize(ref GameData data) {
+            data.items = new List<SerializeableItem>(items.Length);
+            for (int i = 0; i < items.Length; i++) {
+                data.items.Add(items[i].ToSerializable());
+            }
+        }
+
+        public void OnDeserialize(GameData data) {
+            for (int i = 0; i < data.items.Count; i++) {
+                items[i] = data.items[i].ToItem();
+            }
         }
     }
 }

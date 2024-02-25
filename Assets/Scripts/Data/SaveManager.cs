@@ -1,0 +1,51 @@
+using Utilities;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+
+namespace Data {
+    public class SaveManager : Singleton<SaveManager> {
+        [SerializeField] private GameData data;
+
+        [SerializeField] private List<ISerialize> serializeObjects;
+
+        [SerializeField] string path;
+
+        private void Start() {
+            serializeObjects = FindSerializeObjects();
+            path = Path.Combine(Application.dataPath, "Game.json");
+        }
+
+        public void Save() {
+            foreach (ISerialize serializeObject in serializeObjects) {
+                serializeObject.OnSerialize(ref data);
+            }
+            File.WriteAllText(path, JsonUtility.ToJson(data, true));
+        }
+
+        public void Load() {
+            data = JsonUtility.FromJson<GameData>(File.ReadAllText(path));
+            foreach (ISerialize serializeObject in serializeObjects) {
+                serializeObject.OnDeserialize(data);
+            }
+        }
+
+        private List<ISerialize> FindSerializeObjects() {
+            IEnumerable<ISerialize> serializeObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISerialize>();
+            ISerialize playerController = serializeObjects.OfType<Entity.Player.PlayerController>().FirstOrDefault();
+            ISerialize inventory = serializeObjects.OfType<Items.Inventory>().FirstOrDefault();
+            List<ISerialize> serializeObjectList = new List<ISerialize>();
+            if (playerController != null && inventory != null) { // Need to ensure inventory is loaded before PlayerController as it relies on items to initialise!
+                serializeObjectList.Add(inventory);
+                serializeObjectList.Add(playerController);
+                foreach (ISerialize obj in serializeObjects.Where((ISerialize obj) => obj != playerController && obj != inventory)) {
+                    serializeObjectList.Add(obj);
+                }
+                return serializeObjectList;
+            } else {
+                return new List<ISerialize>(serializeObjects);
+            }
+        }
+    }
+}

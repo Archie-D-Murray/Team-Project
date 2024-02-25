@@ -1,0 +1,88 @@
+{
+    "stats": [
+        {
+            "type": 0,
+            "value": 100.0
+        },
+        {
+            "type": 1,
+            "value": 5.0
+        },
+        {
+            "type": 2,
+            "value": 10.0
+        },
+        {
+            "type": 3,
+            "value": 7.0
+        },
+        {
+            "type": 4,
+            "value": 1.0
+        },
+        {
+            "type": 5,
+            "value": 50.0
+        }
+    ],
+    "playerPos": {
+        "x": 1.9800000190734864,
+        "y": 2.0199999809265138,
+        "z": 0.0
+    },
+    "weaponIndex": -1,
+    "playerCurrentHealth": 100.0,
+    "playerCurrentMana": 50.0,
+    "items": [
+        {
+            "count": 1,
+            "type": 2,
+            "uid": 0
+        },
+        {
+            "count": 1,
+            "type": 3,
+            "uid": 1035813074
+        },
+        {
+            "count": -1,
+            "type": 0,
+            "uid": -2147483648
+        },
+        {
+            "count": -1,
+            "type": 0,
+            "uid": -2147483648
+        },
+        {
+            "count": -1,
+            "type": 0,
+            "uid": -2147483648
+        },
+        {
+            "count": -1,
+            "type": 0,
+            "uid": -2147483648
+        },
+        {
+            "count": -1,
+            "type": 0,
+            "uid": -2147483648
+        },
+        {
+            "count": -1,
+            "type": 0,
+            "uid": -2147483648
+        },
+        {
+            "count": -1,
+            "type": 0,
+            "uid": -2147483648
+        },
+        {
+            "count": -1,
+            "type": 0,
+            "uid": -2147483648
+        }
+    ]
+}
