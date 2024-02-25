@@ -485,7 +485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 984468093437402189, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
       propertyPath: statDict.Array.data[0].value
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 984468093437402189, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
       propertyPath: statDict.Array.data[1].value
@@ -513,11 +513,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067241091572247789, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.7730055
+      value: -4.65
       objectReference: {fileID: 0}
     - target: {fileID: 4067241091572247789, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4026055
+      value: 2.84
       objectReference: {fileID: 0}
     - target: {fileID: 4067241091572247789, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1110,11 +1110,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7587572020107182379, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.9412475
+      value: 6.71
       objectReference: {fileID: 0}
     - target: {fileID: 7587572020107182379, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.2971175
+      value: -1.97
       objectReference: {fileID: 0}
     - target: {fileID: 7587572020107182379, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1162,7 +1162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8157955738992398605, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
       propertyPath: statDict.Array.data[2].value
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8157955738992398605, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
       propertyPath: statDict.Array.data[3].value
@@ -1203,12 +1203,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    stats: []
-    playerPos: {x: 0, y: 0, z: 0}
-    weaponIndex: 0
-    playerCurrentHealth: 0
-    playerCurrentMana: 0
-    items: []
+    playerData:
+      stats: []
+      playerPos: {x: 0, y: 0, z: 0}
+      weaponIndex: 0
+      playerCurrentHealth: 0
+      playerCurrentMana: 0
+      items: []
+    enemies: []
   path: 
 --- !u!4 &955664616
 Transform:
