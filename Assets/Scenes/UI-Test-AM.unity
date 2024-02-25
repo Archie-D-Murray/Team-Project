@@ -503,6 +503,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1903227161464962191, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4067241091572247789, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -645,7 +649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5656536645280623788, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6739130777095418777, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: m_Sprite
@@ -738,10 +742,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6923347667607853242, guid: c4355440c72d93d489999cfef79480ae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 608448603}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4355440c72d93d489999cfef79480ae, type: 3}
 --- !u!1001 &513484803
 PrefabInstance:
@@ -852,56 +853,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c4704d95bb62884386f1b65ce9dfe89, type: 3}
---- !u!1 &608448599 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6923347667607853242, guid: c4355440c72d93d489999cfef79480ae, type: 3}
-  m_PrefabInstance: {fileID: 498039348}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &608448603
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608448599}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.11134696}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.3211044, y: 0.47773072}
-    oldSize: {x: 3.61, y: 5.000023}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.71, y: 5.000023}
-  m_EdgeRadius: 0
 --- !u!224 &714416070 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7412205447542861103, guid: 6974801db121bdb4da1ed1322fba068a, type: 3}
@@ -1133,6 +1084,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 192948234543233020, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1832162507653907705, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1200,6 +1155,18 @@ PrefabInstance:
     - target: {fileID: 8157955738992398605, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
       propertyPath: statDict.Array.data[3].type
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8157955738992398605, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: statDict.Array.data[0].value
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8157955738992398605, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: statDict.Array.data[2].value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8157955738992398605, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: statDict.Array.data[3].value
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
