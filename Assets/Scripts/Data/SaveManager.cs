@@ -30,16 +30,24 @@ namespace Data {
                 serializeObject.OnDeserialize(data);
             }
         }
+        
 
+        ///<summary>
+        ///Always loads Inventory, PlayerController, EnemyControllers then all Stat, Health and Mana components
+        ///</summary>
         private List<ISerialize> FindSerializeObjects() {
             IEnumerable<ISerialize> serializeObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISerialize>();
             ISerialize playerController = serializeObjects.OfType<Entity.Player.PlayerController>().FirstOrDefault();
             ISerialize inventory = serializeObjects.OfType<Items.Inventory>().FirstOrDefault();
+            IEnumerable<ISerialize> enemies = serializeObjects.OfType<EnemyScript>();
             List<ISerialize> serializeObjectList = new List<ISerialize>();
-            if (playerController != null && inventory != null) { // Need to ensure inventory is loaded before PlayerController as it relies on items to initialise!
+            if (playerController != null && inventory != null && enemies != null) { // Need to ensure inventory is loaded before PlayerController as it relies on items to initialise!
                 serializeObjectList.Add(inventory);
                 serializeObjectList.Add(playerController);
-                foreach (ISerialize obj in serializeObjects.Where((ISerialize obj) => obj != playerController && obj != inventory)) {
+                foreach (ISerialize enemy in enemies) {
+                    serializeObjectList.Add(enemy);
+                }
+                foreach (ISerialize obj in serializeObjects.Where((ISerialize obj) => obj != playerController && obj != inventory && !enemies.Contains(obj))) {
                     serializeObjectList.Add(obj);
                 }
                 return serializeObjectList;

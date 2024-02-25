@@ -6,10 +6,15 @@ using UnityEngine;
 using Entity;
 using Utilities;
 
-public class EnemyScript : MonoBehaviour {
-    [SerializeField] protected float enemySpeed;
-    [SerializeField] protected float enemyHealth;
-    [SerializeField] protected int enemyDamage;
+using System;
+using Data;
+using System.Linq;
+
+[Serializable] public enum EnemyType { STATIC, CHASING }
+
+public class EnemyScript : MonoBehaviour, ISerialize {
+    [SerializeField] public EnemyType type;
+    [SerializeField] public int id;
 
     [SerializeField] private LayerMask playerLayer;
 
@@ -25,6 +30,7 @@ public class EnemyScript : MonoBehaviour {
 
     // Start is called before the first frame update
     protected virtual void Start() {
+        InitEnemy();
         rigidBody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         stats = GetComponent<Stats>();
@@ -34,6 +40,11 @@ public class EnemyScript : MonoBehaviour {
             Destroy(gameObject);
         };
         playerLayer = 1 << LayerMask.NameToLayer("Player");
+    }
+
+    protected virtual void InitEnemy() {
+        type = EnemyType.STATIC;
+        id = Utilities.DeterministicHashCode.Hash(type.ToString() + name);
     }
 
     // Update is called once per frame
@@ -79,4 +90,11 @@ public class EnemyScript : MonoBehaviour {
         }
     }
 
+    public virtual void OnSerialize(ref GameData data) {
+        data.enemies.Add(new EnemyData(id, type, transform.position));
+    }
+
+    public virtual void OnDeserialize(GameData data) {
+        transform.position = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == id)?.enemyPos ?? transform.position;
+    }
 }

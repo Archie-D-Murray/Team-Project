@@ -42,15 +42,15 @@ namespace Items {
         }
 
         public void OnSerialize(ref GameData data) {
-            data.items = new List<SerializeableItem>(items.Length);
+            data.playerData.items = new List<SerializeableItem>(items.Length);
             for (int i = 0; i < items.Length; i++) {
-                data.items.Add(items[i].ToSerializable());
+                data.playerData.items.Add(items[i].ToSerializable());
             }
         }
 
         public void OnDeserialize(GameData data) {
-            for (int i = 0; i < data.items.Count; i++) {
-                items[i] = data.items[i].ToItem();
+            for (int i = 0; i < data.playerData.items.Count; i++) {
+                items[i] = data.playerData.items[i].ToItem();
             }
         }
     }

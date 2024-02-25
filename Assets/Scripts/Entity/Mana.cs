@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 
 using Data;
+using System.Linq;
 
 namespace Entity {
     [RequireComponent(typeof(Stats))]
@@ -98,14 +99,28 @@ namespace Entity {
             }
         }
 
-        public void OnSerialize(ref GameData data) {
-            if (!gameObject.HasComponent<PlayerController>()) { return; }
-            data.playerCurrentMana = currentMana;
+       public void OnSerialize(ref GameData data) {
+            if (gameObject.HasComponent<PlayerController>()) { 
+                data.playerData.playerCurrentMana = currentMana;
+            } else {
+                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
+                if (enemyData == null) {
+                    Debug.LogError($"Could not find associated enemy in data with {name}");
+                }
+                enemyData.enemyCurrentMana = currentMana;
+            }
         }
 
         public void OnDeserialize(GameData data) {
-            if (!gameObject.HasComponent<PlayerController>()) { return; }
-            currentMana = data.playerCurrentMana;
-        }
+            if (gameObject.HasComponent<PlayerController>()) { 
+                currentMana = data.playerData.playerCurrentMana;
+            } else {
+                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
+                if (enemyData == null) {
+                    Debug.LogError($"Could not find associated enemy in data with {name}");
+                }
+                currentMana = enemyData.enemyCurrentMana;
+            } 
+        } 
     }
 }

@@ -1,7 +1,11 @@
+using System;
+
 using Entity;
 
 using UnityEngine;
 using UnityEngine.AI;
+
+using Data;
 
 public class ChasingEnemy : EnemyScript
 {
@@ -44,5 +48,10 @@ public class ChasingEnemy : EnemyScript
 
     protected new void OnTriggerEnter2D(Collider2D collision) {
         base.OnTriggerEnter2D(collision);
+    }
+
+    protected override void InitEnemy() {
+        type = EnemyType.CHASING;
+        id = Utilities.DeterministicHashCode.Hash(type.ToString() + name);
     }
 }

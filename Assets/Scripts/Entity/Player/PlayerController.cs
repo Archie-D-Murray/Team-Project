@@ -70,23 +70,23 @@ namespace Entity.Player {
         }
 
         public void OnSerialize(ref GameData data) {
-            data.playerPos = rb2D.position;
-            data.weaponIndex = attackSystem != null ? Array.FindIndex(GetComponent<Inventory>().items, (Item item) => item.itemData.id == attackSystem.GetWeapon().id) : -1;
+            data.playerData.playerPos = rb2D.position;
+            data.playerData.weaponIndex = attackSystem != null ? Array.FindIndex(GetComponent<Inventory>().items, (Item item) => item.itemData.id == attackSystem.GetWeapon().id) : -1;
         }
 
         public void OnDeserialize(GameData data) {
-            rb2D.MovePosition(data.playerPos);
+            rb2D.MovePosition(data.playerData.playerPos);
             Inventory inventory = GetComponent<Inventory>();
-            if (data.weaponIndex == -1) {
+            if (data.playerData.weaponIndex == -1) {
                 attackSystem = null;
                 return;
             }
             switch (playerClass) {
                 case PlayerClass.Ranged:
-                    SetWeapon<BowData>(inventory.items[data.weaponIndex].itemData as BowData);
+                    SetWeapon<BowData>(inventory.items[data.playerData.weaponIndex].itemData as BowData);
                     break;
                 case PlayerClass.Melee:
-                    SetWeapon<SwordData>(inventory.items[data.weaponIndex].itemData as SwordData);
+                    SetWeapon<SwordData>(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
                     break;
                 default:
                     break;
