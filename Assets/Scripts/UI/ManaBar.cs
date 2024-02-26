@@ -32,7 +32,7 @@ namespace UI {
                 return;
             }
             currentMana = mana.getPercentMana;
-            manaText.text = $"{mana.getCurrentMana} / {mana.getMaxMana} ({mana.getPercentMana:0%})";
+            UpdateManaReadout();
             mana.onManaUse += UpdateManaReadout;
             mana.onManaRecover += UpdateManaReadout;
         }
@@ -42,8 +42,8 @@ namespace UI {
             manaBar.fillAmount = currentMana;
         }
 
-        private void UpdateManaReadout(float _) {
-            manaText.text = $"{mana.getCurrentMana} / {mana.getMaxMana} ({mana.getPercentMana:0%})";
+        private void UpdateManaReadout(float _ = 0f) {
+            manaText.text = $"{mana.getCurrentMana:0} / {mana.getMaxMana:0} ({mana.getPercentMana:0%})";
         }
     }
 }

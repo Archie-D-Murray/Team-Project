@@ -50,6 +50,15 @@ namespace Entity.Player {
                     attackSystem = new MeleeSystem(stats, transform, swordData);
                     break;
 
+                case PlayerClass.Mage:
+                    MageStaffData staffData = GetWeapon<MageStaffData>();
+                    SpellData[] spells = GetComponent<Inventory>().spells;
+                    if (!staffData) {
+                        Debug.LogWarning("Could not find mage staff to intialise attackSystem, attacks will not work intil this is initialised");
+                    }
+                    attackSystem = new MageSystem(stats, transform, staffData, spells, GetComponent<Mana>());
+                    break;
+
                 default:
                     Debug.Log("Only implmented ranged!");
                     Destroy(this);
@@ -88,6 +97,9 @@ namespace Entity.Player {
                 case PlayerClass.Melee:
                     SetWeapon<SwordData>(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
                     break;
+                case PlayerClass.Mage:
+                    SetWeapon<MageStaffData>(inventory.items[data.playerData.weaponIndex].itemData as MageStaffData);
+                    break;
                 default:
                     break;
             }
@@ -121,6 +133,9 @@ namespace Entity.Player {
 
                 case PlayerClass.Melee:
                     attackSystem = new MeleeSystem(stats, transform, itemData as SwordData);
+                    break;
+                case PlayerClass.Mage:
+                    attackSystem = new MageSystem(stats, transform, itemData as MageStaffData, GetComponent<Inventory>().spells, GetComponent<Mana>());
                     break;
                 default:
                     break;

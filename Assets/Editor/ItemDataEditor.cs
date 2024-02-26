@@ -2,6 +2,7 @@ using Items;
 using UnityEngine;
 using UnityEditor;
 using System;
+using Items.Spells;
 
 [CustomEditor(typeof(ItemData))]
 public class ItemDataEditor : Editor {
@@ -21,3 +22,12 @@ public class ConsumableDataEditor : ItemDataEditor {}
 
 [CustomEditor(typeof(SwordData))]
 public class SwordDataEditor : ItemDataEditor {}
+
+[CustomEditor(typeof(SpellData))]
+public class SpellDataEditor : ItemDataEditor {}
+
+[CustomEditor(typeof(MageStaffData))]
+public class MageStaffDataEditor : ItemDataEditor {}
+
+[CustomEditor(typeof(FireballSpell))]
+public class FireBallSpellEditor : SpellDataEditor {}

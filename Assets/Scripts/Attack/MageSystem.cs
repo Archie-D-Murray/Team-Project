@@ -16,67 +16,91 @@ namespace Attack {
         private Stats stats;
         private Mana mana;
         private Transform origin;
-        private BowData bow;
-        private GameObject projectilePrefab;
+        private SpellData[] spells;
+        private MageStaffData staff;
+        private int spellIndex = 0;
 
-        public MageSystem(Stats stats, Transform origin, BowData bow, Mana mana) {
+        public MageSystem(Stats stats, Transform origin, MageStaffData staff, SpellData[] spells, Mana mana) {
             this.stats = stats;
             this.mana = mana;
             this.origin = origin;
-            if (bow && bow is BowData) {
-                this.projectilePrefab = bow.projectile;
-                this.bow = bow;
-                ResetAttackTimer();
+            if (staff && staff is MageStaffData) {
+                this.staff = staff;
             } else {
-                Debug.LogError("Projectile System was initialised incorrectly!");
+                Debug.LogError("Mage System was initialised incorrectly!");
+            }
+
+            if (spells != null) {
+                this.spells = spells;
+            } else {
+                Debug.LogError("Mage system has no spells?");
             }
         }
 
         public void FixedUpdate() {
             cooldown.Update(Time.fixedDeltaTime);
             if (cooldown.isFinished && Utilities.Input.instance.playerControls.Gameplay.Attack.IsPressed()) {
-                Attack(origin);
-                ResetAttackTimer();
+                spellIndex = 0;
+                if (HasSpell() && mana.UseMana(spells[spellIndex].manaCost)) {
+                    Debug.Log($"Casting spell: {spells[spellIndex].name}");
+                    Attack(origin);
+                    ResetSpellCooldown();
+                }
             }
         }
 
+        private bool HasSpell() {
+            if (spells == null) {
+                Debug.LogWarning($"No spells?");
+                return false;
+            }
+            if (spells.Length <= spellIndex) {
+                Debug.LogWarning($"No spell assigned in slot: {spellIndex}");
+                return false;
+            }
+            if (!spells[spellIndex]) {
+                Debug.LogWarning($"No spell assigned in slot: {spellIndex}");
+                return false;
+            }
+            return true;
+        }
+
         public void Attack(Transform origin) {
-            if (stats.GetStat(StatType.DAMAGE, out float damage)) {
+            if (stats.GetStat(StatType.MAGIC, out float magic)) {
                 Quaternion rotation = Quaternion.AngleAxis(
                     Vector2.SignedAngle(
                         Vector2.up, 
                         (Utilities.Input.instance.main.ScreenToWorldPoint(Utilities.Input.instance.playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - origin.position).normalized),
                     Vector3.forward
                 );
-                GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, rotation);
-                projectile.GetOrAddComponent<EntityDamager>().Init(damage * bow.damageModifier);
-                projectile.GetOrAddComponent<LinearProjectileMover>().Init(bow.projectileSpeed);
-                projectile.GetOrAddComponent<AutoDestroy>().Init(bow.missileDuration);
-                mana.UseMana(10);
+                spells[spellIndex].CastSpell(origin.position, rotation, magic * staff.damageAmplifier * spells[spellIndex].magicModifier);
             } else {
-                Debug.LogError("Stats does not contain a DAMAGE entry!");
+                Debug.LogError($"Could not find entry for Magic Stat on Stats of {stats.name}!");
             }
         }
 
-        private void ResetAttackTimer() {
-            if (stats.GetStat(StatType.ATTACK_SPEED, out float attackCooldown)) {                
-                cooldown.Restart(1f / (attackCooldown * bow.drawTimeModifier));
-            } else {
-                Debug.LogError("Stats does not contain an ATTACK_SPEED entry!");
-                return;
-            }
+        private void ResetSpellCooldown() {
+            cooldown.Restart(spells[spellIndex].cooldown * staff.cooldownModifier);
         }
 
-        public void SetWeapon<T>(T bow) where T : ItemData {
-            if (bow is not BowData || !bow) {
-                Debug.LogError("Tried to pass non bow to SetWeapon on ProjectileSystem!");
+        public void SetWeapon<T>(T staff) where T : ItemData {
+            if (!staff || staff is not MageStaffData) {
+                Debug.LogError("Tried to pass non staff to SetWeapon on MageSystem!");
                 return;
             }
-            this.bow = bow as BowData;
+            this.staff = staff as MageStaffData;
         }
 
         public ItemData GetWeapon() {
-            return bow;
+            return staff;
+        }
+
+        public void SetSpells(SpellData[] spells) {
+            if (spells == null) {
+                Debug.LogError("No spells?");
+                return;
+            }
+            this.spells = spells;
         }
     }
 }

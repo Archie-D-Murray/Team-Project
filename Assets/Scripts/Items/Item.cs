@@ -14,11 +14,11 @@ namespace Items {
             this.count = count;
         }
 
-        public SerializeableItem ToSerializable() {
+        public SerializableItem ToSerializable() {
             if (itemData) {
-                return new SerializeableItem(count, type, itemData.id);
+                return new SerializableItem(count, type, itemData.id);
             } else {
-                return SerializeableItem.Null;
+                return SerializableItem.Null;
             }
         }
     }

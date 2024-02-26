@@ -60,9 +60,9 @@ namespace Entity {
             }
         }
 
-        public void UseMana(float manaCost) {
-            if (currentMana == 0.0f) { //Currently OOM
-                return;
+        public bool UseMana(float manaCost) {
+            if (currentMana <= manaCost) { //Currently OOM
+                return false;
             }
             manaCost = Mathf.Max(manaCost, 0.0f);
             if (manaCost != 0.0f) {
@@ -73,6 +73,7 @@ namespace Entity {
                 Debug.Log($"{name} has no mana");
                 oom?.Invoke();
             }
+            return true;
         }
 
         public void RecoverMana(float amount) {

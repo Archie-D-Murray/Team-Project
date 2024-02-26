@@ -40,16 +40,19 @@ namespace Attack {
 
         public void Attack(Transform origin) {
             if (stats.GetStat(StatType.DAMAGE, out float damage)) {
-                Quaternion rotation = Quaternion.AngleAxis(
-                    Vector2.SignedAngle(
-                        Vector2.up, 
-                        (Utilities.Input.instance.main.ScreenToWorldPoint(Utilities.Input.instance.playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - origin.position).normalized),
-                    Vector3.forward
-                );
-                GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, rotation);
-                projectile.GetOrAddComponent<EntityDamager>().Init(damage * bow.damageModifier);
-                projectile.GetOrAddComponent<LinearProjectileMover>().Init(bow.projectileSpeed);
-                projectile.GetOrAddComponent<AutoDestroy>().Init(bow.missileDuration);
+                float angleIncrement = bow.spreadAngle / ((float) bow.projectiles - 1f);
+                float spreadStart = -bow.spreadAngle * 0.5f + Utilities.Input.instance.AngleToMouse(origin);
+                for (int i = 0; i < bow.projectiles; i++) {
+                    Quaternion rotation = Quaternion.AngleAxis(
+                        spreadStart,
+                        Vector3.forward
+                    );
+                    GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, rotation);
+                    projectile.GetOrAddComponent<EntityDamager>().Init(damage * bow.damageModifier);
+                    projectile.GetOrAddComponent<LinearProjectileMover>().Init(bow.projectileSpeed);
+                    projectile.GetOrAddComponent<AutoDestroy>().Init(bow.missileDuration);
+                    spreadStart += angleIncrement;
+                }
             } else {
                 Debug.LogError("Stats does not contain a DAMAGE entry!");
             }

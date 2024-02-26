@@ -8,6 +8,11 @@ namespace Data {
     [Serializable] public class GameData {
         public PlayerData playerData;
         public List<EnemyData> enemies;
+
+        public GameData() {
+            playerData = new PlayerData();
+            enemies = new List<EnemyData>();
+        }
     }
 
     [Serializable] public class PlayerData {
@@ -17,7 +22,8 @@ namespace Data {
         public int weaponIndex;
         public float playerCurrentHealth;
         public float playerCurrentMana;
-        public List<SerializeableItem> items;
+        public List<SerializableItem> items;
+        public List<int> spells;
     }
 
     [Serializable] public class EnemyData {

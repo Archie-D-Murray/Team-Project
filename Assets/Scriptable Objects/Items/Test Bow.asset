@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cfb68d9d346834989a378e8a94ddcc, type: 3}
   m_Name: Test Bow
   m_EditorClassIdentifier: 
+  id: 0
   icon: {fileID: 2800000, guid: 53d33bff0a9374b6db003552e5767cdb, type: 3}
   itemName: Bow
   maxCount: 1
@@ -19,4 +20,6 @@ MonoBehaviour:
   drawTimeModifier: 1
   projectileSpeed: 500
   missileDuration: 2
+  projectiles: 3
+  spreadAngle: 45
   projectile: {fileID: 8508758827916593260, guid: b16a5b4e91459d94aa8491fdb4bbf7f7, type: 3}

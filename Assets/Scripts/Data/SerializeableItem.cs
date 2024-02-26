@@ -3,14 +3,14 @@ using Items;
 
 namespace Data {
     [Serializable]
-    public class SerializeableItem {
+    public class SerializableItem {
         public int count;
         public ItemType type;
         public int uid;
 
-        public static readonly SerializeableItem Null = new SerializeableItem(-1, ItemType.ITEM, int.MinValue);
+        public static readonly SerializableItem Null = new SerializableItem(-1, ItemType.ITEM, int.MinValue);
 
-        public SerializeableItem(int count, ItemType type, int uid) {
+        public SerializableItem(int count, ItemType type, int uid) {
             this.count = count;
             this.type = type;
             this.uid = uid;
