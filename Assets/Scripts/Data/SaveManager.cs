@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Collections;
 
 namespace Data {
     public class SaveManager : Singleton<SaveManager> {
@@ -18,10 +19,18 @@ namespace Data {
         }
 
         public void Save() {
+            StartCoroutine(SaveIEnumerator());
+        }
+
+        IEnumerator SaveIEnumerator() {
+            data = new GameData();
             foreach (ISerialize serializeObject in serializeObjects) {
                 serializeObject.OnSerialize(ref data);
             }
-            File.WriteAllText(path, JsonUtility.ToJson(data, true));
+            yield return Yielders.waitForEndOfFrame;
+            string buffer = JsonUtility.ToJson(data, true);
+            yield return Yielders.waitForEndOfFrame;
+            File.WriteAllText(path, buffer);
         }
 
         public void Load() {
@@ -37,6 +46,7 @@ namespace Data {
         ///</summary>
         private List<ISerialize> FindSerializeObjects() {
             IEnumerable<ISerialize> serializeObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISerialize>();
+
             ISerialize playerController = serializeObjects.OfType<Entity.Player.PlayerController>().FirstOrDefault();
             ISerialize inventory = serializeObjects.OfType<Items.Inventory>().FirstOrDefault();
             IEnumerable<ISerialize> enemies = serializeObjects.OfType<EnemyScript>();

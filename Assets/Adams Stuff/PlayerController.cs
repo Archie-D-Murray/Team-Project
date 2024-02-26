@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float timeCooldown = 3f;
     private float timeTimer = 0;
-    private Vector3[] previousPos;
+    private Queue<Vector3> previousPos;
 
 
     void Start()
@@ -46,10 +46,9 @@ public class PlayerController : MonoBehaviour
 
     private void SetupPreviousPos()
     {
-        previousPos = new Vector3[150];
-        for (int i = 0; i < previousPos.Length; i++)
-        {
-            previousPos[i] = transform.position;
+        previousPos = new Queue<Vector3>(150);
+        for (int i = 0; i < 150; i++) {
+            previousPos.Enqueue(transform.position);
         }
     }
 
@@ -91,15 +90,12 @@ public class PlayerController : MonoBehaviour
     private void RewindTime()
     {
         timeTimer = timeCooldown;
-        transform.position = previousPos[0];
+        transform.position = previousPos.Dequeue();
     }
 
     private void InsertNewPosition()
     {
-        for (int i = 0; i < previousPos.Length-1; i++)
-        {
-            previousPos[i] = previousPos[i + 1];
-        }
-        previousPos[previousPos.Length-1] = transform.position;
+        _ = previousPos.Dequeue();
+        previousPos.Enqueue(transform.position);
     }
 }

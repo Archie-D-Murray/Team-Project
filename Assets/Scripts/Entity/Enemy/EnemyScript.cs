@@ -10,7 +10,9 @@ using System;
 using Data;
 using System.Linq;
 
-[Serializable] public enum EnemyType { STATIC, CHASING }
+[Serializable] public enum EnemyType { STATIC, CHASING,
+    SHOOTING
+}
 
 public class EnemyScript : MonoBehaviour, ISerialize {
     [SerializeField] public EnemyType type;
