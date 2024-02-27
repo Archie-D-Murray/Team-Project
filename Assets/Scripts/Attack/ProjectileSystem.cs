@@ -20,15 +20,19 @@ namespace Attack {
 
         public ProjectileSystem(Stats stats, Transform origin, BowData bow) {
             this.stats = stats;
-            this.projectilePrefab = bow.projectile;
             this.origin = origin;
-            this.bow = bow;
-            ResetAttackTimer();
+            if (bow && bow is BowData) {
+                this.projectilePrefab = bow.projectile;
+                this.bow = bow;
+                ResetAttackTimer();
+            } else {
+                Debug.LogError("Projectile System was initialised incorrectly!");
+            }
         }
 
         public void FixedUpdate() {
             attackTimer.Update(Time.fixedDeltaTime);
-            if (attackTimer.isFinished && Input.instance.playerControls.Gameplay.Attack.IsPressed()) {
+            if (attackTimer.isFinished && Utilities.Input.instance.playerControls.Gameplay.Attack.IsPressed()) {
                 Attack(origin);
                 ResetAttackTimer();
             }
@@ -36,16 +40,19 @@ namespace Attack {
 
         public void Attack(Transform origin) {
             if (stats.GetStat(StatType.DAMAGE, out float damage)) {
-                Quaternion rotation = Quaternion.AngleAxis(
-                    Vector2.SignedAngle(
-                        Vector2.up, 
-                        (Input.instance.main.ScreenToWorldPoint(Input.instance.playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - origin.position).normalized),
-                    Vector3.forward
-                );
-                GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, rotation);
-                projectile.GetOrAddComponent<EntityDamager>().Init(damage * bow.damageModifier);
-                projectile.GetOrAddComponent<LinearProjectileMover>().Init(bow.projectileSpeed);
-                projectile.GetOrAddComponent<AutoDestroy>().Init(bow.missileDuration);
+                float angleIncrement = bow.spreadAngle / ((float) bow.projectiles - 1f);
+                float spreadStart = -bow.spreadAngle * 0.5f + Utilities.Input.instance.AngleToMouse(origin);
+                for (int i = 0; i < bow.projectiles; i++) {
+                    Quaternion rotation = Quaternion.AngleAxis(
+                        spreadStart,
+                        Vector3.forward
+                    );
+                    GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, rotation);
+                    projectile.GetOrAddComponent<EntityDamager>().Init(damage * bow.damageModifier);
+                    projectile.GetOrAddComponent<LinearProjectileMover>().Init(bow.projectileSpeed);
+                    projectile.GetOrAddComponent<AutoDestroy>().Init(bow.missileDuration);
+                    spreadStart += angleIncrement;
+                }
             } else {
                 Debug.LogError("Stats does not contain a DAMAGE entry!");
             }
@@ -53,19 +60,23 @@ namespace Attack {
 
         private void ResetAttackTimer() {
             if (stats.GetStat(StatType.ATTACK_SPEED, out float attackCooldown)) {                
-                attackTimer.Restart(attackCooldown * bow.drawTimeModifier);
+                attackTimer.Restart(1f / (attackCooldown * bow.drawTimeModifier));
             } else {
                 Debug.LogError("Stats does not contain an ATTACK_SPEED entry!");
                 return;
             }
         }
 
-        public void SetWeapon(ItemData bow) {
-            if (bow is not BowData) {
+        public void SetWeapon<T>(T bow) where T : ItemData {
+            if (bow is not BowData || !bow) {
                 Debug.LogError("Tried to pass non bow to SetWeapon on ProjectileSystem!");
                 return;
             }
             this.bow = bow as BowData;
+        }
+
+        public ItemData GetWeapon() {
+            return bow;
         }
     }
 }

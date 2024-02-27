@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c72e0318851adb42b4d3547e0252c8c, type: 3}
-  m_Name: New Item
+  m_Script: {fileID: 11500000, guid: be7227948f69f0244820cf8f5272cc3f, type: 3}
+  m_Name: Test Staff
   m_EditorClassIdentifier: 
-  icon: {fileID: 2800000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
-  itemName: Item
-  maxCount: 0
+  id: -64803719
+  icon: {fileID: 2800000, guid: 9efb82d91ad0e4fdfbf6a09635f9d78d, type: 3}
+  itemName: Crap staff
+  maxCount: 1
+  damageAmplifier: 1
+  cooldownModifier: 1

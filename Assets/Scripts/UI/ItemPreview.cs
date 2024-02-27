@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 
+using Entity;
 using Entity.Player;
 
 using Items;
@@ -21,7 +22,10 @@ namespace UI {
 
         private Inventory inventory;
         private InventoryUI inventoryUI;
-        private PlayerController playerController;
+        private Entity.Player.PlayerController playerController;
+        private Health playerHealth;
+        private Mana playerMana;
+        private Stats playerStats;
         private CanvasGroup canvasGroup;
 
         public void Init(Inventory inventory, InventoryUI inventoryUI) {
@@ -47,7 +51,10 @@ namespace UI {
         }
 
         public void Start() {
-            playerController = FindFirstObjectByType<PlayerController>();
+            playerController = FindFirstObjectByType<Entity.Player.PlayerController>();
+            playerHealth = playerController.GetComponent<Health>();
+            playerMana = playerController.GetComponent<Mana>();
+            playerStats = playerController.GetComponent<Stats>();
             itemIcon = GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<ItemIcon>());
             foreach (TMP_Text text in GetComponentsInChildren<TMP_Text>()) {
                 if (text.gameObject.HasComponent<ItemCount>()) {
@@ -70,16 +77,21 @@ namespace UI {
         }
 
         public void Use() {
+            bool shouldHide = false;
             switch (item.type) {
                 case ItemType.ITEM:
                     Debug.Log("Item doesn't do anything");
                     return;
                 case ItemType.CONSUMABLE:
-                    Debug.Log("Not implemented yet!");
+                    if (item.itemData is not ConsumableData) {
+                        Debug.LogError($"Item data for {item.itemData.name} is not a ConsumbleItemData instance!\n{Environment.StackTrace}");
+                        break;
+                    }
+                    shouldHide = Consume(item.itemData as ConsumableData, playerHealth, playerMana, playerStats);
                     break;
                 case ItemType.RANGED:
                     Debug.Log("Set bow!");
-                    playerController.SetBow(item.itemData as BowData);
+                    playerController.SetWeapon<BowData>(item.itemData as BowData);
                     break;
                 case ItemType.MELEE:
                     Debug.Log("Not implemented yet!");
@@ -92,13 +104,40 @@ namespace UI {
                     break;
             }
             inventoryUI.UpdateInventory();
+            if (shouldHide) {
+                Hide();
+            }
+        }
+
+        private bool Consume(ConsumableData data, Health playerHealth, Mana playerMana, Stats playerStats) {
+            if (data.isStats) {
+                playerStats.AddStatModifer(data.targetStat, data.amount, data.duration);
+            } else {
+                switch (data.targetStat) {
+                    case StatType.HEALTH:
+                        playerHealth.Heal(data.amount);
+                        break;
+
+                    case StatType.MANA:
+                        playerMana.RecoverMana(data.amount);
+                        break;
+                    default:
+                        Debug.LogWarning($"Invalid stat type has been set for {data.name} as isStat modifier is not true!");
+                        break;
+                }
+            }
+            inventory.RemoveItem(item);
+            return item.count > 0;
         }
 
         public void Drop() {
             if (!item.itemData) {
                 Debug.Log("Preview showing when no item is selected...");
                 return;
-            }            
+            }
+            if (item.type == ItemType.MELEE || item.type == ItemType.RANGED || item.type == ItemType.MAGE) {
+                playerController.SetWeapon<ItemData>(null);
+            }
             inventory.RemoveItem(item, item.count);
             inventoryUI.UpdateInventory();
             Hide();

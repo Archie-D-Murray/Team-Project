@@ -1,0 +1,391 @@
+fileFormatVersion: 2
+guid: fab478e1378882f449100fbb5089b844
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: melee walk - no text_0
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 1100
+        width: 361
+        height: 500
+      alignment: 9
+      pivot: {x: 0.3211044, y: 0.47773072}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5ceaef6d7ead554bb97bc9a302d8c7c
+      internalID: -1702344054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_1
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 1091
+        width: 348
+        height: 506
+      alignment: 9
+      pivot: {x: 0.22483212, y: 0.48679686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 758f3ef3cd452b24aaab69deba00e16d
+      internalID: -1661295290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_2
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 1092
+        width: 347
+        height: 505
+      alignment: 9
+      pivot: {x: 0.7887962, y: 0.50881976}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de947deb5066f6741b2054822a7f4a77
+      internalID: 2038005483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_3
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 1105
+        width: 378
+        height: 476
+      alignment: 9
+      pivot: {x: 0.5942622, y: 0.50935733}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee150183ccef56a4e940ed31b58dfb8f
+      internalID: 1689943879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 580
+        width: 350
+        height: 480
+      alignment: 9
+      pivot: {x: 0.41728494, y: 0.4489662}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d113696ee115a134fa99742cb1e08fcd
+      internalID: 1004220063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_5
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 587
+        width: 429
+        height: 482
+      alignment: 9
+      pivot: {x: 0.35984308, y: 0.44917786}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfee2032d430a414fb0bdd271df042e5
+      internalID: 440503515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_6
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 545
+        width: 429
+        height: 481
+      alignment: 9
+      pivot: {x: 0.6609208, y: 0.47222126}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 155e036918e493a439ac7ad8b07b5478
+      internalID: -158171272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_7
+      rect:
+        serializedVersion: 2
+        x: 1626
+        y: 586
+        width: 420
+        height: 441
+      alignment: 9
+      pivot: {x: 0.54241824, y: 0.4747515}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34110d70fa2b5364f8c538a3e1ed44f2
+      internalID: 1531307877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_8
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 23
+        width: 344
+        height: 486
+      alignment: 9
+      pivot: {x: 0.43526334, y: 0.44501385}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9436196a9b735274f82538c6dbdd14de
+      internalID: -304233398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_9
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 86
+        width: 482
+        height: 461
+      alignment: 9
+      pivot: {x: 0.39373514, y: 0.41304806}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab3d6a52415790148880ba35cf475abf
+      internalID: 1346463122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_10
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 28
+        width: 483
+        height: 461
+      alignment: 9
+      pivot: {x: 0.58299166, y: 0.41787857}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbadf4b066adb994a988f290108ccd5d
+      internalID: -1989350444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: melee walk - no text_11
+      rect:
+        serializedVersion: 2
+        x: 1626
+        y: 51
+        width: 390
+        height: 440
+      alignment: 9
+      pivot: {x: 0.5114205, y: 0.4190204}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01c74ce686f4e29428f351c7c99d7221
+      internalID: 1700655246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      melee walk - no text_0: -1702344054
+      melee walk - no text_1: -1661295290
+      melee walk - no text_10: -1989350444
+      melee walk - no text_11: 1700655246
+      melee walk - no text_2: 2038005483
+      melee walk - no text_3: 1689943879
+      melee walk - no text_4: 1004220063
+      melee walk - no text_5: 440503515
+      melee walk - no text_6: -158171272
+      melee walk - no text_7: 1531307877
+      melee walk - no text_8: -304233398
+      melee walk - no text_9: 1346463122
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

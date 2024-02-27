@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Linq;
 
 using UnityEngine;
 
+using Data;
+
 namespace Entity {
     [RequireComponent(typeof(Stats))]
-    public class Health : MonoBehaviour {
+    public class Health : MonoBehaviour, ISerialize {
         public float getPercentHealth => Mathf.Clamp01(currentHealth / maxHealth);
         public float getCurrentHealth => currentHealth;
         public float getMaxHealth => maxHealth;
 
         public Action<float> onDamage;
+        public Action<float> onHeal;
         public Action onDeath;
 
         [SerializeField] private float currentHealth;
@@ -55,6 +59,31 @@ namespace Entity {
         public void Heal(float amount) {
             amount = Mathf.Max(0f, amount);
             currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+            onHeal?.Invoke(amount);
+        }
+
+        public void OnSerialize(ref GameData data) {
+            if (gameObject.HasComponent<PlayerController>()) { 
+                data.playerData.playerCurrentHealth = currentHealth;
+            } else {
+                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
+                if (enemyData == null) {
+                    Debug.LogError($"Could not find associated enemy in data with {name}");
+                }
+                enemyData.enemyCurrentHealth = currentHealth;
+            }
+        }
+
+        public void OnDeserialize(GameData data) {
+            if (gameObject.HasComponent<PlayerController>()) { 
+                currentHealth = data.playerData.playerCurrentHealth;
+            } else {
+                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
+                if (enemyData == null) {
+                    Debug.LogError($"Could not find associated enemy in data with {name}");
+                }
+                currentHealth = enemyData.enemyCurrentHealth;
+            } 
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Attack {
     public interface IAttackSystem {
         void Attack(Transform origin);
         void FixedUpdate();
-        void SetWeapon(ItemData item);
+        ItemData GetWeapon();
+        void SetWeapon<T>(T item) where T : ItemData;
     }
 }

@@ -1,0 +1,157 @@
+{
+    "playerData": {
+        "stats": [
+            {
+                "type": 0,
+                "value": 100.0
+            },
+            {
+                "type": 1,
+                "value": 5.0
+            },
+            {
+                "type": 2,
+                "value": 10.0
+            },
+            {
+                "type": 3,
+                "value": 7.0
+            },
+            {
+                "type": 4,
+                "value": 1.0
+            },
+            {
+                "type": 5,
+                "value": 50.0
+            }
+        ],
+        "playerPos": {
+            "x": 1.4299999475479127,
+            "y": 1.8799999952316285,
+            "z": 0.0
+        },
+        "weaponIndex": -1,
+        "playerCurrentHealth": 100.0,
+        "playerCurrentMana": 50.0,
+        "items": [
+            {
+                "count": 1,
+                "type": 2,
+                "uid": 0
+            },
+            {
+                "count": 1,
+                "type": 3,
+                "uid": 1035813074
+            },
+            {
+                "count": 2,
+                "type": 1,
+                "uid": 0
+            },
+            {
+                "count": 10,
+                "type": 0,
+                "uid": 0
+            },
+            {
+                "count": 1,
+                "type": 1,
+                "uid": 0
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            }
+        ],
+        "spells": [
+            432583936
+        ]
+    },
+    "enemies": [
+        {
+            "id": 2036,
+            "type": 0,
+            "stats": [
+                {
+                    "type": 0,
+                    "value": 20.0
+                },
+                {
+                    "type": 1,
+                    "value": 0.0
+                },
+                {
+                    "type": 2,
+                    "value": 2.0
+                },
+                {
+                    "type": 4,
+                    "value": 2.0
+                }
+            ],
+            "enemyPos": {
+                "x": 6.710000038146973,
+                "y": -1.9700000286102296,
+                "z": 0.0
+            },
+            "enemyCurrentHealth": 20.0,
+            "enemyCurrentMana": 0.0
+        },
+        {
+            "id": 1720,
+            "type": 1,
+            "stats": [
+                {
+                    "type": 0,
+                    "value": 20.0
+                },
+                {
+                    "type": 1,
+                    "value": 10.0
+                },
+                {
+                    "type": 2,
+                    "value": 1.0
+                },
+                {
+                    "type": 4,
+                    "value": 1.0
+                },
+                {
+                    "type": 3,
+                    "value": 0.0
+                }
+            ],
+            "enemyPos": {
+                "x": -4.650000095367432,
+                "y": 2.3400003910064699,
+                "z": -0.5833329558372498
+            },
+            "enemyCurrentHealth": 20.0,
+            "enemyCurrentMana": 0.0
+        }
+    ]
+}

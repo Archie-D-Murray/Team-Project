@@ -7,6 +7,8 @@ namespace Items {
         [Min(0.001f)] public float drawTimeModifier = 1f;
         [Min(0.001f)] public float projectileSpeed = 1f;
         [Min(0.001f)] public float missileDuration = 1f;
+        public int projectiles = 1;
+        public float spreadAngle = 0f;
         public GameObject projectile;
     }
 }
