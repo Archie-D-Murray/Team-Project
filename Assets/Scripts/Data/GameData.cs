@@ -8,10 +8,12 @@ namespace Data {
     [Serializable] public class GameData {
         public PlayerData playerData;
         public List<EnemyData> enemies;
+        public int sceneID;
 
         public GameData() {
             playerData = new PlayerData();
             enemies = new List<EnemyData>();
+            sceneID = 0;
         }
     }
 

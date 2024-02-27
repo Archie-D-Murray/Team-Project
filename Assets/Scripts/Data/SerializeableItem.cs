@@ -18,7 +18,7 @@ namespace Data {
 
         public Item ToItem() {
             if (uid != Null.uid) {
-                return new Item(Array.Find(ItemServer.instance.items, (ItemData itemData) => itemData ? itemData.id == uid : false), type, count);
+                return new Item(Array.Find(AssetServer.instance.items, (ItemData itemData) => itemData ? itemData.id == uid : false), type, count);
             } else {
                 return new Item(null, Null.type, Null.count);
             }

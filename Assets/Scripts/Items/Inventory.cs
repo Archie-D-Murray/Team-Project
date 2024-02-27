@@ -59,7 +59,7 @@ namespace Items {
             }
             spells = new SpellData[data.playerData.spells.Count]; 
             for (int i = 0; i < data.playerData.spells.Count; i++) {
-                spells[i] = Array.Find(ItemServer.instance.spells, (SpellData spellData) => spellData.id == data.playerData.spells[i]);
+                spells[i] = Array.Find(AssetServer.instance.spells, (SpellData spellData) => spellData.id == data.playerData.spells[i]);
             }
         }
     }

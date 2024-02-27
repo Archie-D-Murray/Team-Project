@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Data {
-    public class SaveManager : Singleton<SaveManager> {
+    public class SaveManager : PersistentSingleton<SaveManager> {
         [SerializeField] private GameData data;
 
         [SerializeField] private List<ISerialize> serializeObjects;
@@ -24,6 +25,7 @@ namespace Data {
 
         IEnumerator SaveIEnumerator() {
             data = new GameData();
+            data.sceneID = SceneManager.GetActiveScene().buildIndex;
             foreach (ISerialize serializeObject in serializeObjects) {
                 serializeObject.OnSerialize(ref data);
             }
@@ -33,11 +35,29 @@ namespace Data {
             File.WriteAllText(path, buffer);
         }
 
-        public void Load() {
-            data = JsonUtility.FromJson<GameData>(File.ReadAllText(path));
+        IEnumerator LoadIEnumerator(bool switchScene = true) {
+            string buffer = File.ReadAllText(path);
+            yield return Yielders.waitForEndOfFrame;
+            data = JsonUtility.FromJson<GameData>(buffer);
+            if (switchScene) {
+                SceneManager.LoadSceneAsync(data.sceneID);
+            }
             foreach (ISerialize serializeObject in serializeObjects) {
                 serializeObject.OnDeserialize(data);
             }
+        }
+
+        public void Load() {
+            StartCoroutine(LoadIEnumerator(false));
+        }
+
+        public void New() {
+            data = new GameData();
+            StartCoroutine(SaveIEnumerator());
+        }
+
+        public void ContinueFromSave() {
+            StartCoroutine(LoadIEnumerator(false));
         }
         
 
