@@ -143,5 +143,14 @@ namespace Entity {
                 }
             }
         }
+
+        public void IncrementStat(StatType type, float amount) {
+            Stat stat = FindStat(type);
+            if (stat != null) {
+                stat.value += amount;
+            } else {
+                Debug.LogWarning($"Tried to update stat that does not exist: {type}");
+            }
+        }
     }
 }
