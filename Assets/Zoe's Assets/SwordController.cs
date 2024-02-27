@@ -15,13 +15,20 @@ public class SwordController : MonoBehaviour
 
     private void Update()
     {
-        if (UnityEngine.Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             for (int i = 0; i < enemies.Count; i++)
             {
                 //enemies[i].GetComponent<EnemyController>().TakeDamage(damage);
             }
         }
+
+        Vector3 direction = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition) - transform.position;
+        direction.Normalize();
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
