@@ -61,14 +61,14 @@
                 "uid": 0
             },
             {
-                "count": -1,
-                "type": 0,
-                "uid": -2147483648
+                "count": 1,
+                "type": 2,
+                "uid": 0
             },
             {
-                "count": -1,
-                "type": 0,
-                "uid": -2147483648
+                "count": 1,
+                "type": 4,
+                "uid": -64803719
             },
             {
                 "count": -1,
@@ -91,35 +91,6 @@
         ]
     },
     "enemies": [
-        {
-            "id": 2036,
-            "type": 0,
-            "stats": [
-                {
-                    "type": 0,
-                    "value": 20.0
-                },
-                {
-                    "type": 1,
-                    "value": 0.0
-                },
-                {
-                    "type": 2,
-                    "value": 2.0
-                },
-                {
-                    "type": 4,
-                    "value": 2.0
-                }
-            ],
-            "enemyPos": {
-                "x": 6.710000038146973,
-                "y": -1.9700000286102296,
-                "z": 0.0
-            },
-            "enemyCurrentHealth": 20.0,
-            "enemyCurrentMana": 0.0
-        },
         {
             "id": 1720,
             "type": 1,
@@ -148,10 +119,40 @@
             "enemyPos": {
                 "x": -4.650000095367432,
                 "y": 2.3400003910064699,
-                "z": -0.5833329558372498
+                "z": -0.5833328366279602
+            },
+            "enemyCurrentHealth": 20.0,
+            "enemyCurrentMana": 0.0
+        },
+        {
+            "id": 2036,
+            "type": 0,
+            "stats": [
+                {
+                    "type": 0,
+                    "value": 20.0
+                },
+                {
+                    "type": 1,
+                    "value": 0.0
+                },
+                {
+                    "type": 2,
+                    "value": 2.0
+                },
+                {
+                    "type": 4,
+                    "value": 2.0
+                }
+            ],
+            "enemyPos": {
+                "x": 6.710000038146973,
+                "y": -1.9700000286102296,
+                "z": 0.0
             },
             "enemyCurrentHealth": 20.0,
             "enemyCurrentMana": 0.0
         }
-    ]
+    ],
+    "sceneID": 1
 }

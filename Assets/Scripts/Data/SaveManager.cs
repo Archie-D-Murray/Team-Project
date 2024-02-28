@@ -27,7 +27,7 @@ namespace Data {
             data = new GameData();
             data.sceneID = SceneManager.GetActiveScene().buildIndex;
             foreach (ISerialize serializeObject in serializeObjects) {
-                serializeObject.OnSerialize(ref data);
+                serializeObject?.OnSerialize(ref data);
             }
             yield return Yielders.waitForEndOfFrame;
             string buffer = JsonUtility.ToJson(data, true);
@@ -43,7 +43,7 @@ namespace Data {
                 SceneManager.LoadSceneAsync(data.sceneID);
             }
             foreach (ISerialize serializeObject in serializeObjects) {
-                serializeObject.OnDeserialize(data);
+                serializeObject?.OnDeserialize(data);
             }
         }
 
