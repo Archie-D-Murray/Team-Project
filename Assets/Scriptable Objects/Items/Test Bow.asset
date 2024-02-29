@@ -24,6 +24,6 @@ MonoBehaviour:
   spreadAngle: 45
   projectile: {fileID: 8508758827916593260, guid: b16a5b4e91459d94aa8491fdb4bbf7f7, type: 3}
   frames:
-  - {fileID: 7208985, guid: 55edec401cf21614199965e54e631362, type: 3}
-  - {fileID: 1935353228, guid: 55edec401cf21614199965e54e631362, type: 3}
   - {fileID: 843877843, guid: 55edec401cf21614199965e54e631362, type: 3}
+  - {fileID: 1935353228, guid: 55edec401cf21614199965e54e631362, type: 3}
+  - {fileID: 7208985, guid: 55edec401cf21614199965e54e631362, type: 3}

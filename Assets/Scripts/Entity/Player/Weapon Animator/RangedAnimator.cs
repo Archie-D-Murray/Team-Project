@@ -41,7 +41,7 @@ namespace Entity.Player {
                 }
                 yield return Yielders.waitForFixedUpdate;
             }
-            renderer.sprite = frames[0];
+            renderer.sprite = frames[frames.Length - 1];
         }
     }
 }
