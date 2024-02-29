@@ -1,6 +1,6 @@
 using System;
 
-using Attack.Components;
+using Entity.Player;
 
 using Entity;
 
@@ -16,14 +16,16 @@ namespace Attack {
         private Stats stats;
         private Mana mana;
         private Transform origin;
+        private WeaponController weaponController;
         private SpellData[] spells;
         private MageStaffData staff;
         private int spellIndex = 0;
 
-        public MageSystem(Stats stats, Transform origin, MageStaffData staff, SpellData[] spells, Mana mana) {
+        public MageSystem(Stats stats, Transform origin, WeaponController weaponController, MageStaffData staff, SpellData[] spells, Mana mana) {
             this.stats = stats;
             this.mana = mana;
             this.origin = origin;
+            this.weaponController = weaponController;
             if (staff && staff is MageStaffData) {
                 this.staff = staff;
             } else {
@@ -74,6 +76,7 @@ namespace Attack {
                     Vector3.forward
                 );
                 spells[spellIndex].CastSpell(origin.position, rotation, magic * staff.damageAmplifier * spells[spellIndex].magicModifier);
+                weaponController.Attack(spells[spellIndex].castTime);
             } else {
                 Debug.LogError($"Could not find entry for Magic Stat on Stats of {stats.name}!");
             }

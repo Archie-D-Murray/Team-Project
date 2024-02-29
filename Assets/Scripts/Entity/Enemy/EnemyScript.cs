@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,14 +5,10 @@ using Entity;
 using Utilities;
 
 using System;
-using Data;
-using System.Linq;
 
-[Serializable] public enum EnemyType { STATIC, CHASING,
-    SHOOTING
-}
+[Serializable] public enum EnemyType { STATIC, CHASING, SHOOTING }
 
-public class EnemyScript : MonoBehaviour, ISerialize {
+public class EnemyScript : MonoBehaviour {
     [SerializeField] public EnemyType type;
     [SerializeField] public int id;
 
@@ -90,13 +84,5 @@ public class EnemyScript : MonoBehaviour, ISerialize {
             } else {
             }
         }
-    }
-
-    public virtual void OnSerialize(ref GameData data) {
-        data.enemies.Add(new EnemyData(id, type, transform.position));
-    }
-
-    public virtual void OnDeserialize(GameData data) {
-        transform.position = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == id)?.enemyPos ?? transform.position;
     }
 }

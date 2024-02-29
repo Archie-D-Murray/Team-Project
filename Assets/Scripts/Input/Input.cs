@@ -14,8 +14,8 @@ namespace Utilities {
 
         public float AngleToMouse(Transform obj) {
             return Vector2.SignedAngle(
-                Vector2.up, 
-                (main.ScreenToWorldPoint(playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - obj.position).normalized
+                (main.ScreenToWorldPoint(playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - obj.position).normalized,
+                Vector2.up
             );
         }
     }

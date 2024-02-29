@@ -7,5 +7,6 @@ namespace Data {
         public ItemData[] items;
         public SpellData[] spells;
         public UnityEngine.Material flashMaterial;
+        public UnityEngine.GameObject slash;
     }
 }

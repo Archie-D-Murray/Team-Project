@@ -63,27 +63,11 @@ namespace Entity {
         }
 
         public void OnSerialize(ref GameData data) {
-            if (gameObject.HasComponent<PlayerController>()) { 
-                data.playerData.playerCurrentHealth = currentHealth;
-            } else {
-                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
-                if (enemyData == null) {
-                    Debug.LogError($"Could not find associated enemy in data with {name}");
-                }
-                enemyData.enemyCurrentHealth = currentHealth;
-            }
+            data.playerData.playerCurrentHealth = currentHealth;
         }
 
         public void OnDeserialize(GameData data) {
-            if (gameObject.HasComponent<PlayerController>()) { 
-                currentHealth = data.playerData.playerCurrentHealth;
-            } else {
-                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
-                if (enemyData == null) {
-                    Debug.LogError($"Could not find associated enemy in data with {name}");
-                }
-                currentHealth = enemyData.enemyCurrentHealth;
-            } 
+            currentHealth = data.playerData.playerCurrentHealth;
         }
     }
 }
