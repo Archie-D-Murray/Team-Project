@@ -48,7 +48,7 @@ namespace Attack {
                 for (int i = 0; i < bow.projectiles; i++) {
                     Quaternion rotation = Quaternion.AngleAxis(
                         spreadStart,
-                        Vector3.forward
+                        Vector3.back
                     );
                     GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, rotation);
                     projectile.GetOrAddComponent<EntityDamager>().Init(damage * bow.damageModifier);

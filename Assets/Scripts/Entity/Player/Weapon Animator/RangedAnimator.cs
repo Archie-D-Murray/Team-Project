@@ -2,18 +2,20 @@ using System;
 using System.Collections;
 
 using UnityEngine;
+using UnityEngine.U2D;
 
 using Utilities;
 
 namespace Entity.Player {
     [Serializable] public class RangedAnimator : WeaponAnimator {
 
-        [SerializeField] private Animator animator;
+        [SerializeField] private SpriteRenderer renderer;
+        [SerializeField] private Sprite[] frames;
 
-        private readonly int attack = Animator.StringToHash("Attack");
-
-        public RangedAnimator(WeaponController weaponController) : base(weaponController) {
-            animator = weaponController.GetComponent<Animator>();
+        public RangedAnimator(WeaponController weaponController, Sprite[] frames) : base(weaponController) {
+            Array.ForEach(frames, (Sprite frame) => Debug.Log($"Frame {frame.name}"));
+            this.frames = frames;
+            renderer = weaponController.GetComponent<SpriteRenderer>();
         }
 
         public override void FixedUpdate() {
@@ -22,10 +24,24 @@ namespace Entity.Player {
         }
 
         protected override IEnumerator WeaponAttack(float attackTime) {
-            animator.speed = 1 / attackTime;
-            animator.SetTrigger(attack);
-            yield return Yielders.WaitForSeconds(attackTime);
-            animator.speed = 1f;
+            renderer.sprite = frames[0];
+            CountDownTimer frameTimer = new CountDownTimer(attackTime / (frames.Length - 1));
+            int frame = 0;
+            while (frame != frames.Length) {
+                frameTimer.Update(Time.fixedDeltaTime);
+                if (frameTimer.isFinished && frame < frames.Length) {
+                    frame++;
+                    if (frame < frames.Length) {
+                    renderer.sprite = frames[frame];
+                    } else {
+                        break;
+                    }
+                    frameTimer.Reset();
+                    frameTimer.Start();
+                }
+                yield return Yielders.waitForFixedUpdate;
+            }
+            renderer.sprite = frames[0];
         }
     }
 }

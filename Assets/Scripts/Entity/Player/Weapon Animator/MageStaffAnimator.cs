@@ -10,7 +10,9 @@ namespace Entity.Player {
 
         [SerializeField] private float angleOffset = 90f;
 
-        public MageStaffAnimator(WeaponController weaponController) : base(weaponController) {}
+        public MageStaffAnimator(WeaponController weaponController, Sprite sprite) : base(weaponController) {
+            weaponController.GetComponent<SpriteRenderer>().sprite = sprite;
+        }
 
         public override void FixedUpdate() {
             if (!allowMouseRotation) { return; }

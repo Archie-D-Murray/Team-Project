@@ -12,29 +12,35 @@ namespace Entity.Player {
 
         private float halfSwingRotation => 0.5f * swingDirection * swingRotation;
 
-        public SwordAnimator(WeaponController weaponController) : base(weaponController) {}
+        public SwordAnimator(WeaponController weaponController, Sprite sprite) : base(weaponController) {
+            weaponController.GetComponent<SpriteRenderer>().sprite = sprite;
+        }
 
         protected override IEnumerator WeaponAttack(float attackTime) {
             // TODO: Fix this!
             allowMouseRotation = false;
-            float attackAngle = positionAngle - halfSwingRotation;
-            float currentAngle = positionAngle;
+            float startAngle = positionAngle;
+            float endAngle = positionAngle - halfSwingRotation;
+            float currentAngle = startAngle;
             CountDownTimer timer = new CountDownTimer(attackTime * 0.125f);
-            for (; currentAngle == attackAngle; currentAngle = Mathf.LerpAngle(currentAngle, attackAngle, timer.Progress())) { // Swing to start pos
-                WeaponPositionRotation(currentAngle, Mathf.LerpAngle(0f, -swingDirection * angleOffset, timer.Progress()));
+            for (; timer.isRunning; currentAngle = Mathf.Lerp(startAngle, endAngle, timer.Progress())) { // Swing to start pos
+                WeaponPositionRotation(currentAngle, Mathf.Lerp(Mathf.Sign(currentAngle) * angleOffset, 0f, timer.Progress()));
                 timer.Update(Time.fixedDeltaTime);
                 yield return Yielders.waitForFixedUpdate;
             }
+            startAngle = endAngle;
+            endAngle += swingRotation * swingDirection;
             timer.Restart(attackTime * 0.375f);
-            for (; attackAngle < positionAngle + 0.5f * swingRotation; attackAngle = Mathf.LerpAngle(attackAngle, positionAngle + halfSwingRotation, timer.Progress())) { // Attack swing
-                WeaponPositionRotation(attackAngle, Mathf.LerpAngle(-swingDirection * angleOffset, swingRotation * angleOffset, timer.Progress()));
+            for (; timer.isRunning; currentAngle = Mathf.Lerp(startAngle, endAngle, timer.Progress())) { // Attack swing
+                WeaponPositionRotation(currentAngle, 0f);
                 timer.Update(Time.fixedDeltaTime);
                 yield return Yielders.waitForFixedUpdate;
             }
-            currentAngle = attackAngle;
+            startAngle = endAngle;
+            endAngle = positionAngle;
             timer.Restart(attackTime * 0.5f);
-            for (; currentAngle == positionAngle; currentAngle = Mathf.LerpAngle(currentAngle, positionAngle, timer.Progress())) { // Swing back to start pos
-                WeaponPositionRotation(currentAngle, Mathf.LerpAngle(swingDirection * angleOffset, 0f, timer.Progress()));
+            for (; timer.isRunning; currentAngle = Mathf.Lerp(startAngle, endAngle, timer.Progress())) { // Swing back to start pos
+                WeaponPositionRotation(currentAngle, Mathf.Lerp(0f, Mathf.Sign(currentAngle) * angleOffset, timer.Progress()));
                 timer.Update(Time.fixedDeltaTime);
                 yield return Yielders.waitForFixedUpdate;
             }

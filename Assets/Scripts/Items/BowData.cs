@@ -10,5 +10,6 @@ namespace Items {
         public int projectiles = 1;
         public float spreadAngle = 0f;
         public GameObject projectile;
+        public Sprite[] frames;
     }
 }

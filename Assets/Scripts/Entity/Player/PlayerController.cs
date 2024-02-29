@@ -36,7 +36,6 @@ namespace Entity.Player {
         }
 
         public void DebugInitialise() {
-            weaponController.SetWeaponType(playerClass);
             switch (playerClass) {
                 case PlayerClass.Ranged:
                     BowData bowData = GetWeapon<BowData>();
@@ -44,6 +43,7 @@ namespace Entity.Player {
                         Debug.LogWarning("Could not find bow to initialise attackSystem, attacks will not work until this is initialised!");
                     }
                     attackSystem = new RangedSystem(stats, transform, weaponController, bowData);
+                    weaponController.SetWeapon(bowData);
                     break;
 
                 case PlayerClass.Melee:
@@ -52,6 +52,7 @@ namespace Entity.Player {
                         Debug.LogWarning("Could not find sword to initialise attackSystem, attacks will not work until this is initialised!");
                     }
                     attackSystem = new MeleeSystem(stats, transform, weaponController, swordData);
+                    weaponController.SetWeapon(swordData);
                     break;
 
                 case PlayerClass.Mage:
@@ -61,6 +62,7 @@ namespace Entity.Player {
                         Debug.LogWarning("Could not find mage staff to intialise attackSystem, attacks will not work intil this is initialised");
                     }
                     attackSystem = new MageSystem(stats, transform, weaponController, staffData, spells, GetComponent<Mana>());
+                    weaponController.SetWeapon(staffData);
                     break;
 
                 default:
@@ -94,16 +96,18 @@ namespace Entity.Player {
                 attackSystem = null;
                 return;
             }
-            weaponController.SetWeaponType(playerClass);
             switch (playerClass) {
                 case PlayerClass.Ranged:
                     SetWeapon<BowData>(inventory.items[data.playerData.weaponIndex].itemData as BowData);
+                    weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as BowData);
                     break;
                 case PlayerClass.Melee:
                     SetWeapon<SwordData>(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
+                    weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
                     break;
                 case PlayerClass.Mage:
                     SetWeapon<MageStaffData>(inventory.items[data.playerData.weaponIndex].itemData as MageStaffData);
+                    weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as MageStaffData);
                     break;
                 default:
                     break;
@@ -131,17 +135,19 @@ namespace Entity.Player {
         }
 
         public void ReInitialiseAttackSystem<T>(T itemData) where T : ItemData {
-            weaponController.SetWeaponType(playerClass);
             switch (playerClass) {
                 case PlayerClass.Ranged:
                     attackSystem = new RangedSystem(stats, transform, weaponController, itemData as BowData);
+                    weaponController.SetWeapon(itemData as BowData);
                     break;
 
                 case PlayerClass.Melee:
                     attackSystem = new MeleeSystem(stats, transform, weaponController, itemData as SwordData);
+                    weaponController.SetWeapon(itemData as SwordData);
                     break;
                 case PlayerClass.Mage:
                     attackSystem = new MageSystem(stats, transform, weaponController, itemData as MageStaffData, GetComponent<Inventory>().spells, GetComponent<Mana>());
+                    weaponController.SetWeapon(itemData as MageStaffData);
                     break;
                 default:
                     break;

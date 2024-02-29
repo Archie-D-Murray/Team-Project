@@ -1,15 +1,16 @@
+using Items;
+
 using UnityEngine;
 
 namespace Entity.Player {
     public class WeaponController : MonoBehaviour {
         [SerializeField] private WeaponAnimator weaponAnimator;
 
-        public void SetWeaponType(PlayerClass type) {
-            if (IsSameType(type)) { return; }
-            weaponAnimator = type switch {
-                PlayerClass.Melee => new SwordAnimator(this),
-                PlayerClass.Ranged => new RangedAnimator(this),
-                PlayerClass.Mage => new MageStaffAnimator(this),
+        public void SetWeapon<T>(T weapon) where T : ItemData {
+            weaponAnimator = weapon.InferItemType() switch {
+                ItemType.MELEE  => new SwordAnimator(this, (weapon as SwordData).sprite),
+                ItemType.RANGED => new RangedAnimator(this, (weapon as BowData).frames),
+                ItemType.MAGE => new MageStaffAnimator(this, (weapon as MageStaffData).sprite),
                 _ => null
             };
         }
@@ -22,13 +23,13 @@ namespace Entity.Player {
             weaponAnimator?.Attack(attackTime);
         }
 
-        private bool IsSameType(PlayerClass type) {
+        private bool IsSameType(ItemType type) {
             if (weaponAnimator == null) {
                 return false;
             } else {
-            return weaponAnimator is SwordAnimator     && type == PlayerClass.Melee
-                || weaponAnimator is RangedAnimator    && type == PlayerClass.Ranged
-                || weaponAnimator is MageStaffAnimator && type == PlayerClass.Mage;
+            return weaponAnimator is SwordAnimator     && type == ItemType.MELEE
+                || weaponAnimator is RangedAnimator    && type == ItemType.RANGED
+                || weaponAnimator is MageStaffAnimator && type == ItemType.MAGE;
             }
         }
     }
