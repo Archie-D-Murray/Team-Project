@@ -15,6 +15,7 @@ namespace Entity.Player {
         public SwordAnimator(WeaponController weaponController) : base(weaponController) {}
 
         protected override IEnumerator WeaponAttack(float attackTime) {
+            // TODO: Fix this!
             allowMouseRotation = false;
             float attackAngle = positionAngle - halfSwingRotation;
             float currentAngle = positionAngle;
