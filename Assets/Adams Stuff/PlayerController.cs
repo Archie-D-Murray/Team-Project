@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private float timeTimer = 0;
     private Queue<Vector3> previousPos;
 
+    [SerializeField] private GameObject fade;
+
 
     void Start()
     {
@@ -62,6 +64,16 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && canMove && timeTimer < 0)
         {
             RewindTime();
+        }
+        if (Input.GetKeyDown(KeyCode.P)) 
+        {
+            if(fade.activeInHierarchy == true) 
+            {
+                fade.GetComponent<Fading>().DoFade();
+            } else
+            {
+                fade.SetActive(true);
+            }
         }
     }
 
