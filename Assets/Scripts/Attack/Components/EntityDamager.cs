@@ -19,7 +19,7 @@ namespace Attack.Components {
 
         private void OnTriggerEnter2D(Collider2D collision) {
             if (collision.TryGetComponent(out Health health)) { // Hit an 'enemy entity'
-                health.Damage(damage, gameObject);
+                health.Damage(damage, transform.position);
             } else { // Hit an 'enemy projectile' or a wall
                 Destroy(gameObject);
             }

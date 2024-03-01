@@ -12,7 +12,7 @@ namespace Entity {
         public void Start() {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             originalMaterial = spriteRenderer.material;
-            GetComponent<Health>().onDamage += (float _) => Flash();
+            GetComponent<Health>().onDamage += (float _, KnockbackData _) => Flash();
         }
 
         private void Flash() {
