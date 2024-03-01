@@ -16,6 +16,7 @@ namespace Entity.Player {
             Array.ForEach(frames, (Sprite frame) => Debug.Log($"Frame {frame.name}"));
             this.frames = frames;
             renderer = weaponController.GetComponent<SpriteRenderer>();
+            renderer.sprite = frames[frames.Length - 1];
         }
 
         public override void FixedUpdate() {

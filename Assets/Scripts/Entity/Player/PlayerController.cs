@@ -33,6 +33,7 @@ namespace Entity.Player {
             stats = GetComponent<Stats>();
             weaponController = GetComponentInChildren<WeaponController>();
             attackSystem = null;
+            DebugInitialise();
         }
 
         public void DebugInitialise() {
@@ -76,8 +77,8 @@ namespace Entity.Player {
             attackSystem?.FixedUpdate();
             animator.SetFloat("x", rb2D.velocity.normalized.x);
             animator.SetFloat("y", rb2D.velocity.normalized.y);
-            animator.SetFloat("dirX", Mathf.Sign(lastDir.x));
-            animator.SetFloat("dirY", Mathf.Sign(lastDir.y));
+            animator.SetFloat("dirX", lastDir.x);
+            animator.SetFloat("dirY", lastDir.y);
             animator.SetFloat("speed", Vector2.ClampMagnitude(rb2D.velocity, 1f).magnitude);
             if (rb2D.velocity.sqrMagnitude > 0.01f) {
                 lastDir = rb2D.velocity.normalized;

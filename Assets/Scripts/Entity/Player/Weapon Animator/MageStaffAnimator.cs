@@ -12,6 +12,7 @@ namespace Entity.Player {
 
         public MageStaffAnimator(WeaponController weaponController, Sprite sprite) : base(weaponController) {
             weaponController.GetComponent<SpriteRenderer>().sprite = sprite;
+            Debug.Log("Initialised Mage");
         }
 
         public override void FixedUpdate() {
