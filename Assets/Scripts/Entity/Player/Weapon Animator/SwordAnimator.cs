@@ -12,8 +12,9 @@ namespace Entity.Player {
 
         private float halfSwingRotation => 0.5f * swingDirection * swingRotation;
 
-        public SwordAnimator(WeaponController weaponController, Sprite sprite) : base(weaponController) {
+        public SwordAnimator(WeaponController weaponController, Sprite sprite, float radius) : base(weaponController) {
             weaponController.GetComponent<SpriteRenderer>().sprite = sprite;
+            this.radius = radius;
         }
 
         protected override IEnumerator WeaponAttack(float attackTime) {

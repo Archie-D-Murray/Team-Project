@@ -40,7 +40,7 @@ public class EnemyProjectile : MonoBehaviour
             return;
         }
         if (collision.gameObject.TryGetComponent(out Health health)) {
-            health.Damage(projectileDamage);
+            health.Damage(projectileDamage, gameObject);
             Destroy(this.gameObject);
         }
     }

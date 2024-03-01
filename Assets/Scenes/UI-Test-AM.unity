@@ -3371,7 +3371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3105323449848903384, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: playerClass
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3105323449848903384, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: debugInitialise

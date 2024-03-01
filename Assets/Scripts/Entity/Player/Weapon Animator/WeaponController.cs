@@ -8,7 +8,7 @@ namespace Entity.Player {
 
         public void SetWeapon<T>(T weapon) where T : ItemData {
             weaponAnimator = weapon.InferItemType() switch {
-                ItemType.MELEE  => new SwordAnimator(this, (weapon as SwordData).sprite),
+                ItemType.MELEE  => new SwordAnimator(this, (weapon as SwordData).sprite, (weapon as SwordData).radius),
                 ItemType.RANGED => new RangedAnimator(this, (weapon as BowData).frames),
                 ItemType.MAGE => new MageStaffAnimator(this, (weapon as MageStaffData).sprite),
                 _ => null

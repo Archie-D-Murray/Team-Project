@@ -34,7 +34,7 @@ namespace Attack.Components {
             foreach (Collider2D coll in Physics2D.OverlapCircleAll(transform.position, radius, enemyLayer)) {
                 if (coll.TryGetComponent(out Health health)) {
                     Debug.Log($"Fireball Damaged {health.name}");
-                    health.Damage(damage);
+                    health.Damage(damage, gameObject);
                 } else {
                     Destroy(coll.gameObject);
                 }

@@ -11,7 +11,7 @@ public class HealthEditor : Editor {
         Health health = target as Health;
         if (GUILayout.Button("Damage (10)")) {
             if (Application.isPlaying) {
-                health.Damage(10f);
+                health.Damage(10f, health.gameObject);
             } else {
                 Debug.Log("Make sure you are in play mode to use this!");
             }
