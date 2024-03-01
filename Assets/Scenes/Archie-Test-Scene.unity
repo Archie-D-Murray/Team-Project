@@ -9121,26 +9121,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5720280158011759397, guid: 582df5d6e768d484fbfa68ab653c6b58, type: 3}
-      propertyPath: m_fontSize
-      value: 21.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5720280158011759397, guid: 582df5d6e768d484fbfa68ab653c6b58, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 00edcd08bc1c52b4e99068a4d2d6328f, type: 2}
-    - target: {fileID: 5720280158011759397, guid: 582df5d6e768d484fbfa68ab653c6b58, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -4476552313153475566, guid: 00edcd08bc1c52b4e99068a4d2d6328f, type: 2}
-    - target: {fileID: 5720280158011759397, guid: 582df5d6e768d484fbfa68ab653c6b58, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7797089998768836508, guid: 582df5d6e768d484fbfa68ab653c6b58, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9351,18 +9331,6 @@ PrefabInstance:
     - target: {fileID: 6234678165023347099, guid: 6974801db121bdb4da1ed1322fba068a, type: 3}
       propertyPath: m_Name
       value: Mana Bar
-      objectReference: {fileID: 0}
-    - target: {fileID: 7629511307065655327, guid: 6974801db121bdb4da1ed1322fba068a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.754717
-      objectReference: {fileID: 0}
-    - target: {fileID: 7629511307065655327, guid: 6974801db121bdb4da1ed1322fba068a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.72423565
-      objectReference: {fileID: 0}
-    - target: {fileID: 7629511307065655327, guid: 6974801db121bdb4da1ed1322fba068a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.20932715
       objectReference: {fileID: 0}
     - target: {fileID: 8322369791552292395, guid: 6974801db121bdb4da1ed1322fba068a, type: 3}
       propertyPath: mana
