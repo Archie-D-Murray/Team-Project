@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 
 using Entity;
+using Entity.Player;
 
 using Tags.UI.Status;
 
@@ -20,6 +21,7 @@ namespace UI {
         [Header("Editor")]
         [SerializeField] private Health health;
         [SerializeField] private Stats stats;
+        [SerializeField] private Level level;
         [Tooltip("Prefab to spawn - should have a TMP_Text and Image components somewhere (can be in children)")]
         [SerializeField] private GameObject statPrefab;
         [SerializeField] private StatIcon[] statIcons = new StatIcon[Enum.GetValues(typeof(StatType)).Length];
@@ -34,14 +36,16 @@ namespace UI {
         private bool isOpen => canvasGroup.alpha == 1f;
 
         private void Start() {
-            if (!health || !stats) {
-                Debug.LogError("HEALTH or Stats or Inventory were not assigned in editor!");
+            if (!health || !stats || !level) {
+                Debug.LogError("Health or Stats or Level were not assigned in editor!");
                 Destroy(this);
                 return;
             }
 
             SetupCanvas();
             InitStats();        
+
+            level.onLevelUp += (int _) => UpdateStats();
         }
 
         private void SetupCanvas() {
@@ -79,19 +83,27 @@ namespace UI {
                 statSlots[item.i].readout.text = stats.GetStatDisplay(item.type);
                 statSlots[item.i].icon = statSlot.GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<StatusIcon>());
                 statSlots[item.i].icon.sprite = Array.Find(statIcons, (StatIcon statIcon) => statIcon.type == item.type).icon;
+                statSlots[item.i].level = statSlot.GetComponentInChildren<Button>();
+                statSlots[item.i].level.onClick.AddListener(() => LevelUpClick(item.type));
+                statSlots[item.i].level.interactable = false;
             }
+        }
+
+        public void LevelUpClick(StatType type) {
+            level.LevelUpStat(type);
+            UpdateStats();
         }
 
         public void Show() {
             UpdateStats();
             if (!isOpen) {
-                canvasGroup.FadeAlpha(0.1f, false, this);
+                canvasGroup.FadeCanvas(0.1f, false, this);
             }
         }
 
         public void Hide() {
             if (isOpen) {
-                canvasGroup.FadeAlpha(0.1f, true, this);
+                canvasGroup.FadeCanvas(0.1f, true, this);
             }
         }
 
@@ -99,6 +111,7 @@ namespace UI {
             // Magic iteration that gives both index and variable using a tuple
             foreach ((StatType type, int i) item in stats.statDict.Select((stat, i) => (stat.type, i))) {
                 statSlots[item.i].readout.text = stats.GetStatDisplay(item.type);
+                statSlots[item.i].level.interactable = level.unappliedLevels > 0;
             }
         }
     }

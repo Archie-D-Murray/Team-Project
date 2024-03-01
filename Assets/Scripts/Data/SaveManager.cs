@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Data {
-    public class SaveManager : Singleton<SaveManager> {
+    public class SaveManager : PersistentSingleton<SaveManager> {
         [SerializeField] private GameData data;
 
         [SerializeField] private List<ISerialize> serializeObjects;
@@ -24,8 +25,9 @@ namespace Data {
 
         IEnumerator SaveIEnumerator() {
             data = new GameData();
+            data.sceneID = SceneManager.GetActiveScene().buildIndex;
             foreach (ISerialize serializeObject in serializeObjects) {
-                serializeObject.OnSerialize(ref data);
+                serializeObject?.OnSerialize(ref data);
             }
             yield return Yielders.waitForEndOfFrame;
             string buffer = JsonUtility.ToJson(data, true);
@@ -33,11 +35,29 @@ namespace Data {
             File.WriteAllText(path, buffer);
         }
 
-        public void Load() {
-            data = JsonUtility.FromJson<GameData>(File.ReadAllText(path));
-            foreach (ISerialize serializeObject in serializeObjects) {
-                serializeObject.OnDeserialize(data);
+        IEnumerator LoadIEnumerator(bool switchScene = true) {
+            string buffer = File.ReadAllText(path);
+            yield return Yielders.waitForEndOfFrame;
+            data = JsonUtility.FromJson<GameData>(buffer);
+            if (switchScene) {
+                SceneManager.LoadSceneAsync(data.sceneID);
             }
+            foreach (ISerialize serializeObject in serializeObjects) {
+                serializeObject?.OnDeserialize(data);
+            }
+        }
+
+        public void Load() {
+            StartCoroutine(LoadIEnumerator(false));
+        }
+
+        public void New() {
+            data = new GameData();
+            StartCoroutine(SaveIEnumerator());
+        }
+
+        public void ContinueFromSave() {
+            StartCoroutine(LoadIEnumerator(true));
         }
         
 
@@ -45,19 +65,15 @@ namespace Data {
         ///Always loads Inventory, PlayerController, EnemyControllers then all Stat, Health and Mana components
         ///</summary>
         private List<ISerialize> FindSerializeObjects() {
-            IEnumerable<ISerialize> serializeObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISerialize>();
+            List<ISerialize> serializeObjects = FindObjectsOfType<MonoBehaviour>().Where((MonoBehaviour mono) => !mono.gameObject.HasComponent<EnemyScript>()).OfType<ISerialize>().ToList();
 
             ISerialize playerController = serializeObjects.OfType<Entity.Player.PlayerController>().FirstOrDefault();
             ISerialize inventory = serializeObjects.OfType<Items.Inventory>().FirstOrDefault();
-            IEnumerable<ISerialize> enemies = serializeObjects.OfType<EnemyScript>();
             List<ISerialize> serializeObjectList = new List<ISerialize>();
-            if (playerController != null && inventory != null && enemies != null) { // Need to ensure inventory is loaded before PlayerController as it relies on items to initialise!
+            if (playerController != null && inventory != null) { // Need to ensure inventory is loaded before PlayerController as it relies on items to initialise!
                 serializeObjectList.Add(inventory);
                 serializeObjectList.Add(playerController);
-                foreach (ISerialize enemy in enemies) {
-                    serializeObjectList.Add(enemy);
-                }
-                foreach (ISerialize obj in serializeObjects.Where((ISerialize obj) => obj != playerController && obj != inventory && !enemies.Contains(obj))) {
+                foreach (ISerialize obj in serializeObjects.Where((ISerialize obj) => obj != playerController && obj != inventory)) {
                     serializeObjectList.Add(obj);
                 }
                 return serializeObjectList;

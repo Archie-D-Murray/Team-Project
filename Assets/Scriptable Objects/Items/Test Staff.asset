@@ -18,3 +18,4 @@ MonoBehaviour:
   maxCount: 1
   damageAmplifier: 1
   cooldownModifier: 1
+  sprite: {fileID: 21300000, guid: 552e4023649abe94581bb756fb093f8f, type: 3}

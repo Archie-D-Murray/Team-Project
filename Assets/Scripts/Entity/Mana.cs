@@ -101,27 +101,11 @@ namespace Entity {
         }
 
        public void OnSerialize(ref GameData data) {
-            if (gameObject.HasComponent<PlayerController>()) { 
-                data.playerData.playerCurrentMana = currentMana;
-            } else {
-                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
-                if (enemyData == null) {
-                    Debug.LogError($"Could not find associated enemy in data with {name}");
-                }
-                enemyData.enemyCurrentMana = currentMana;
-            }
+            data.playerData.playerCurrentMana = currentMana;
         }
 
         public void OnDeserialize(GameData data) {
-            if (gameObject.HasComponent<PlayerController>()) { 
-                currentMana = data.playerData.playerCurrentMana;
-            } else {
-                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
-                if (enemyData == null) {
-                    Debug.LogError($"Could not find associated enemy in data with {name}");
-                }
-                currentMana = enemyData.enemyCurrentMana;
-            } 
+            currentMana = data.playerData.playerCurrentMana;
         } 
     }
 }

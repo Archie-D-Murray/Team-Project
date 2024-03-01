@@ -87,7 +87,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4203112342183476541}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 0}
   stats: {fileID: 0}
+  level: {fileID: 0}
   statPrefab: {fileID: 1903839283401362928, guid: 125ab9a2310545244947f927ef55f0f0, type: 3}
   statIcons:
   - type: 0

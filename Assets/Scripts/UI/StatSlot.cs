@@ -8,5 +8,6 @@ namespace UI {
     [Serializable] public class StatSlot {
         public TMP_Text readout;
         public Image icon;
+        public Button level;
     }
 }

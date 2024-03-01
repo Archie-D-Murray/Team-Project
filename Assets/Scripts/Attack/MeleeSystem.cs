@@ -5,6 +5,8 @@ using UnityEngine;
 using Utilities;
 
 using Entity;
+using Data;
+using Entity.Player;
 
 namespace Attack {
     public class MeleeSystem : IAttackSystem {
@@ -12,18 +14,20 @@ namespace Attack {
         private Stats stats;
         private Transform origin;
         private SwordData data;
+        private WeaponController weaponController;
         private LayerMask enemyLayer;
 
-        public MeleeSystem(Stats stats, Transform origin, SwordData data) {
+        public MeleeSystem(Stats stats, Transform origin, WeaponController weaponController, SwordData data) {
             this.stats = stats;
             this.origin = origin;
+            this.weaponController = weaponController;
             this.data = data;
             enemyLayer = 1 << LayerMask.NameToLayer("Enemy");
         }
 
         public void Attack(Transform origin) {
             Debug.Log("Melee Attack!");
-            // TODO: Play attack animation
+            // GameObject.Instantiate(AssetServer.instance.slash, origin.position, origin.rotation);
             foreach (Collider2D enemy in Physics2D.OverlapCircleAll(origin.position, data.radius, enemyLayer)) {
                 if (enemy.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
                     health.Damage(damage * data.damageModifier);
@@ -34,6 +38,7 @@ namespace Attack {
         private void ResetAttackTimer() {
             if (stats.GetStat(StatType.ATTACK_SPEED, out float attackSpeed)) {
                 attackTimer.Restart(1f / (attackSpeed * data.attackSpeedModifier));
+                weaponController.Attack(1f / (attackSpeed * data.attackSpeedModifier));
             }
         }
 

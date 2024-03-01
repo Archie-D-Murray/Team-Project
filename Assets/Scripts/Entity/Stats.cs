@@ -101,46 +101,25 @@ namespace Entity {
         }
 
         public void OnSerialize(ref GameData data) {
-            if (gameObject.HasComponent<PlayerController>()) {
-                data.playerData.stats = new List<Stat>(statDict.Length);
-                foreach (Stat stat in statDict) {
-                    data.playerData.stats.Add(stat);
-                }
-            } else {
-                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
-                if (enemyData == null) {
-                    Debug.LogError($"Could not find enemyData associated with {name}!");
-                    return;
-                }
-                enemyData.stats = new List<Stat>(statDict.Length);
-                foreach (Stat stat in statDict) {
-                    enemyData.stats.Add(stat);
-                }
-                enemyData.statModifiers = statModifers.Select((KeyValuePair<StatType, StatModifier> kvp) => (kvp.Key, kvp.Value)).ToList();
+            data.playerData.stats = new List<Stat>(statDict.Length);
+            foreach (Stat stat in statDict) {
+                data.playerData.stats.Add(stat);
             }
         }
 
         public void OnDeserialize(GameData data) {
-            if (gameObject.HasComponent<PlayerController>()) {
-                statDict = new Stat[data.playerData.stats.Count];
-                for (int i = 0; i < data.playerData.stats.Count; i++) {
-                    statDict[i] = data.playerData.stats[i];
-                }
+            statDict = new Stat[data.playerData.stats.Count];
+            for (int i = 0; i < data.playerData.stats.Count; i++) {
+                statDict[i] = data.playerData.stats[i];
+            }
+        }
+
+        public void IncrementStat(StatType type, float amount) {
+            Stat stat = FindStat(type);
+            if (stat != null) {
+                stat.value += amount;
             } else {
-                EnemyData enemyData = data.enemies.FirstOrDefault((EnemyData enemyData) => enemyData.id == GetComponent<EnemyScript>().id);
-                if (enemyData == null) {
-                    Debug.LogError($"Could not find enemyData associated with {name}!");
-                    return;
-                }
-                statDict = new Stat[enemyData.stats.Count];
-                for (int i = 0; i < enemyData.stats.Count; i++) {
-                    statDict[i] = enemyData.stats[i];
-                }
-                if (enemyData.statModifiers == null) {
-                    statModifers = new Dictionary<StatType, StatModifier>();
-                } else {
-                    statModifers = new Dictionary<StatType, StatModifier>(enemyData.statModifiers.Select(((StatType type, StatModifier mod) pair) => new KeyValuePair<StatType, StatModifier>(pair.type, pair.mod)));
-                }
+                Debug.LogWarning($"Tried to update stat that does not exist: {type}");
             }
         }
     }

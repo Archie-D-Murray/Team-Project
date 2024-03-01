@@ -17,5 +17,19 @@ namespace Items {
         public override int GetHashCode() {
             return HashCode.Combine(base.GetHashCode(), itemName);
         }
+
+        public ItemType InferItemType() {
+            if (this is SwordData) {
+                return ItemType.MELEE;
+            } else if (this is MageStaffData) {
+                return ItemType.MAGE;
+            } else if (this is BowData) {
+                return ItemType.RANGED;
+            } else if (this is ConsumableData) {
+                return ItemType.CONSUMABLE;
+            } else {
+                return ItemType.ITEM;
+            }
+        }
     }
 }

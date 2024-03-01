@@ -5,5 +5,6 @@ namespace Items {
     public class MageStaffData : ItemData {
         public float damageAmplifier = 1f;
         public float cooldownModifier = 1f;
+        public Sprite sprite;
     }
 }
