@@ -26,7 +26,7 @@ public class EnemyProjectile : MonoBehaviour
         }
         projectileSpeed = 2.0f;
         playerLayer = 1 << LayerMask.NameToLayer("Player");
-        wallLayer = 1 << LayerMask.NameToLayer("Wall");
+        wallLayer = 1 << LayerMask.NameToLayer("Obstacle");
         rigidBodyComponent = GetComponent<Rigidbody2D>();
 
         Vector3 projectileDirection = playerTransform.position - transform.position;
@@ -35,13 +35,14 @@ public class EnemyProjectile : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (1 << collision.gameObject.layer != playerLayer.value) {
-            return;
-        }
+    private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.TryGetComponent(out Health health)) {
             health.Damage(projectileDamage);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
+        else if (1 << collision.gameObject.layer == wallLayer.value) {
+            Debug.Log(collision.name);
+            Destroy(gameObject);
+        }  
     }
 }
