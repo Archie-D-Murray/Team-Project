@@ -14,18 +14,19 @@ namespace Audio {
     }
 
     public class SFXEmitter : MonoBehaviour {
-        [SerializeField] private SFXType[] sfxList;
+        [SerializeField] private SFX[] sfxList;
         private Dictionary<SFXType, AudioSource> sfxSources;
 
         private void Start() {
             AudioMixerGroup sfxGroup = SoundManager.instance.sfxMixer;
             sfxSources = new Dictionary<SFXType, AudioSource>(sfxList.Length);
-            foreach (SFXType type in sfxList) {
+            foreach (SFX sfx in sfxList) {
                 AudioSource source = gameObject.AddComponent<AudioSource>();
                 source.outputAudioMixerGroup = sfxGroup;
                 source.loop = false;
                 source.playOnAwake = false;
-                sfxSources.Add(type, source);
+                source.clip = sfx.clip;
+                sfxSources.Add(sfx.type, source);
             }
         }
 

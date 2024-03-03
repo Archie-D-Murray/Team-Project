@@ -20,7 +20,7 @@ namespace Audio {
         [SerializeField] private BGMType current;
         [SerializeField] private BGMType target;
         [SerializeField] private AudioMixerGroup bgmGroup;
-        [SerializeField] private BGMType[] bgmList;
+        [SerializeField] private BGM[] bgmList;
         [SerializeField] private BGMType startBGM = BGMType.NONE;
 
         private Dictionary<BGMType, AudioSource> bgmSources;
@@ -29,12 +29,13 @@ namespace Audio {
         public void Start() {
             current = BGMType.NONE;
             bgmSources = new Dictionary<BGMType, AudioSource>(bgmList.Length);
-            foreach (BGMType type in bgmList) {
+            foreach (BGM bgm in bgmList) {
                 AudioSource source = gameObject.AddComponent<AudioSource>();
                 source.playOnAwake = false;
                 source.loop = true;
+                source.clip = bgm.clip;
                 source.outputAudioMixerGroup = SoundManager.instance.bgmMixer;
-                bgmSources.Add(type, source);
+                bgmSources.Add(bgm.type, source);
             }
             if (startBGM != BGMType.NONE) {
                 PlayBGM(startBGM);

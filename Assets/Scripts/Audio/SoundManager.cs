@@ -3,9 +3,7 @@ using UnityEngine.Audio;
 using Utilities;
 
 namespace Audio {
-    public class SoundManager : PersistentSingleton<SoundManager> {
-        public BGM[] bgmList;
-        public SFX[] sfxList;
+    public class SoundManager : Singleton<SoundManager> {
         public AudioMixer mixer;
         public AudioMixerGroup sfxMixer;
         public AudioMixerGroup bgmMixer;
