@@ -5,11 +5,9 @@ using System;
 
 namespace Entity.Player {
     [Serializable] public class SwordAnimator : WeaponAnimator {
-        [Header("Editor")]
         [SerializeField] private float swingRotation = 180f;
         [SerializeField] private float swingDirection = 1f;
         [SerializeField] private float angleOffset = 90f;
-        [SerializeField] private bool blocking = true;
 
         private float halfSwingRotation => 0.5f * swingDirection * swingRotation;
 

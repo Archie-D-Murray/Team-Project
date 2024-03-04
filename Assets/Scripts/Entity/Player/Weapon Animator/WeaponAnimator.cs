@@ -5,15 +5,13 @@ using System;
 
 namespace Entity.Player {
     [Serializable] public abstract class WeaponAnimator {
-        [Header("Editor")]
         [SerializeField] protected bool allowMouseRotation = true;
         [SerializeField] protected float radius = 1f;
         [SerializeField] protected float rotationSpeed = 45f;
 
-        [Header("Debug")]
-        [SerializeField] protected Vector2 positionOffset;
-        [SerializeField] protected float positionAngle;
-        [SerializeField] protected WeaponController weaponController;
+        protected Vector2 positionOffset;
+        protected float positionAngle;
+        protected WeaponController weaponController;
 
         public WeaponAnimator(WeaponController weaponController) {
             this.weaponController = weaponController;
