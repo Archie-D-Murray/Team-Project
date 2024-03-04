@@ -11,7 +11,7 @@ namespace Audio {
 
     [Serializable] public enum BGMType { NONE, MAIN_MENU, PASSIVE, COMBAT }
 
-    public class BGM {
+    [Serializable] public class BGM {
         public BGMType type;
         public AudioClip clip;
     }
@@ -57,6 +57,7 @@ namespace Audio {
             CountDownTimer fadeTimer = new CountDownTimer(duration);
             bgmSources.TryGetValue(current, out AudioSource currentSource);
             bgmSources.TryGetValue(target, out AudioSource targetSource);
+            targetSource.Play();
             if (currentSource) {
                 while (fadeTimer.isRunning) {
                     fadeTimer.Update(Time.fixedDeltaTime);

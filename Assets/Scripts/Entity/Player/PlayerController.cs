@@ -86,12 +86,14 @@ namespace Entity.Player {
         }
 
         public void OnSerialize(ref GameData data) {
+            data.playerData.playerClass = playerClass;
             data.playerData.playerPos = rb2D.position;
             data.playerData.weaponIndex = attackSystem != null ? Array.FindIndex(GetComponent<Inventory>().items, (Item item) => item.itemData.id == attackSystem.GetWeapon().id) : -1;
         }
 
         public void OnDeserialize(GameData data) {
             rb2D.MovePosition(data.playerData.playerPos);
+            playerClass = data.playerData.playerClass;
             Inventory inventory = GetComponent<Inventory>();
             if (data.playerData.weaponIndex == -1) {
                 attackSystem = null;

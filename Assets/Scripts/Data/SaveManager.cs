@@ -48,11 +48,12 @@ namespace Data {
         }
 
         public void Load() {
-            StartCoroutine(LoadIEnumerator(false));
+            StartCoroutine(LoadIEnumerator(true));
         }
 
         public void New() {
             data = new GameData();
+            data.sceneID = SceneManager.GetActiveScene().buildIndex;
             StartCoroutine(SaveIEnumerator());
         }
 

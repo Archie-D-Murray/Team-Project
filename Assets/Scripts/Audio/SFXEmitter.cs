@@ -8,7 +8,7 @@ namespace Audio {
 
     [Serializable] public enum SFXType { ENTITY_HIT, ENTITY_DEATH }
 
-    public class SFX {
+    [Serializable] public class SFX {
         public SFXType type;
         public AudioClip clip;
     }

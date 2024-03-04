@@ -7,5 +7,9 @@ namespace Audio {
         public AudioMixer mixer;
         public AudioMixerGroup sfxMixer;
         public AudioMixerGroup bgmMixer;
+
+        public void SetBGMVol(float volume) {
+            mixer.SetFloat("BGM", volume);
+        }
     }
 }

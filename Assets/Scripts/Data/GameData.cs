@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Entity;
+using Entity.Player;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Data {
 
@@ -11,11 +14,11 @@ namespace Data {
 
         public GameData() {
             playerData = new PlayerData();
-            sceneID = 0;
         }
     }
 
     [Serializable] public class PlayerData {
+        public PlayerClass playerClass;
         public List<Stat> stats;
         public List<(StatType type, StatModifier mod)> statModifiers;
         public Vector3 playerPos;
