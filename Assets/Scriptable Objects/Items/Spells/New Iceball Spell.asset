@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaccdad59a9c3a743ba556861a225b5a, type: 3}
+  m_Name: New Iceball Spell
+  m_EditorClassIdentifier: 
+  id: 1541866193
+  icon: {fileID: 2800000, guid: 009774248359949e3b9317677c6678da, type: 3}
+  itemName: Ice ball spell
+  maxCount: 1
+  cooldown: 1
+  manaCost: 10
+  spell: {fileID: 8508758827916593260, guid: 610b5b4d1d5117e40a6259e28f11a5fa, type: 3}
+  magicModifier: 1
+  duration: 1
+  speed: 0
+  castTime: 1
+  radius: 4

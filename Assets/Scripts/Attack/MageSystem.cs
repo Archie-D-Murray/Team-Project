@@ -17,7 +17,7 @@ namespace Attack {
         private Mana mana;
         private Transform origin;
         private WeaponController weaponController;
-        private SpellData[] spells;
+        private SpellData[] spells = new SpellData[3]; 
         private MageStaffData staff;
         private int spellIndex = 0;
 
@@ -39,10 +39,37 @@ namespace Attack {
             }
         }
 
+        public void SetSpell(int index, SpellData spell) {
+            if (index >= spells.Length || index < 0) {
+                Debug.LogWarning($"Tried to set spell at invalid index: {index}");
+                return;
+            }
+            spells[index] = spell;
+        }
+
         public void FixedUpdate() {
             cooldown.Update(Time.fixedDeltaTime);
-            if (cooldown.isFinished && Utilities.Input.instance.playerControls.Gameplay.Attack.IsPressed()) {
+            if (!cooldown.isFinished) {
+                return;
+            }
+            if (Utilities.Input.instance.playerControls.Gameplay.UseSpellOne.IsPressed()) {
                 spellIndex = 0;
+                if (HasSpell() && mana.UseMana(spells[spellIndex].manaCost)) {
+                    Debug.Log($"Casting spell: {spells[spellIndex].name}");
+                    Attack(origin);
+                    ResetSpellCooldown();
+                }
+            }
+            if (Utilities.Input.instance.playerControls.Gameplay.UseSpellTwo.IsPressed()) {
+                spellIndex = 1;
+                if (HasSpell() && mana.UseMana(spells[spellIndex].manaCost)) {
+                    Debug.Log($"Casting spell: {spells[spellIndex].name}");
+                    Attack(origin);
+                    ResetSpellCooldown();
+                }
+            }
+            if (Utilities.Input.instance.playerControls.Gameplay.UseSpellThree.IsPressed()) {
+                spellIndex = 2;
                 if (HasSpell() && mana.UseMana(spells[spellIndex].manaCost)) {
                     Debug.Log($"Casting spell: {spells[spellIndex].name}");
                     Attack(origin);

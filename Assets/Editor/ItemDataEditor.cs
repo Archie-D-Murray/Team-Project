@@ -31,3 +31,9 @@ public class MageStaffDataEditor : ItemDataEditor {}
 
 [CustomEditor(typeof(FireballSpell))]
 public class FireBallSpellEditor : SpellDataEditor {}
+
+[CustomEditor(typeof(IceballSpell))]
+public class IceBallSpellEditor : SpellDataEditor {}
+
+[CustomEditor(typeof(HealingSpell))]
+public class HealSpellEditor : SpellDataEditor {}

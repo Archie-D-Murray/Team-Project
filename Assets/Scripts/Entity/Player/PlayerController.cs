@@ -27,6 +27,8 @@ namespace Entity.Player {
 
         [SerializeField] private Stats stats;
 
+        public IAttackSystem getAttackSystem => attackSystem;
+
         private void Awake() {
             animator = GetComponentInChildren<Animator>();
             rb2D = GetComponent<Rigidbody2D>();

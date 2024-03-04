@@ -62,6 +62,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseSpellOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d3a65e9-6e7f-4d65-b5b2-994d4f0b9383"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseSpellTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f0c7d2d-c157-4afe-b29f-8c4c717965f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseSpellThree"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a4b7cbf-3dd4-42b9-aca5-606759ce2299"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +177,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7afd8be5-49ea-40e5-ab09-05dc184b3dae"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseSpellOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7443f96-3fee-4a5a-a369-909d1b00fc1b"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseSpellTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0494d69a-9054-4ec8-91cb-9a04ef51e24d"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseSpellThree"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -262,6 +322,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""bf569eb1-1892-4418-982b-6d40458e9b6c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BindSpellOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""396ab956-dc17-4d6a-ae35-b508c6112175"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BindSpellTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d548ed3-dd48-469e-9c8e-b2a98f0c78e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BindSpellThree"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f865a1c-b90b-4a74-8a50-be52a1341775"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpellMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""52e2ebfd-4a96-42ab-a6f2-bd2e8b100aac"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -708,6 +804,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21b01110-9f7f-46db-b81c-2dcee6e4893b"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BindSpellOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a9f4e06-af8f-4269-ab35-b8002d06d7cd"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BindSpellTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e2441fd0-6a9d-4c09-9fe9-5990d1a9d8ec"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BindSpellThree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c743bcb0-7ba3-4b3c-9139-4b8ababb7876"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpellMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -726,6 +866,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_MousePosition = m_Gameplay.FindAction("MousePosition", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_UseSpellOne = m_Gameplay.FindAction("UseSpellOne", throwIfNotFound: true);
+        m_Gameplay_UseSpellTwo = m_Gameplay.FindAction("UseSpellTwo", throwIfNotFound: true);
+        m_Gameplay_UseSpellThree = m_Gameplay.FindAction("UseSpellThree", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -740,6 +883,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_Status = m_UI.FindAction("Status", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
+        m_UI_BindSpellOne = m_UI.FindAction("BindSpellOne", throwIfNotFound: true);
+        m_UI_BindSpellTwo = m_UI.FindAction("BindSpellTwo", throwIfNotFound: true);
+        m_UI_BindSpellThree = m_UI.FindAction("BindSpellThree", throwIfNotFound: true);
+        m_UI_SpellMenu = m_UI.FindAction("SpellMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -805,6 +952,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_MousePosition;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_UseSpellOne;
+    private readonly InputAction m_Gameplay_UseSpellTwo;
+    private readonly InputAction m_Gameplay_UseSpellThree;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -813,6 +963,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_Gameplay_MousePosition;
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        public InputAction @UseSpellOne => m_Wrapper.m_Gameplay_UseSpellOne;
+        public InputAction @UseSpellTwo => m_Wrapper.m_Gameplay_UseSpellTwo;
+        public InputAction @UseSpellThree => m_Wrapper.m_Gameplay_UseSpellThree;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -834,6 +987,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @UseSpellOne.started += instance.OnUseSpellOne;
+            @UseSpellOne.performed += instance.OnUseSpellOne;
+            @UseSpellOne.canceled += instance.OnUseSpellOne;
+            @UseSpellTwo.started += instance.OnUseSpellTwo;
+            @UseSpellTwo.performed += instance.OnUseSpellTwo;
+            @UseSpellTwo.canceled += instance.OnUseSpellTwo;
+            @UseSpellThree.started += instance.OnUseSpellThree;
+            @UseSpellThree.performed += instance.OnUseSpellThree;
+            @UseSpellThree.canceled += instance.OnUseSpellThree;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -850,6 +1012,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @UseSpellOne.started -= instance.OnUseSpellOne;
+            @UseSpellOne.performed -= instance.OnUseSpellOne;
+            @UseSpellOne.canceled -= instance.OnUseSpellOne;
+            @UseSpellTwo.started -= instance.OnUseSpellTwo;
+            @UseSpellTwo.performed -= instance.OnUseSpellTwo;
+            @UseSpellTwo.canceled -= instance.OnUseSpellTwo;
+            @UseSpellThree.started -= instance.OnUseSpellThree;
+            @UseSpellThree.performed -= instance.OnUseSpellThree;
+            @UseSpellThree.canceled -= instance.OnUseSpellThree;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -883,6 +1054,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_Status;
     private readonly InputAction m_UI_Inventory;
+    private readonly InputAction m_UI_BindSpellOne;
+    private readonly InputAction m_UI_BindSpellTwo;
+    private readonly InputAction m_UI_BindSpellThree;
+    private readonly InputAction m_UI_SpellMenu;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
@@ -899,6 +1074,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @Status => m_Wrapper.m_UI_Status;
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
+        public InputAction @BindSpellOne => m_Wrapper.m_UI_BindSpellOne;
+        public InputAction @BindSpellTwo => m_Wrapper.m_UI_BindSpellTwo;
+        public InputAction @BindSpellThree => m_Wrapper.m_UI_BindSpellThree;
+        public InputAction @SpellMenu => m_Wrapper.m_UI_SpellMenu;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -944,6 +1123,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @BindSpellOne.started += instance.OnBindSpellOne;
+            @BindSpellOne.performed += instance.OnBindSpellOne;
+            @BindSpellOne.canceled += instance.OnBindSpellOne;
+            @BindSpellTwo.started += instance.OnBindSpellTwo;
+            @BindSpellTwo.performed += instance.OnBindSpellTwo;
+            @BindSpellTwo.canceled += instance.OnBindSpellTwo;
+            @BindSpellThree.started += instance.OnBindSpellThree;
+            @BindSpellThree.performed += instance.OnBindSpellThree;
+            @BindSpellThree.canceled += instance.OnBindSpellThree;
+            @SpellMenu.started += instance.OnSpellMenu;
+            @SpellMenu.performed += instance.OnSpellMenu;
+            @SpellMenu.canceled += instance.OnSpellMenu;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -984,6 +1175,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @BindSpellOne.started -= instance.OnBindSpellOne;
+            @BindSpellOne.performed -= instance.OnBindSpellOne;
+            @BindSpellOne.canceled -= instance.OnBindSpellOne;
+            @BindSpellTwo.started -= instance.OnBindSpellTwo;
+            @BindSpellTwo.performed -= instance.OnBindSpellTwo;
+            @BindSpellTwo.canceled -= instance.OnBindSpellTwo;
+            @BindSpellThree.started -= instance.OnBindSpellThree;
+            @BindSpellThree.performed -= instance.OnBindSpellThree;
+            @BindSpellThree.canceled -= instance.OnBindSpellThree;
+            @SpellMenu.started -= instance.OnSpellMenu;
+            @SpellMenu.performed -= instance.OnSpellMenu;
+            @SpellMenu.canceled -= instance.OnSpellMenu;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1016,6 +1219,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnUseSpellOne(InputAction.CallbackContext context);
+        void OnUseSpellTwo(InputAction.CallbackContext context);
+        void OnUseSpellThree(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1031,5 +1237,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnStatus(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnBindSpellOne(InputAction.CallbackContext context);
+        void OnBindSpellTwo(InputAction.CallbackContext context);
+        void OnBindSpellThree(InputAction.CallbackContext context);
+        void OnSpellMenu(InputAction.CallbackContext context);
     }
 }
