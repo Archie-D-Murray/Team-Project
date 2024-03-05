@@ -51,15 +51,20 @@ public class MageUI : MonoBehaviour {
     }
 
     public void SetSlot(int index, SpellData spell) {
+        foreach (Image image in spellHotBarSlots) {
+            if (image.sprite == spellSelection.icon) {
+                image.color = Color.clear;
+            }
+        }
         spellHotBarSlots[index].sprite = spell.icon;
         spellHotBarSlots[index].color = Color.white;
-        if (mageSystem != null) {
+        if (mageSystem == null) {
             Debug.LogError("Player not intialised for mage state!");
             enabled = false;
             return;
         }
+        
         mageSystem.SetSpell(index, spell);
-        spellSelection = null;
     }
 
     public void Show() {
@@ -69,6 +74,7 @@ public class MageUI : MonoBehaviour {
             spellInstance.GetComponentInChildren<Button>().onClick.AddListener(() => SetSpellSelection(spell));
             spellInstance.GetComponentInChildren<TMP_Text>().text = spell.itemName;
             spellInstance.GetComponentsInChildren<Image>().First((Image image) => image.gameObject.HasComponent<SpellSlot>()).sprite = spell.icon;
+            spellHotBarSlots[Array.IndexOf(inventory.spells, spell)].sprite = spell.icon;
         }
         canvas.FadeCanvas(0.1f, false, this);
     }
@@ -78,6 +84,7 @@ public class MageUI : MonoBehaviour {
     }
 
     public void Hide() {
+        spellSelection = null;
         canvas.FadeCanvas(0.1f, true, this);
         foreach (Transform child in canvas.transform) {
             if (!child.gameObject.HasComponent<Image>()) {
