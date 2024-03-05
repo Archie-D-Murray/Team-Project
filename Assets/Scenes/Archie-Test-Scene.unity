@@ -1233,6 +1233,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 0}
   rb2D: {fileID: 0}
+--- !u!1 &35080859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 35080860}
+  - component: {fileID: 35080861}
+  m_Layer: 5
+  m_Name: Melee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &35080860
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35080859}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 453945024266103512}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &35080861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35080859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa752eb1ed8382448a2acc80e89a0f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &51015184
 GameObject:
   m_ObjectHideFlags: 0
@@ -4151,6 +4200,55 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1991593640}
   m_SourcePrefab: {fileID: 100100000, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+--- !u!1 &936672064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 936672065}
+  - component: {fileID: 936672066}
+  m_Layer: 5
+  m_Name: Ranged
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &936672065
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936672064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 453945024266103512}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &936672066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936672064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e5e6dc79b45f464bb0e8e51a68e9d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &955664614
 GameObject:
   m_ObjectHideFlags: 0
@@ -4963,6 +5061,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1390271820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2641947895260431236, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
+  m_PrefabInstance: {fileID: 453945024266103511}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1392627512
 GameObject:
   m_ObjectHideFlags: 0
@@ -9700,6 +9803,12 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5480485979613382780, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 35080860}
+    - targetCorrespondingSourceObject: {fileID: 5480485979613382780, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 936672065}
     - targetCorrespondingSourceObject: {fileID: 5206123755829575236, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2028566232}
@@ -9709,13 +9818,31 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4953926943785834931, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1512523272}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2641947895260431236, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 453945024266103513}
   m_SourcePrefab: {fileID: 100100000, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
 --- !u!224 &453945024266103512 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5480485979613382780, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
   m_PrefabInstance: {fileID: 453945024266103511}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &453945024266103513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390271820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a41c9f5e50f02a4ab976653a059bc92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mageUI: {fileID: 0}
+  meleeUI: {fileID: 0}
+  rangedUI: {fileID: 0}
 --- !u!1001 &470904998387118900
 PrefabInstance:
   m_ObjectHideFlags: 0
