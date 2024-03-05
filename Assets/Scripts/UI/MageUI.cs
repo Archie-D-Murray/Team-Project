@@ -15,7 +15,7 @@ using Tags.UI.Class;
 
 public class MageUI : MonoBehaviour {
     private Inventory inventory;
-    private Entity.Player.PlayerController playerController;
+    private MageSystem mageSystem;
     private Image[] spellHotBarSlots;
     private CanvasGroup canvas;
 
@@ -24,8 +24,14 @@ public class MageUI : MonoBehaviour {
 
     private void Start() {
         canvas = GetComponent<CanvasGroup>();
-        playerController = FindFirstObjectByType<Entity.Player.PlayerController>();
+        Entity.Player.PlayerController playerController = FindFirstObjectByType<Entity.Player.PlayerController>();
         inventory = playerController.GetComponent<Inventory>();
+        if (playerController.getAttackSystem is not MageSystem) {
+            Debug.LogError("Player is not currently a mage!");
+            enabled = false;
+            return;
+        }
+        mageSystem = playerController.getAttackSystem as MageSystem;
         spellHotBarSlots = FindFirstObjectByType<SpellHotbar>().GetComponentsInChildren<Image>().Where((Image image) => image.gameObject.HasComponent<SpellSlot>()).ToArray();
         Utilities.Input.instance.playerControls.UI.SpellMenu.started += (InputAction.CallbackContext context) => Toggle();
     }
@@ -38,14 +44,21 @@ public class MageUI : MonoBehaviour {
         }
     }
 
+    private void FixedUpdate() {
+        foreach (Image spellSlot in spellHotBarSlots) {
+            spellSlot.fillAmount = mageSystem.CooldownProgress;
+        }
+    }
+
     public void SetSlot(int index, SpellData spell) {
         spellHotBarSlots[index].sprite = spell.icon;
         spellHotBarSlots[index].color = Color.white;
-        if (playerController.getAttackSystem == null || playerController.getAttackSystem is not MageSystem) {
+        if (mageSystem != null) {
             Debug.LogError("Player not intialised for mage state!");
+            enabled = false;
             return;
         }
-        (playerController.getAttackSystem as MageSystem).SetSpell(index, spell);
+        mageSystem.SetSpell(index, spell);
         spellSelection = null;
     }
 

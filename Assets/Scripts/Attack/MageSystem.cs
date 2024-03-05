@@ -38,8 +38,15 @@ namespace Attack {
                 Debug.LogWarning($"Tried to set spell at invalid index: {index}");
                 return;
             }
+            for (int i = 0; i < spells.Length; i++) {
+                if (spells[i] == spell) {
+                    spells[i] = null;
+                }
+            }
             spells[index] = spell;
         }
+
+        public float CooldownProgress => cooldown.Progress();
 
         public void FixedUpdate() {
             cooldown.Update(Time.fixedDeltaTime);
