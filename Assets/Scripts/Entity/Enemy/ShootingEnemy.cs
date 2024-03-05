@@ -29,7 +29,7 @@ namespace Entity {
                 agent.speed = amount;
             };
 
-            playerTransform = FindObjectOfType<PlayerController>().OrNull()?.transform ?? null;
+            playerTransform = FindObjectOfType<MovementController>().OrNull()?.transform ?? null;
             if (!playerTransform) {
                 Debug.LogError("Could not find player!");
                 Destroy(this);

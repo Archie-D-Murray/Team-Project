@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerController : MonoBehaviour
-{
+public class MovementController : MonoBehaviour {
     [SerializeField] private float speed = 5f;
     private Vector2 inputDirection;
     private Vector2 velocity;
@@ -31,64 +31,52 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject fade;
 
 
-    void Start()
-    {
+    void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
         SetupPreviousPos();
     }
 
-    void Update()
-    {
+    void Update() {
         HandleInputs();
         dashTimer -= Time.deltaTime;
         timeTimer -= Time.deltaTime;
     }
 
-    private void SetupPreviousPos()
-    {
+    private void SetupPreviousPos() {
         previousPos = new Queue<Vector3>(150);
         for (int i = 0; i < 150; i++) {
             previousPos.Enqueue(transform.position);
         }
     }
 
-    private void HandleInputs()
-    {
+    private void HandleInputs() {
         inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (Input.GetKeyDown("space") && canMove && inputDirection.magnitude != 0 && dashTimer < 0)
-        {
+        if (Input.GetKeyDown("space") && canMove && inputDirection.magnitude != 0 && dashTimer < 0) {
             StartCoroutine(Dash());
         }
-        if (Input.GetKeyDown(KeyCode.E) && canMove && timeTimer < 0)
-        {
+        if (Input.GetKeyDown(KeyCode.E) && canMove && timeTimer < 0) {
             RewindTime();
         }
-        if (Input.GetKeyDown(KeyCode.P)) 
-        {
-            if(fade.activeInHierarchy == true) 
-            {
+        if (Input.GetKeyDown(KeyCode.P)) {
+            if (fade.activeInHierarchy == true) {
                 fade.GetComponent<Fading>().DoFade();
-            } else
-            {
+            } else {
                 fade.SetActive(true);
             }
         }
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         InsertNewPosition();
-        if (canMove)
-        {
+        if (canMove) {
             velocity = inputDirection.normalized * speed;
         }
         rigidBody.velocity = velocity;
     }
 
-    private IEnumerator Dash()
-    {
+    private IEnumerator Dash() {
         canMove = false;
         coll.excludeLayers = exclusionLayers;
         animator.SetTrigger("dash");
@@ -99,14 +87,12 @@ public class PlayerController : MonoBehaviour
         coll.excludeLayers = emptyLayer;
     }
 
-    private void RewindTime()
-    {
+    private void RewindTime() {
         timeTimer = timeCooldown;
         transform.position = previousPos.Dequeue();
     }
 
-    private void InsertNewPosition()
-    {
+    private void InsertNewPosition() {
         _ = previousPos.Dequeue();
         previousPos.Enqueue(transform.position);
     }

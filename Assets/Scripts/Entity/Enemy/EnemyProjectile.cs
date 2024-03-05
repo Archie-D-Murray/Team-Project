@@ -19,7 +19,7 @@ public class EnemyProjectile : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        playerTransform = FindObjectOfType<PlayerController>().OrNull()?.transform ?? null;
+        playerTransform = FindObjectOfType<MovementController>().OrNull()?.transform ?? null;
         if (!playerTransform) {
             Debug.LogError("Could not find player!");
             Destroy(this);

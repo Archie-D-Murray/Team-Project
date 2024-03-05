@@ -10,7 +10,7 @@ using UnityEngine;
 using Data;
 
 namespace Entity.Player {
-    [Serializable] public enum PlayerClass { Ranged, Melee, Mage }
+    [Serializable] public enum PlayerClass { RANGED, MELEE, MAGE }
     public class PlayerController : MonoBehaviour, ISerialize {
 
         [SerializeField] private IAttackSystem attackSystem;
@@ -28,6 +28,8 @@ namespace Entity.Player {
         [SerializeField] private Stats stats;
 
         public IAttackSystem getAttackSystem => attackSystem;
+        public PlayerClass getPlayerClass => playerClass;
+        public Action<PlayerClass> onClassChange;
 
         private void Awake() {
             animator = GetComponentInChildren<Animator>();
@@ -40,7 +42,7 @@ namespace Entity.Player {
 
         public void DebugInitialise() {
             switch (playerClass) {
-                case PlayerClass.Ranged:
+                case PlayerClass.RANGED:
                     BowData bowData = GetWeapon<BowData>();
                     if (!bowData) {
                         Debug.LogWarning("Could not find bow to initialise attackSystem, attacks will not work until this is initialised!");
@@ -49,7 +51,7 @@ namespace Entity.Player {
                     weaponController.SetWeapon(bowData);
                     break;
 
-                case PlayerClass.Melee:
+                case PlayerClass.MELEE:
                     SwordData swordData = GetWeapon<SwordData>();
                     if (!swordData) {
                         Debug.LogWarning("Could not find sword to initialise attackSystem, attacks will not work until this is initialised!");
@@ -58,7 +60,7 @@ namespace Entity.Player {
                     weaponController.SetWeapon(swordData);
                     break;
 
-                case PlayerClass.Mage:
+                case PlayerClass.MAGE:
                     MageStaffData staffData = GetWeapon<MageStaffData>();
                     if (!staffData) {
                         Debug.LogWarning("Could not find mage staff to intialise attackSystem, attacks will not work intil this is initialised");
@@ -72,6 +74,7 @@ namespace Entity.Player {
                     Destroy(this);
                     break;
             }
+            onClassChange?.Invoke(playerClass);
         }
 
         private void FixedUpdate() {
@@ -95,21 +98,22 @@ namespace Entity.Player {
         public void OnDeserialize(GameData data) {
             rb2D.MovePosition(data.playerData.playerPos);
             playerClass = data.playerData.playerClass;
+            onClassChange?.Invoke(playerClass);
             Inventory inventory = GetComponent<Inventory>();
             if (data.playerData.weaponIndex == -1) {
                 attackSystem = null;
                 return;
             }
             switch (playerClass) {
-                case PlayerClass.Ranged:
+                case PlayerClass.RANGED:
                     SetWeapon<BowData>(inventory.items[data.playerData.weaponIndex].itemData as BowData);
                     weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as BowData);
                     break;
-                case PlayerClass.Melee:
+                case PlayerClass.MELEE:
                     SetWeapon<SwordData>(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
                     weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
                     break;
-                case PlayerClass.Mage:
+                case PlayerClass.MAGE:
                     SetWeapon<MageStaffData>(inventory.items[data.playerData.weaponIndex].itemData as MageStaffData);
                     weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as MageStaffData);
                     break;
@@ -140,16 +144,16 @@ namespace Entity.Player {
 
         public void ReInitialiseAttackSystem<T>(T itemData) where T : ItemData {
             switch (playerClass) {
-                case PlayerClass.Ranged:
+                case PlayerClass.RANGED:
                     attackSystem = new RangedSystem(stats, transform, weaponController, itemData as BowData);
                     weaponController.SetWeapon(itemData as BowData);
                     break;
 
-                case PlayerClass.Melee:
+                case PlayerClass.MELEE:
                     attackSystem = new MeleeSystem(stats, transform, weaponController, itemData as SwordData);
                     weaponController.SetWeapon(itemData as SwordData);
                     break;
-                case PlayerClass.Mage:
+                case PlayerClass.MAGE:
                     attackSystem = new MageSystem(stats, transform, weaponController, itemData as MageStaffData, GetComponent<Mana>());
                     weaponController.SetWeapon(itemData as MageStaffData);
                     break;

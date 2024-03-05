@@ -12,11 +12,13 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System;
 using Tags.UI.Class;
+using Entity.Player;
 
 public class MageUI : MonoBehaviour {
     private Inventory inventory;
     private MageSystem mageSystem;
     private Image[] spellHotBarSlots;
+    private PlayerController playerController;
     private CanvasGroup canvas;
 
     [SerializeField] private GameObject spellPrefab;
@@ -24,7 +26,7 @@ public class MageUI : MonoBehaviour {
 
     private void Start() {
         canvas = GetComponent<CanvasGroup>();
-        Entity.Player.PlayerController playerController = FindFirstObjectByType<Entity.Player.PlayerController>();
+        playerController = FindFirstObjectByType<Entity.Player.PlayerController>();
         inventory = playerController.GetComponent<Inventory>();
         if (playerController.getAttackSystem is not MageSystem) {
             Debug.LogError("Player is not currently a mage!");
