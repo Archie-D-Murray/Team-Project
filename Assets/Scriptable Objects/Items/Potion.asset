@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fd814c3eaa73247ae803d11ae48bed, type: 3}
   m_Name: Potion
   m_EditorClassIdentifier: 
-  icon: {fileID: 2800000, guid: b8ba3923a6094cd48b85425f47fd7450, type: 3}
+  id: 0
+  icon: {fileID: 21300000, guid: 2af1a7323d104499d992be9a2d8dc933, type: 3}
   itemName: Health Potion (10)
   maxCount: 1
   isStats: 0

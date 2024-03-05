@@ -12,12 +12,13 @@ namespace Entity.Player {
 
         public MageStaffAnimator(WeaponController weaponController, Sprite sprite) : base(weaponController) {
             weaponController.GetComponent<SpriteRenderer>().sprite = sprite;
+            Debug.Log("Initialised Mage");
         }
 
         public override void FixedUpdate() {
             if (!allowMouseRotation) { return; }
             positionAngle = Utilities.Input.instance.AngleToMouse(weaponController.transform.parent);
-            WeaponPositionRotation(positionAngle, angleOffset);
+            WeaponPositionRotation(positionAngle, angleOffset * Mathf.Sign(positionAngle));
         }
 
         protected override IEnumerator WeaponAttack(float attackTime) {

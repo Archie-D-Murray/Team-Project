@@ -44,7 +44,7 @@ namespace UI {
             }
             count.text = item.count.ToString();
             itemName.text = item.itemData.itemName;
-            itemIcon.sprite = item.itemData.icon.ToSprite();
+            itemIcon.sprite = item.itemData.icon;
             this.item = item;
             use.interactable = item.type != ItemType.ITEM;
             Show();

@@ -17,7 +17,7 @@ namespace Upgrades {
             if (!collider.gameObject.HasComponent<Entity.Player.PlayerController>()) {
                 return;
             }
-            if (!looted && Utilities.Input.instance.playerControls.Gameplay.Interact.triggered) {
+            if (!looted && Utilities.Input.instance.playerControls.Gameplay.Interact.ReadValue<float>() == 1f) {
                 Debug.Log("Showing Upgrade Canvas");
                 UpgradeManager.instance.ShowUpgrades(upgrades);
                 looted = true;

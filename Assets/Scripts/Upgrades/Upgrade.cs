@@ -12,7 +12,11 @@ namespace Upgrades {
         [Min(0.01f)] public float step = 1f;
 
         public float GetRandomStat() {
-            return min + Random.Range(0f, (max - min) / step) * step;
+            if (step == 0.0f) {
+                return Random.Range(min, max);
+            } else {
+                return Mathf.Ceil(Random.Range(min, max) / step) * step;
+            }
         }
     }
 }

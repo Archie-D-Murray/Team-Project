@@ -35,6 +35,7 @@ public class EnemyScript : MonoBehaviour {
             // Could spawn particles, give player xp, etc...
             Destroy(gameObject);
         };
+        health.onDamage += GetComponent<KnockbackHandler>().Knockback;
         playerLayer = 1 << LayerMask.NameToLayer("Player");
     }
 
@@ -72,7 +73,7 @@ public class EnemyScript : MonoBehaviour {
         }
         if (collision.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage) && timer.isFinished) {
             if (stats.GetStat(StatType.ATTACK_SPEED, out float attackSpeed)) {
-                health.Damage(damage);
+                health.Damage(damage, transform.position);
                 timer.Restart(1f / Mathf.Max(0.001f, attackSpeed));
             } else {
             }

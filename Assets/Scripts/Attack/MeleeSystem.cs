@@ -30,7 +30,7 @@ namespace Attack {
             // GameObject.Instantiate(AssetServer.instance.slash, origin.position, origin.rotation);
             foreach (Collider2D enemy in Physics2D.OverlapCircleAll(origin.position, data.radius, enemyLayer)) {
                 if (enemy.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
-                    health.Damage(damage * data.damageModifier);
+                    health.Damage(damage * data.damageModifier, weaponController.transform.position);
                 }
             }
         }

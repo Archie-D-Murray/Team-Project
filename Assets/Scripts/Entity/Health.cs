@@ -11,8 +11,7 @@ namespace Entity {
         public float getPercentHealth => Mathf.Clamp01(currentHealth / maxHealth);
         public float getCurrentHealth => currentHealth;
         public float getMaxHealth => maxHealth;
-
-        public Action<float> onDamage;
+        public Action<float, KnockbackData> onDamage;
         public Action<float> onHeal;
         public Action onDeath;
 
@@ -41,14 +40,17 @@ namespace Entity {
             Damage(diff);
         }
 
-        public void Damage(float damage) {
+        /// <summary>Damages an entity</summary>
+        /// <param name="damage">Damage to apply</param>
+        /// <param name="entityPos">Position of entity that applied the knockback</param>
+        public void Damage(float damage, Vector2? entityPos = null) {
             if (currentHealth == 0.0f) { //Don't damage dead things!
                 return;
             }
             damage = Mathf.Max(damage, 0.0f);
             if (damage != 0.0f) {
                 currentHealth = Mathf.Max(0.0f, currentHealth - damage);
-                onDamage?.Invoke(damage);
+                onDamage?.Invoke(damage, entityPos != null ? new KnockbackData(entityPos.Value, true) : KnockbackData.Null());
             }
             if (currentHealth == 0.0f) {
                 Debug.Log($"{name} is dead");
