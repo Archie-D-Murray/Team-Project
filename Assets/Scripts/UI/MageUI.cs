@@ -51,15 +51,20 @@ public class MageUI : MonoBehaviour {
     }
 
     public void SetSlot(int index, SpellData spell) {
+        foreach (Image image in spellHotBarSlots) {
+            if (image.sprite == spellSelection.icon) {
+                image.color = Color.clear;
+            }
+        }
         spellHotBarSlots[index].sprite = spell.icon;
         spellHotBarSlots[index].color = Color.white;
-        if (mageSystem != null) {
+        if (mageSystem == null) {
             Debug.LogError("Player not intialised for mage state!");
             enabled = false;
             return;
         }
+        
         mageSystem.SetSpell(index, spell);
-        spellSelection = null;
     }
 
     public void Show() {
@@ -78,6 +83,7 @@ public class MageUI : MonoBehaviour {
     }
 
     public void Hide() {
+        spellSelection = null;
         canvas.FadeCanvas(0.1f, true, this);
         foreach (Transform child in canvas.transform) {
             if (!child.gameObject.HasComponent<Image>()) {
