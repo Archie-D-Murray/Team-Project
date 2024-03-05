@@ -1,5 +1,5 @@
 using UnityEngine;
 
 namespace Tags.UI.Class {
-    public class SpellSlot : MonoBehaviour {}
+    public class SpellHotbar : MonoBehaviour {}
 }

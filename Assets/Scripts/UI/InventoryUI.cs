@@ -143,7 +143,7 @@ namespace UI {
                     count = item.count;
                     button.onClick.RemoveAllListeners();
                     button.onClick.AddListener(() => preview.SetItem(item));
-                    icon.sprite = item.itemData.icon.ToSprite();
+                    icon.sprite = item.itemData.icon;
                     UpdateUIElements();
                 }
             }
@@ -174,7 +174,7 @@ namespace UI {
                     button.onClick.AddListener(() => preview.SetItem(item));
                 }
                 return item.itemData
-                    ? new ItemSlot(item.itemData.name, item.itemData.icon.ToSprite(), item.count, icon, name, count, button)
+                    ? new ItemSlot(item.itemData.name, item.itemData.icon, item.count, icon, name, count, button)
                     : Empty(icon, name, count, button);
             }
         }

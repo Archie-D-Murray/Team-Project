@@ -21,7 +21,7 @@ namespace Attack {
         private MageStaffData staff;
         private int spellIndex = 0;
 
-        public MageSystem(Stats stats, Transform origin, WeaponController weaponController, MageStaffData staff, SpellData[] spells, Mana mana) {
+        public MageSystem(Stats stats, Transform origin, WeaponController weaponController, MageStaffData staff, Mana mana) {
             this.stats = stats;
             this.mana = mana;
             this.origin = origin;
@@ -30,12 +30,6 @@ namespace Attack {
                 this.staff = staff;
             } else {
                 Debug.LogError("Mage System was initialised incorrectly!");
-            }
-
-            if (spells != null) {
-                this.spells = spells;
-            } else {
-                Debug.LogError("Mage system has no spells?");
             }
         }
 

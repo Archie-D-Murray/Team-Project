@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b44cd695a7e0fbc4eb148449dc6c3f85
+guid: be4be01000f59384aa64843e2a6dc234
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spell Frame_0
+      name: Spell Icons_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 543c6a88ffe447047837b15f160f9c61
-      internalID: 2111837196
+      spriteID: a3fed37748c51bd4694e5fbf86c46b54
+      internalID: -1621661920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spell Frame_1
+      name: Spell Icons_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 16
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +145,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4201d6b7a9d0e174089d0b0377b495df
-      internalID: 1144829577
+      spriteID: 02f35832f95d3ae498eef76ee09d31b4
+      internalID: 1533841660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Icons_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a904c9c738881ad4a8e1b1379b4f33b3
+      internalID: -1670455278
       vertices: []
       indices: 
       edges: []
@@ -162,8 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spell Frame_0: 2111837196
-      Spell Frame_1: 1144829577
+      Spell Icons_0: -1621661920
+      Spell Icons_1: 1533841660
+      Spell Icons_2: -1670455278
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -18,7 +18,7 @@ namespace Entity.Player {
         public override void FixedUpdate() {
             if (!allowMouseRotation) { return; }
             positionAngle = Utilities.Input.instance.AngleToMouse(weaponController.transform.parent);
-            WeaponPositionRotation(positionAngle, angleOffset);
+            WeaponPositionRotation(positionAngle, angleOffset * Mathf.Sign(positionAngle));
         }
 
         protected override IEnumerator WeaponAttack(float attackTime) {

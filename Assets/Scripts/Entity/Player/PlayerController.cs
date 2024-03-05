@@ -60,11 +60,10 @@ namespace Entity.Player {
 
                 case PlayerClass.Mage:
                     MageStaffData staffData = GetWeapon<MageStaffData>();
-                    SpellData[] spells = GetComponent<Inventory>().spells;
                     if (!staffData) {
                         Debug.LogWarning("Could not find mage staff to intialise attackSystem, attacks will not work intil this is initialised");
                     }
-                    attackSystem = new MageSystem(stats, transform, weaponController, staffData, spells, GetComponent<Mana>());
+                    attackSystem = new MageSystem(stats, transform, weaponController, staffData, GetComponent<Mana>());
                     weaponController.SetWeapon(staffData);
                     break;
 
@@ -151,7 +150,7 @@ namespace Entity.Player {
                     weaponController.SetWeapon(itemData as SwordData);
                     break;
                 case PlayerClass.Mage:
-                    attackSystem = new MageSystem(stats, transform, weaponController, itemData as MageStaffData, GetComponent<Inventory>().spells, GetComponent<Mana>());
+                    attackSystem = new MageSystem(stats, transform, weaponController, itemData as MageStaffData, GetComponent<Mana>());
                     weaponController.SetWeapon(itemData as MageStaffData);
                     break;
                 default:

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: New Healing Spell
   m_EditorClassIdentifier: 
   id: 1913975003
-  icon: {fileID: 2800000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}
+  icon: {fileID: -1670455278, guid: be4be01000f59384aa64843e2a6dc234, type: 3}
   itemName: Heal spell
   maxCount: 1
   cooldown: 1
   manaCost: 10
-  spell: {fileID: 0}
+  spell: {fileID: 1029977828612693446, guid: d37b58a919ed2bb4db3b4fa1a07a6cfc, type: 3}
   magicModifier: 1
   duration: 0
   speed: 0

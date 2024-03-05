@@ -6,7 +6,7 @@ namespace Items {
     [CreateAssetMenu(menuName = "Items/ItemData")]
     public class ItemData : ScriptableObject {
         public int id;
-        public Texture2D icon;
+        public Sprite icon;
         public string itemName;
         public int maxCount = 1;
 

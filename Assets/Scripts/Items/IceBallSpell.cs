@@ -6,10 +6,12 @@ namespace Items.Spells {
     public class IceballSpell : SpellData {
 
         public float radius;
+        public float tickRate;
+        public float slowAmount;
 
         public override void CastSpell(Vector3 position, Quaternion rotation, float magic) {
             GameObject spellInstance = Instantiate(spell, position, rotation);
-            spellInstance.GetOrAddComponent<FireballController>().Init(magic, speed, radius);
+            spellInstance.GetOrAddComponent<IceballController>().Init(tickRate, magic, speed, slowAmount, radius);
             spellInstance.GetOrAddComponent<AutoDestroy>().Init(duration);
         }
     }

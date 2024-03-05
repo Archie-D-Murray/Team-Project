@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New Iceball Spell
   m_EditorClassIdentifier: 
   id: 1541866193
-  icon: {fileID: 2800000, guid: 009774248359949e3b9317677c6678da, type: 3}
+  icon: {fileID: 1533841660, guid: be4be01000f59384aa64843e2a6dc234, type: 3}
   itemName: Ice ball spell
   maxCount: 1
   cooldown: 1
@@ -21,6 +21,8 @@ MonoBehaviour:
   spell: {fileID: 8508758827916593260, guid: 610b5b4d1d5117e40a6259e28f11a5fa, type: 3}
   magicModifier: 1
   duration: 1
-  speed: 0
+  speed: 2
   castTime: 1
-  radius: 4
+  radius: 0.25
+  tickRate: 0
+  slowAmount: 0

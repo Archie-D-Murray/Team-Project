@@ -13,9 +13,7 @@ namespace Items.Spells {
             foreach (Collider2D coll in Physics2D.OverlapCircleAll(position, radius, playerLayer)) {
                 if (coll.gameObject.TryGetComponent(out Health health)) {
                     health.Heal(magic);
-                    if (healParticles) {
-                        Instantiate(healParticles, position, rotation);
-                    }
+                    Instantiate(spell, position, rotation);
                 }
             }
         }

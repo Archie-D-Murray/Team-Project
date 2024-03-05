@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test Bow
   m_EditorClassIdentifier: 
   id: 0
-  icon: {fileID: 2800000, guid: 53d33bff0a9374b6db003552e5767cdb, type: 3}
+  icon: {fileID: 7208985, guid: 55edec401cf21614199965e54e631362, type: 3}
   itemName: Bow
   maxCount: 1
   damageModifier: 1
