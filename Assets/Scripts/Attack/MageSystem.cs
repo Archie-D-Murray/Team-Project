@@ -46,6 +46,8 @@ namespace Attack {
             spells[index] = spell;
         }
 
+        public float CooldownProgress => cooldown.Progress();
+
         public void FixedUpdate() {
             cooldown.Update(Time.fixedDeltaTime);
             if (!cooldown.isFinished) {
