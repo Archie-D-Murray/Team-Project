@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Entity;
+using Entity.Player;
 public class EnemyProjectile : MonoBehaviour
 {
 
