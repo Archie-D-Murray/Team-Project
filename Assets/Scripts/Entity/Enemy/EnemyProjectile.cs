@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Entity.Player;
 using Entity;
-public class EnemyProjectile : MonoBehaviour
-{
+public class EnemyProjectile : MonoBehaviour {
 
     private Transform playerTransform;
     private Rigidbody2D rigidBodyComponent;
@@ -17,16 +17,15 @@ public class EnemyProjectile : MonoBehaviour
 
 
     // Start is called before the first frame update
-    private void Start()
-    {
-        playerTransform = FindObjectOfType<MovementController>().OrNull()?.transform ?? null;
+    private void Start() {
+        playerTransform = FindObjectOfType<PlayerController>().OrNull()?.transform ?? null;
         if (!playerTransform) {
             Debug.LogError("Could not find player!");
             Destroy(this);
         }
         projectileSpeed = 2.0f;
         playerLayer = 1 << LayerMask.NameToLayer("Player");
-        wallLayer = 1 << LayerMask.NameToLayer("Wall");
+        wallLayer = 1 << LayerMask.NameToLayer("Obstacle");
         rigidBodyComponent = GetComponent<Rigidbody2D>();
 
         Vector3 projectileDirection = playerTransform.position - transform.position;
@@ -35,13 +34,13 @@ public class EnemyProjectile : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (1 << collision.gameObject.layer != playerLayer.value) {
-            return;
-        }
+    private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.TryGetComponent(out Health health)) {
-            health.Damage(projectileDamage, transform.position);
-            Destroy(this.gameObject);
+            health.Damage(projectileDamage);
+            Destroy(gameObject);
+        } else if (1 << collision.gameObject.layer == wallLayer.value) {
+            Debug.Log(collision.name);
+            Destroy(gameObject);
         }
     }
 }

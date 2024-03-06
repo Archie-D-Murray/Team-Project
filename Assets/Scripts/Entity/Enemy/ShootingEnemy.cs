@@ -1,15 +1,22 @@
 using UnityEngine;
-using UnityEngine.AI;
 using System;
+using Entity;
+
+using UnityEngine.AI;
+
+using Data;
+using Utilities;
 
 namespace Entity {
     public class ShootingEnemy : EnemyScript {
 
         public GameObject projectile;
-        [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private Transform playerTransform;
-        private int shootingRange;
+        private Transform playerTransform;
+        [SerializeField] private float aggroRange;
+        [SerializeField] private float shootingRange;
+        NavMeshAgent agent;
 
+        private CountDownTimer attackTimer = new CountDownTimer(0f);
         protected override void InitEnemy() {
             type = EnemyType.SHOOTING;
             id = HashCode.Combine(type.ToString(), name);
@@ -59,5 +66,12 @@ namespace Entity {
         protected new void OnTriggerEnter2D(Collider2D collision) {
             base.OnTriggerEnter2D(collision);
         }
+
+
+
+
+
+
+
     }
 }

@@ -45,7 +45,7 @@ public class EnemyScript : MonoBehaviour {
     }
 
     // Update is called once per frame
-    private void Update() {
+    protected virtual void Update() {
         EnemyMovement();
         EnemyAttacks();
     }
@@ -68,13 +68,6 @@ public class EnemyScript : MonoBehaviour {
 
 
     protected void OnTriggerEnter2D(Collider2D collision) {
-        // if(collision.CompareTag("Player Attack")) 
-        // {
-        //     //example damage
-        //     int damage = 2;
-        //     //need help implmenting the other scripts
-        //     TakeDamage(damage);
-        // }
         if (1 << collision.gameObject.layer != playerLayer.value) {
             return;
         }
