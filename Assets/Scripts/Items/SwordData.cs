@@ -6,6 +6,5 @@ namespace Items {
         public float radius = 1f;
         public float damageModifier = 1f;
         public float attackSpeedModifier = 1f;
-        public Sprite sprite;
     }
 }
