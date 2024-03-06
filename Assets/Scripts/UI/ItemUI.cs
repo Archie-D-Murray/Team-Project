@@ -51,6 +51,7 @@ namespace UI {
             foreach (Item item in shownItems) {
                 GameObject itemInstance = Instantiate(itemPrefab, canvas.transform);
                 itemInstance.GetComponentsInChildren<Image>().First((Image image) => image.gameObject.HasComponent<ItemIcon>()).sprite = item.itemData.icon;
+                itemInstance.GetComponentsInChildren<Image>().First((Image image) => image.gameObject.HasComponent<ItemSprite>()).sprite = item.itemData.sprite;
                 itemInstance.GetComponentsInChildren<TMP_Text>().First((TMP_Text image) => image.gameObject.HasComponent<ItemCount>()).text = item.count.ToString();
                 itemInstance.GetComponentsInChildren<TMP_Text>().First((TMP_Text image) => image.gameObject.HasComponent<ItemName>()).text = item.itemData.itemName;
                 Button button = itemInstance.GetComponentInChildren<Button>();

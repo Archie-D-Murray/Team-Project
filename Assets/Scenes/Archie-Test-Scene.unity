@@ -4217,7 +4217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4697838574143827175, guid: 1c4704d95bb62884386f1b65ce9dfe89, type: 3}
       propertyPath: m_Alpha
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5602083197861443481, guid: 1c4704d95bb62884386f1b65ce9dfe89, type: 3}
       propertyPath: m_Name
@@ -4548,7 +4548,7 @@ PrefabInstance:
     - target: {fileID: 9012111417556816745, guid: a3e8ca24b536b7540bc91a359103cd5a, type: 3}
       propertyPath: statIcons.Array.data[1].icon
       value: 
-      objectReference: {fileID: -1707380100, guid: 855e24ee72b23ea4ca855dff56a15024, type: 3}
+      objectReference: {fileID: -1014385499, guid: ee1833f3372bdde44916c5ee71e80c8b, type: 3}
     - target: {fileID: 9012111417556816745, guid: a3e8ca24b536b7540bc91a359103cd5a, type: 3}
       propertyPath: statIcons.Array.data[2].icon
       value: 
@@ -4578,6 +4578,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1832162507653907705, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d239a6b906da40e4ba2afddc47e64c76, type: 3}
+    - target: {fileID: 1832162507653907705, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832162507653907705, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832162507653907705, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5791314374047335235, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
       propertyPath: m_Name
       value: StationaryEnemy
@@ -5633,6 +5649,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1832162507653907705, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d239a6b906da40e4ba2afddc47e64c76, type: 3}
+    - target: {fileID: 1832162507653907705, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832162507653907705, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832162507653907705, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5791314374047335235, guid: 057548bd48f866a459647dd848bb40ee, type: 3}
       propertyPath: m_Name
       value: StationaryEnemy (1)
@@ -6047,13 +6079,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 453945024266103512}
   - {fileID: 2029491318}
   - {fileID: 1064005721}
   - {fileID: 1881999228}
   - {fileID: 9167587956627604291}
   - {fileID: 7412205446792503571}
   - {fileID: 7772665740910539216}
-  - {fileID: 453945024266103512}
   - {fileID: 178843102}
   m_Father: {fileID: 0}
   m_RootOrder: 1

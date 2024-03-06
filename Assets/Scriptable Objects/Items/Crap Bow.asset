@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cfb68d9d346834989a378e8a94ddcc, type: 3}
   m_Name: Crap Bow
   m_EditorClassIdentifier: 
-  id: 0
-  icon: {fileID: 7208985, guid: 55edec401cf21614199965e54e631362, type: 3}
+  id: -787513043
+  icon: {fileID: 1143440252, guid: 410154f10dcebef44bd9b135328781d9, type: 3}
+  sprite: {fileID: 7208985, guid: 55edec401cf21614199965e54e631362, type: 3}
   itemName: Crap Bow
   maxCount: 1
   damageModifier: 1
