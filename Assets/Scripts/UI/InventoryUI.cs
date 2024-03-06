@@ -98,28 +98,30 @@ namespace UI {
 
         [Serializable] class ItemSlot {
             public string name;
-            public Sprite sprite;
             public int count;
             public bool isEmpty = false;
+            public Image sprite;
             public Image icon;
             public TMP_Text itemText, itemCount;
             public Button button;
 
-            public ItemSlot(string name, Sprite sprite, int count, Image icon, TMP_Text itemText, TMP_Text itemCount, Button button) {
+            public ItemSlot(string name, int count, Sprite icon, Sprite sprite, Image iconImage, Image spriteImage, TMP_Text itemText, TMP_Text itemCount, Button button) {
                 this.name = name;
                 this.count = count;
-                this.sprite = sprite;
-                this.icon = icon;
+                this.sprite = spriteImage;
+                this.icon = iconImage;
                 this.itemText = itemText;
                 this.itemCount = itemCount;
                 this.button = button;
                 isEmpty = count == -1;
                 if (!isEmpty) {
-                    icon.sprite = sprite;
+                    this.icon.sprite = icon;
+                    this.sprite.sprite = sprite;
                     itemText.text = name;
                     itemCount.text = count.ToString();
                 } else {
-                    icon.color = Color.clear;
+                    this.icon.color = Color.clear;
+                    this.sprite.color = Color.clear;
                     itemText.alpha = 0f;
                     itemCount.alpha = 0f;
                 }
@@ -132,6 +134,7 @@ namespace UI {
             public void Update(Item item, ItemPreview preview) {
                 if (!item.itemData) {
                     icon.color = Color.clear;
+                    sprite.color = Color.clear;
                     itemText.alpha = 0f;
                     itemCount.alpha = 0f;
                     button.onClick.RemoveAllListeners();
@@ -144,6 +147,7 @@ namespace UI {
                     button.onClick.RemoveAllListeners();
                     button.onClick.AddListener(() => preview.SetItem(item));
                     icon.sprite = item.itemData.icon;
+                    sprite.sprite = item.itemData.sprite;
                     UpdateUIElements();
                 }
             }
@@ -153,10 +157,20 @@ namespace UI {
                 itemCount.text = count.ToString();
             }
 
-            public static ItemSlot Empty(Image icon, TMP_Text itemText, TMP_Text itemCount, Button button) => new ItemSlot("", null, -1, icon, itemText, itemCount, button);
+            public static ItemSlot Empty(Image iconImage, Image spriteImage, TMP_Text itemText, TMP_Text itemCount, Button button) => new ItemSlot("", -1, null, null, iconImage, spriteImage, itemText, itemCount, button);
 
             public static ItemSlot FromItem(Item item, GameObject gameObject, ItemPreview preview) {
-                Image icon = gameObject.GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<ItemIcon>());
+                Image icon = null, sprite = null; 
+                foreach (Image image in gameObject.GetComponentsInChildren<Image>()) {
+                    if (image.gameObject.HasComponent<ItemIcon>()) {
+                        icon = image;
+                    } else if (image.gameObject.HasComponent<ItemSprite>()) {
+                        sprite = image;
+                    }
+                }
+                if (sprite == null || icon == null) {
+                    return null;
+                }
                 TMP_Text name = null, count = null;
                 foreach (TMP_Text text in gameObject.GetComponentsInChildren<TMP_Text>()) {
                     if (text.gameObject.HasComponent<ItemCount>()) {
@@ -174,8 +188,8 @@ namespace UI {
                     button.onClick.AddListener(() => preview.SetItem(item));
                 }
                 return item.itemData
-                    ? new ItemSlot(item.itemData.name, item.itemData.icon, item.count, icon, name, count, button)
-                    : Empty(icon, name, count, button);
+                    ? new ItemSlot(item.itemData.name, item.count, item.itemData.icon, item.itemData.sprite, icon, sprite, name, count, button)
+                    : Empty(icon, sprite, name, count, button);
             }
         }
     }

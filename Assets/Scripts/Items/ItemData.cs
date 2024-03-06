@@ -7,6 +7,7 @@ namespace Items {
     public class ItemData : ScriptableObject {
         public int id;
         public Sprite icon;
+        public Sprite sprite;
         public string itemName;
         public int maxCount = 1;
 
