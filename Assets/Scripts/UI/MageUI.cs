@@ -23,6 +23,7 @@ public class MageUI : MonoBehaviour {
 
     [SerializeField] private GameObject spellPrefab;
     [SerializeField] private SpellData spellSelection = null;
+    [SerializeField] private Sprite noSpellIcon;
 
     private void Start() {
         canvas = GetComponent<CanvasGroup>();
@@ -35,6 +36,7 @@ public class MageUI : MonoBehaviour {
         }
         mageSystem = playerController.getAttackSystem as MageSystem;
         spellHotBarSlots = FindFirstObjectByType<SpellHotbar>().GetComponentsInChildren<Image>().Where((Image image) => image.gameObject.HasComponent<SpellSlot>()).ToArray();
+        Array.ForEach(spellHotBarSlots, (Image image) => image.sprite = noSpellIcon);
         Utilities.Input.instance.playerControls.UI.SpellMenu.started += (InputAction.CallbackContext context) => Toggle();
     }
 
@@ -55,7 +57,7 @@ public class MageUI : MonoBehaviour {
     public void SetSlot(int index, SpellData spell) {
         foreach (Image image in spellHotBarSlots) {
             if (image.sprite == spellSelection.icon) {
-                image.color = Color.clear;
+                image.sprite = noSpellIcon;
             }
         }
         spellHotBarSlots[index].sprite = spell.icon;
@@ -70,13 +72,16 @@ public class MageUI : MonoBehaviour {
     }
 
     public void Show() {
+        for (int i = 0; i < mageSystem.GetSpells().Length; i++) {
+            spellHotBarSlots[i].sprite = mageSystem.GetSpells()[i] ? mageSystem.GetSpells()[i].icon : noSpellIcon;
+        }
         spellSelection = null;
         foreach (SpellData spell in inventory.spells) {
             GameObject spellInstance = Instantiate(spellPrefab, canvas.transform);
             spellInstance.GetComponentInChildren<Button>().onClick.AddListener(() => SetSpellSelection(spell));
             spellInstance.GetComponentInChildren<TMP_Text>().text = spell.itemName;
             spellInstance.GetComponentsInChildren<Image>().First((Image image) => image.gameObject.HasComponent<SpellSlot>()).sprite = spell.icon;
-            spellHotBarSlots[Array.IndexOf(inventory.spells, spell)].sprite = spell.icon;
+
         }
         canvas.FadeCanvas(0.1f, false, this);
     }

@@ -23,7 +23,7 @@ namespace Utilities {
             }
         }
 
-        public void StartSingleton() {
+        public static void StartSingleton() {
             if (internalInstance == null) {
                 internalInstance = FindFirstObjectByType<T>();
                 if (internalInstance == null) {

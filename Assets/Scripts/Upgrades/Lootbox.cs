@@ -6,7 +6,7 @@ namespace Upgrades {
         [SerializeField] private Upgrade[] upgrades;
 
         private void Start() {
-            UpgradeManager.instance.OrNull()?.StartSingleton();
+            UpgradeManager.StartSingleton();
             if (upgrades == null) {
                 Debug.LogWarning($"Lootbox {name} was not assigned any upgrades!");
                 Destroy(this);

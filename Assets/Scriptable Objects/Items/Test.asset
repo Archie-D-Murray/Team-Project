@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 45216128
   icon: {fileID: 21300000, guid: ba345f2f643d842459447c374943401d, type: 3}
   itemName: Not an item
-  maxCount: 1
+  maxCount: 4

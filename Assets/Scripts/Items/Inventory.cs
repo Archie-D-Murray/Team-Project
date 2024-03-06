@@ -9,10 +9,12 @@ namespace Items {
     public class Inventory : MonoBehaviour, ISerialize {
         public const int MAX_ITEMS = 10;
         public Item[] items = new Item[MAX_ITEMS];
-        public SpellData[] spells = new SpellData[1];
+        public SpellData[] spells = new SpellData[3];
+        public Action onAddItem;
+        public Action onRemoveItem;
 
         public void RemoveItem(Item item, int count = 1) { 
-            int index = Array.IndexOf(items, item);
+            int index = Array.IndexOf(items, Array.Find(items, ((Item inventoryItem) => inventoryItem.itemData == item.itemData)));
             if (index >= 0) {
                 if (items[index].count <= count) {
                     items[index].itemData = null;
@@ -21,21 +23,34 @@ namespace Items {
                 } else {
                     items[index].count -= count;
                 }
+                onRemoveItem?.Invoke();
             }
         }
 
         public void AddItem(Item item, int count = 1) {
-            int index = Array.IndexOf(items, item);
-            if (index >= 0) {
-                if (item.count + count < item.itemData.maxCount) {
-                    item.count += count;
-                    return;
+            if (item.itemData is SpellData) {
+                for (int i = 0; i < spells.Length; i++) {
+                    if (!spells[i]) {
+                        spells[i] = item.itemData as SpellData;
+                    }
                 }
             } else {
-                for (int i = 0; i < count; i++) {
-                    if (!items[i].itemData) {
-                        items[i] = item;
+                int index = Array.IndexOf(items, Array.Find(items, ((Item inventoryItem) => inventoryItem.itemData == item.itemData)));
+                if (index >= 0 && index < items.Length) {
+                    Debug.Log($"Adding {item.itemData.itemName} to existing stack at index {index}");
+                    if (items[index].count + count < item.itemData.maxCount) {
+                        items[index].count += count;
+                        onAddItem?.Invoke();
                         return;
+                    }
+                } else {
+                    Debug.Log($"Looking for an empty slot in inventory for {item.itemData.itemName}");
+                    for (int i = 0; i < items.Length; i++) {
+                        if (!items[i].itemData) {
+                            items[i] = item;
+                            onAddItem?.Invoke();
+                            return;
+                        }
                     }
                 }
             }
@@ -60,6 +75,29 @@ namespace Items {
             spells = new SpellData[data.playerData.spells.Count]; 
             for (int i = 0; i < data.playerData.spells.Count; i++) {
                 spells[i] = Array.Find(AssetServer.instance.spells, (SpellData spellData) => spellData.id == data.playerData.spells[i]);
+            }
+        }
+
+        public bool CanAddItem(ItemData item, int count = 1) {
+            if (item is SpellData) {
+                for (int i = 0; i < spells.Length; i++) {
+                    if (!spells[i]) {
+                        return true;
+                    }
+                }
+                return false;
+            } else {
+                int index = Array.IndexOf(items, Array.Find(items, (Item inventoryItem) => inventoryItem.itemData == item));
+                if (index >= 0) {
+                    return (count + items[index].count) < items[index].itemData.maxCount;
+                } else {
+                    for (int i = 0; i < items.Length; i++) {
+                        if (!items[i].itemData) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
             }
         }
     }

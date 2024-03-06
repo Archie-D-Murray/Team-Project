@@ -9,6 +9,7 @@ using Items;
 using UnityEngine;
 
 using Utilities;
+using System.Collections.Generic;
 
 namespace Attack {
     [Serializable] public class MageSystem : IAttackSystem {
@@ -132,6 +133,10 @@ namespace Attack {
                 return;
             }
             this.spells = spells;
+        }
+
+        public SpellData[] GetSpells() {
+            return spells;
         }
     }
 }

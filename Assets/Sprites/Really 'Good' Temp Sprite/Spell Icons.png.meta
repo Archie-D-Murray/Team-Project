@@ -113,12 +113,12 @@ TextureImporter:
       name: Spell Icons_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 16
         y: 0
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: Spell Icons_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 32
         y: 0
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,7 +155,28 @@ TextureImporter:
       name: Spell Icons_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a904c9c738881ad4a8e1b1379b4f33b3
+      internalID: -1670455278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spell Icons_-1
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -166,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a904c9c738881ad4a8e1b1379b4f33b3
-      internalID: -1670455278
+      spriteID: 40c5c4cfaeb069849b2b50ee5dbca77d
+      internalID: 1917748646
       vertices: []
       indices: 
       edges: []
@@ -183,6 +204,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Spell Icons_-1: 1917748646
       Spell Icons_0: -1621661920
       Spell Icons_1: 1533841660
       Spell Icons_2: -1670455278
