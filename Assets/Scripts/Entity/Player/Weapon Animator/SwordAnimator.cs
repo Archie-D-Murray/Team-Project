@@ -9,6 +9,12 @@ namespace Entity.Player {
         [SerializeField] private float swingDirection = 1f;
         [SerializeField] private float angleOffset = 90f;
 
+        [Serializable] public enum AttackState { NONE, NORMAL, STAB, CHARGE, SPIN }
+
+        public AttackState attackState = AttackState.NONE;
+
+        public Action<float> damageCallback = delegate { };
+
         private float halfSwingRotation => 0.5f * swingDirection * swingRotation;
 
         public SwordAnimator(WeaponController weaponController, Sprite sprite, float radius) : base(weaponController) {
@@ -49,23 +55,66 @@ namespace Entity.Player {
         // }
 
         protected override IEnumerator WeaponAttack(float attackTime) {
-            attackTime -= Time.deltaTime;
-            allowMouseRotation = false;
-            float startAngle = positionAngle + halfSwingRotation * 0.25f;
-            float currentAngle = startAngle;
-            // Jump to halfway (may want to tune this)
-            float endAngle = positionAngle + swingDirection * swingRotation;
             float timer = 0f;
-            Debug.Log($"Starting timer with time: {attackTime}");
-            while (timer <= attackTime) {
-                Debug.Log("Doing timer tick");
-                timer += Time.fixedDeltaTime;
-                currentAngle = Mathf.Lerp(startAngle, endAngle, timer / attackTime);
-                WeaponPositionRotation(currentAngle, Mathf.Lerp(0f, -angleOffset * swingDirection, timer / attackTime));
-                yield return Yielders.waitForFixedUpdate;
+            if (attackState == AttackState.NONE) {
+                Debug.LogError("Attack has been called without setting state, this will do nothing!");
+                yield break;
             }
-            swingDirection *= -1f;
-            allowMouseRotation = true;
+            switch (attackState) {
+                case AttackState.NORMAL:
+                    attackTime -= Time.deltaTime;
+                    allowMouseRotation = false;
+                    float startAngle = positionAngle + halfSwingRotation * 0.25f;
+                    float currentAngle = startAngle;
+                    // Jump to halfway (may want to tune this)
+                    float endAngle = positionAngle + swingDirection * swingRotation;
+                    Debug.Log($"Starting timer with time: {attackTime}");
+                    while (timer <= attackTime) {
+                        timer += Time.fixedDeltaTime;
+                        currentAngle = Mathf.Lerp(startAngle, endAngle, timer / attackTime);
+                        WeaponPositionRotation(currentAngle, Mathf.Lerp(0f, -angleOffset * swingDirection, timer / attackTime));
+                        yield return Yielders.waitForFixedUpdate;
+                    }
+                    damageCallback?.Invoke(0f);
+                    swingDirection *= -1f;
+                    allowMouseRotation = true;
+                    break;
+
+                case AttackState.STAB:
+                    Vector3 targetPos = weaponController.transform.parent.position + (Vector3) Utilities.Input.instance.VectorToMouse(weaponController.transform.parent) * 10f * radius;
+                    Vector3 initialPos = weaponController.transform.parent.position;
+                    Debug.Log($"Player pos: {weaponController.transform.parent.position}, target: {targetPos}");
+                    Quaternion rotation = Quaternion.AngleAxis(Utilities.Input.instance.AngleToMouse(weaponController.transform.parent), Vector3.back);
+                    while (timer <= attackTime) {
+                        timer += Time.fixedDeltaTime;
+                        weaponController.transform.rotation = rotation;
+                        weaponController.transform.position = Vector3.Lerp(initialPos, targetPos, timer / attackTime);
+                        if (timer + Time.fixedDeltaTime >= attackTime) {
+                            damageCallback?.Invoke(rotation.eulerAngles.z);
+                        }
+                        yield return Yielders.waitForFixedUpdate;
+                    }
+                    break;
+
+                case AttackState.CHARGE:
+                    float charge = 0f;
+                    while (Utilities.Input.instance.playerControls.Gameplay.UseSpellTwo.ReadValue<float>() != 0f) {
+                        charge = Mathf.Min(charge + Time.fixedDeltaTime, 2f);
+                        yield return Yielders.waitForFixedUpdate;
+                    }
+                    float angle = positionAngle;
+                    while (timer <= attackTime * charge) {
+                        angle += Time.fixedDeltaTime * charge * 360f;
+                        timer += Time.fixedDeltaTime;
+                        Debug.Log($"Angle: {angle}");
+                        WeaponPositionRotation(angle, 0f);
+                        damageCallback?.Invoke(charge);
+                        yield return Yielders.waitForFixedUpdate;
+                    }
+                    break;
+            }
+            attackState = AttackState.NONE;
+            damageCallback = delegate { }; //Removes all listeners
         }
 
         public override void FixedUpdate() {

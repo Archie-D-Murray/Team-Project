@@ -6,16 +6,20 @@ namespace Entity {
     public class KnockbackHandler : MonoBehaviour {
         [SerializeField] private Health health;
         [SerializeField] private Rigidbody2D rb2D;
+        [SerializeField] private LayerMask obstacles;
+
+        Ray2D hit;
 
         private void Start() {
             health = GetComponent<Health>();
             rb2D = GetComponent<Rigidbody2D>();
             health.onDamage += Knockback;
+            obstacles = 1 << LayerMask.NameToLayer("Obstacle");
         }
 
         public void Knockback(float damage, KnockbackData data) {
             if (data.applyKnockback) {
-                rb2D.MovePosition(rb2D.position + (rb2D.position - data.pos).normalized * damage);
+                rb2D.MovePosition(Physics2D.Raycast(rb2D.position, (data.pos - rb2D.position).normalized, damage, obstacles).point);
             }
         }
     }

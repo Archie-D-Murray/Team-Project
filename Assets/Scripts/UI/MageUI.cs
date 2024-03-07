@@ -26,7 +26,7 @@ public class MageUI : MonoBehaviour {
     [SerializeField] private Sprite noSpellIcon;
 
     private void Start() {
-        canvas = GetComponent<CanvasGroup>();
+        canvas = GetComponentInChildren<CanvasGroup>();
         playerController = FindFirstObjectByType<Entity.Player.PlayerController>();
         inventory = playerController.GetComponent<Inventory>();
         if (playerController.getAttackSystem is not MageSystem) {

@@ -1,3 +1,5 @@
+using System;
+
 using UnityEngine;
 
 namespace Utilities {
@@ -17,6 +19,10 @@ namespace Utilities {
                 (main.ScreenToWorldPoint(playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - obj.position).normalized,
                 Vector2.up
             );
+        }
+
+        public Vector2 VectorToMouse(Transform obj) {
+            return (main.ScreenToWorldPoint(playerControls.Gameplay.MousePosition.ReadValue<Vector2>()) - obj.position).normalized;
         }
     }
 }
