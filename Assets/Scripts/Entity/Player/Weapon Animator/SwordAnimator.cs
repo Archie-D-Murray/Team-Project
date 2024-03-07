@@ -123,5 +123,10 @@ namespace Entity.Player {
             WeaponPositionRotation(positionAngle, angleOffset * swingDirection);
         }
 
+        protected override void WeaponPositionRotation(float positionAngle, float weaponRotationOffset = 0) {
+            positionOffset = new Vector2(Mathf.Sin(positionAngle * Mathf.Deg2Rad), Mathf.Cos(positionAngle * Mathf.Deg2Rad));
+            weaponController.transform.localPosition = Vector3.MoveTowards(weaponController.transform.localPosition, positionOffset * radius, 10f * Time.fixedDeltaTime);
+            weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.AngleAxis(weaponRotationOffset - positionAngle, Vector3.forward), rotationSpeed * Time.fixedDeltaTime);
+        }
     }
 }

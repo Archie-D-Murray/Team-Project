@@ -22,9 +22,7 @@ public class SwordAnimatorDrawer : WeaponAnimatorDrawer {
 
         DrawFields(fields, position, property, label);
     }
-
     
-
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
         return base.GetPropertyHeight(property, label) * FIELD_COUNT + PADDING * (FIELD_COUNT - 1);
     }

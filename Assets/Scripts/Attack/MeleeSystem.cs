@@ -64,13 +64,7 @@ namespace Attack {
         }
 
         private void Stab(Transform origin, float angle) {
-            Debug.Log($"Enemy layer: {enemyLayer.value} ({Mathf.Log(enemyLayer.value, 2)})");
             foreach (Collider2D enemy in Physics2D.OverlapBoxAll(weaponController.transform.position, new Vector2(data.radius * 0.5f, data.radius * 2f), weaponController.transform.eulerAngles.z, enemyLayer)) {
-                if (enemy.transform == origin) {
-                    Debug.Log("Attack has hit player?");
-                    Debug.Log($"Player layer: {1 << enemy.gameObject.layer} == {enemyLayer.value}?");
-                    continue;
-                }
                 if (enemy.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
                     health.Damage(damage * data.stabDamageModifier);
                 }
