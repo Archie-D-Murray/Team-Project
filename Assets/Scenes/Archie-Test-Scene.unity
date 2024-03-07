@@ -1267,7 +1267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &35080860
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4623,7 +4623,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871670019}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22962fe6946d9d7468a1764f9e2f6ea5, type: 3}
   m_Name: 
@@ -4742,7 +4742,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &936672065
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10384,6 +10384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Class UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2641947895260431236, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5480485979613382780, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10510,7 +10514,7 @@ PrefabInstance:
       objectReference: {fileID: 4676522976977567141, guid: 00c5c177a5fbf2e4d96d3a53a17e2452, type: 3}
     - target: {fileID: 7139348296277899976, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7437158459127915182, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
       propertyPath: m_Sprite
@@ -10523,6 +10527,14 @@ PrefabInstance:
     - target: {fileID: 7713767587629564158, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
       propertyPath: m_Spacing.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713767587629564158, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
+      propertyPath: m_CellSize.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713767587629564158, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
+      propertyPath: m_CellSize.y
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 7713767587629564158, guid: 0187f69a5f8379d40bd30b291060867b, type: 3}
       propertyPath: m_Padding.m_Top

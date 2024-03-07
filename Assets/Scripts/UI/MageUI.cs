@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
 using System;
 using Tags.UI.Class;
 using Entity.Player;
+using Tags.UI.Item;
 
 public class MageUI : MonoBehaviour {
     private Inventory inventory;
@@ -25,19 +26,18 @@ public class MageUI : MonoBehaviour {
     [SerializeField] private SpellData spellSelection = null;
     [SerializeField] private Sprite noSpellIcon;
 
-    private void Start() {
+    private void OnEnable() {
         canvas = GetComponentInChildren<CanvasGroup>();
         playerController = FindFirstObjectByType<Entity.Player.PlayerController>();
         inventory = playerController.GetComponent<Inventory>();
-        if (playerController.getAttackSystem is not MageSystem) {
-            Debug.LogError("Player is not currently a mage!");
-            enabled = false;
-            return;
-        }
         mageSystem = playerController.getAttackSystem as MageSystem;
         spellHotBarSlots = FindFirstObjectByType<SpellHotbar>().GetComponentsInChildren<Image>().Where((Image image) => image.gameObject.HasComponent<SpellSlot>()).ToArray();
         Array.ForEach(spellHotBarSlots, (Image image) => image.sprite = noSpellIcon);
         Utilities.Input.instance.playerControls.UI.SpellMenu.started += (InputAction.CallbackContext context) => Toggle();
+        if (playerController.getAttackSystem is not MageSystem) {
+            gameObject.SetActive(false);
+            return;
+        }
     }
 
     private void Toggle() {
@@ -60,7 +60,7 @@ public class MageUI : MonoBehaviour {
                 image.sprite = noSpellIcon;
             }
         }
-        spellHotBarSlots[index].sprite = spell.icon;
+        spellHotBarSlots[index].sprite = spell.sprite;
         spellHotBarSlots[index].color = Color.white;
         if (mageSystem == null) {
             Debug.LogError("Player not intialised for mage state!");
@@ -80,7 +80,8 @@ public class MageUI : MonoBehaviour {
             GameObject spellInstance = Instantiate(spellPrefab, canvas.transform);
             spellInstance.GetComponentInChildren<Button>().onClick.AddListener(() => SetSpellSelection(spell));
             spellInstance.GetComponentInChildren<TMP_Text>().text = spell.itemName;
-            spellInstance.GetComponentsInChildren<Image>().First((Image image) => image.gameObject.HasComponent<SpellSlot>()).sprite = spell.icon;
+            spellInstance.GetComponentsInChildren<Image>().First((Image image) => image.gameObject.HasComponent<ItemSprite>()).sprite = spell.sprite;
+            spellInstance.GetComponentsInChildren<Image>().First((Image image) => image.gameObject.HasComponent<ItemIcon>()).sprite = spell.icon;
 
         }
         canvas.FadeCanvas(0.1f, false, this);

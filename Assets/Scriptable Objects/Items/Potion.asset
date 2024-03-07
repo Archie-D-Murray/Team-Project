@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Potion
   m_EditorClassIdentifier: 
   id: -1485625236
-  icon: {fileID: -852205475, guid: 410154f10dcebef44bd9b135328781d9, type: 3}
-  sprite: {fileID: 1830102740, guid: 410154f10dcebef44bd9b135328781d9, type: 3}
+  icon: {fileID: 992527997, guid: e0329118658dba14e8949b96e228d260, type: 3}
+  sprite: {fileID: 1964334981, guid: e0329118658dba14e8949b96e228d260, type: 3}
   itemName: Health Potion (10)
   maxCount: 15
   isStats: 0

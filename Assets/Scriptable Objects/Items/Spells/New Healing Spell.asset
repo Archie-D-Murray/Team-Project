@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: New Healing Spell
   m_EditorClassIdentifier: 
   id: 1913975003
-  icon: {fileID: -1670455278, guid: be4be01000f59384aa64843e2a6dc234, type: 3}
+  icon: {fileID: 1967314224, guid: e0329118658dba14e8949b96e228d260, type: 3}
+  sprite: {fileID: -631537801, guid: e0329118658dba14e8949b96e228d260, type: 3}
   itemName: Heal spell
   maxCount: 1
   cooldown: 1

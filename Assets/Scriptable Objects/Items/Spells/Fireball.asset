@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   id: 432583936
-  icon: {fileID: -1621661920, guid: be4be01000f59384aa64843e2a6dc234, type: 3}
+  icon: {fileID: 1967314224, guid: e0329118658dba14e8949b96e228d260, type: 3}
+  sprite: {fileID: -909355419, guid: e0329118658dba14e8949b96e228d260, type: 3}
   itemName: Fireball
   maxCount: 1
   cooldown: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Damage Modifier
   m_EditorClassIdentifier: 
   id: 934320016
-  icon: {fileID: -852205475, guid: 410154f10dcebef44bd9b135328781d9, type: 3}
-  sprite: {fileID: -519670248, guid: 855e24ee72b23ea4ca855dff56a15024, type: 3}
+  icon: {fileID: 992527997, guid: e0329118658dba14e8949b96e228d260, type: 3}
+  sprite: {fileID: 1188228438, guid: e0329118658dba14e8949b96e228d260, type: 3}
   itemName: Damage Potion
   maxCount: 1
   isStats: 1

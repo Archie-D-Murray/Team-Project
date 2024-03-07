@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test Item
   m_EditorClassIdentifier: 
   id: -351526300
-  icon: {fileID: -852205475, guid: 410154f10dcebef44bd9b135328781d9, type: 3}
+  icon: {fileID: -1346766736, guid: e0329118658dba14e8949b96e228d260, type: 3}
   sprite: {fileID: -852205475, guid: 410154f10dcebef44bd9b135328781d9, type: 3}
   itemName: Item
   maxCount: 4

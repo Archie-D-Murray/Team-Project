@@ -7,9 +7,9 @@ namespace UI {
         [SerializeField] private GameObject mageUI, meleeUI, rangedUI;
 
         private void Start() {
-            meleeUI = GetComponentInChildren<MeleeUI>().gameObject;
-            rangedUI = GetComponentInChildren<RangedUI>().gameObject;
-            mageUI = GetComponentInChildren<MageUI>().gameObject;
+            meleeUI = GetComponentInChildren<MeleeUI>(true).gameObject;
+            rangedUI = GetComponentInChildren<RangedUI>(true).gameObject;
+            mageUI = GetComponentInChildren<MageUI>(true).gameObject;
             PlayerController playerController = FindFirstObjectByType<PlayerController>();
             ActivateUI(playerController.getPlayerClass);
             playerController.onClassChange += ActivateUI;
