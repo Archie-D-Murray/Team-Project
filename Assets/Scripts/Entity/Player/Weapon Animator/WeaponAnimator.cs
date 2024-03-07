@@ -8,6 +8,7 @@ namespace Entity.Player {
         [SerializeField] protected bool allowMouseRotation = true;
         [SerializeField] protected float radius = 1f;
         [SerializeField] protected float rotationSpeed = 45f;
+        [SerializeField] protected SpriteRenderer spriteRenderer;
 
         protected Vector2 positionOffset;
         protected float positionAngle;
@@ -15,6 +16,7 @@ namespace Entity.Player {
 
         public WeaponAnimator(WeaponController weaponController) {
             this.weaponController = weaponController;
+            spriteRenderer = weaponController.GetComponent<SpriteRenderer>();
         }
 
         public void Attack(float attackTime) {

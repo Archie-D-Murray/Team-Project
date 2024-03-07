@@ -11,12 +11,12 @@ using System;
 
 namespace Attack {
     public class MeleeSystem : IAttackSystem {
-        private CountDownTimer attackTimer = new CountDownTimer(0f);
         private Stats stats;
         private Transform origin;
         private SwordData data;
         private WeaponController weaponController;
         private LayerMask enemyLayer;
+        private bool canAttack = true;
 
         private SwordAnimator swordAnimator => weaponController.GetWeaponAnimator() as SwordAnimator;
 
@@ -39,28 +39,36 @@ namespace Attack {
             }
         }
 
-        private void ResetAttackTimer(float cooldownModifier = 1f) {
+        private void StartAttack(float durationModifier = 1f) {
             if (stats.GetStat(StatType.ATTACK_SPEED, out float attackSpeed)) {
-                attackTimer.Restart(cooldownModifier / (attackSpeed * data.attackSpeedModifier));
-                weaponController.Attack(cooldownModifier / (attackSpeed * data.attackSpeedModifier));
+                weaponController.Attack(durationModifier / (attackSpeed * data.attackSpeedModifier));
             }
         }
 
         public void FixedUpdate() {
-            attackTimer.Update(Time.fixedDeltaTime);
-            if (Utilities.Input.instance.playerControls.Gameplay.Attack.IsPressed() && attackTimer.isFinished) {
+            if (Utilities.Input.instance.playerControls.Gameplay.Attack.IsPressed() && canAttack) {
                 swordAnimator.attackState = SwordAnimator.AttackState.NORMAL;
                 swordAnimator.damageCallback += (float _) => Attack(origin);
-                ResetAttackTimer();
-            } else if (Utilities.Input.instance.playerControls.Gameplay.UseSpellOne.IsPressed() && attackTimer.isFinished) {
+                swordAnimator.onAttackFinish += ResetAttackState;
+                StartAttack();
+                canAttack = false;
+            } else if (Utilities.Input.instance.playerControls.Gameplay.UseSpellOne.IsPressed() && canAttack) {
                 swordAnimator.attackState = SwordAnimator.AttackState.STAB;
                 swordAnimator.damageCallback += (float angle) => Stab(origin, angle);
-                ResetAttackTimer(1.5f);
-            } else if (Utilities.Input.instance.playerControls.Gameplay.UseSpellTwo.IsPressed() && attackTimer.isFinished) {
+                swordAnimator.onAttackFinish += ResetAttackState;
+                StartAttack(1.5f);
+                canAttack = false;
+            } else if (Utilities.Input.instance.playerControls.Gameplay.UseSpellTwo.IsPressed() && canAttack) {
                 swordAnimator.attackState = SwordAnimator.AttackState.CHARGE;
+                swordAnimator.onAttackFinish += ResetAttackState;
                 swordAnimator.damageCallback += (float charge) => SpinAttack(charge, origin);
-                ResetAttackTimer(2.0f);
+                StartAttack();
+                canAttack = false;
             }
+        }
+
+        private void ResetAttackState() {
+            canAttack = true;
         }
 
         private void Stab(Transform origin, float angle) {

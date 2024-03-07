@@ -14,11 +14,12 @@ namespace Entity.Player {
         public AttackState attackState = AttackState.NONE;
 
         public Action<float> damageCallback = delegate { };
+        public Action onAttackFinish;
 
         private float halfSwingRotation => 0.5f * swingDirection * swingRotation;
 
         public SwordAnimator(WeaponController weaponController, Sprite sprite, float radius) : base(weaponController) {
-            weaponController.GetComponent<SpriteRenderer>().sprite = sprite;
+            spriteRenderer.sprite = sprite;
             this.radius = radius;
         }
 
@@ -62,7 +63,7 @@ namespace Entity.Player {
             }
             switch (attackState) {
                 case AttackState.NORMAL:
-                    attackTime -= Time.deltaTime;
+                    yield return Yielders.waitForEndOfFrame;
                     allowMouseRotation = false;
                     float startAngle = positionAngle + halfSwingRotation * 0.25f;
                     float currentAngle = startAngle;
@@ -78,6 +79,7 @@ namespace Entity.Player {
                     damageCallback?.Invoke(0f);
                     swingDirection *= -1f;
                     allowMouseRotation = true;
+                    onAttackFinish?.Invoke();
                     break;
 
                 case AttackState.STAB:
@@ -94,23 +96,41 @@ namespace Entity.Player {
                         }
                         yield return Yielders.waitForFixedUpdate;
                     }
+                    onAttackFinish?.Invoke();
                     break;
 
                 case AttackState.CHARGE:
                     float charge = 0f;
+                    allowMouseRotation = false;
+                    Collider2D collider = weaponController.transform.parent.GetComponent<Collider2D>();
+                    Vector3 startPos = new Vector3(Mathf.Sin(positionAngle * Mathf.Deg2Rad), Mathf.Cos(positionAngle * Mathf.Deg2Rad), 0f) * radius * 2f;
                     while (Utilities.Input.instance.playerControls.Gameplay.UseSpellTwo.ReadValue<float>() != 0f) {
                         charge = Mathf.Min(charge + Time.fixedDeltaTime, 2f);
+                        spriteRenderer.color = Color.Lerp(Color.white, Color.red, charge / 2f);
+                        Quaternion spinRotation = Quaternion.AngleAxis(Vector2.SignedAngle(Vector2.up, weaponController.transform.localPosition), Vector3.forward);
+                        Debug.Log($"Current rotation: {weaponController.transform.localRotation.eulerAngles}, Target rotation: {spinRotation.eulerAngles}");
+                        Debug.Log($"Interpolated rotation: {Quaternion.RotateTowards(weaponController.transform.localRotation, spinRotation, 360f * Time.fixedDeltaTime).eulerAngles}");
+                        weaponController.transform.localRotation = Quaternion.RotateTowards(weaponController.transform.localRotation, spinRotation, 360f * Time.fixedDeltaTime);
+                        weaponController.transform.localPosition = Vector3.MoveTowards(weaponController.transform.localPosition, startPos, 10f * Time.fixedDeltaTime);
                         yield return Yielders.waitForFixedUpdate;
                     }
                     float angle = positionAngle;
+                    Debug.Log($"Starting spin with charge: {charge}");
                     while (timer <= attackTime * charge) {
-                        angle += Time.fixedDeltaTime * charge * 360f;
+                        angle += Time.fixedDeltaTime * 360f * charge;
                         timer += Time.fixedDeltaTime;
-                        Debug.Log($"Angle: {angle}");
-                        WeaponPositionRotation(angle, 0f);
+                        weaponController.transform.localPosition = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0f) * radius * 2f;
+                        weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.up, (Vector2) weaponController.transform.localPosition.normalized)), Time.fixedDeltaTime * rotationSpeed);
+                        // weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, angle), Time.fixedDeltaTime * rotationSpeed);
+                        if (timer >= attackTime) {
+                            spriteRenderer.color = Color.Lerp(Color.red, Color.white, timer * 0.5f / attackTime); // Last half of spin, return to normal colour
+                        }
                         damageCallback?.Invoke(charge);
                         yield return Yielders.waitForFixedUpdate;
                     }
+                    spriteRenderer.color = Color.white;
+                    onAttackFinish?.Invoke();
+                    allowMouseRotation = true;
                     break;
             }
             attackState = AttackState.NONE;
