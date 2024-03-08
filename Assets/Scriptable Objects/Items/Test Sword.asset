@@ -20,3 +20,5 @@ MonoBehaviour:
   radius: 0.5
   damageModifier: 1
   attackSpeedModifier: 1
+  stabDamageModifier: 1
+  spinDamageModifier: 1

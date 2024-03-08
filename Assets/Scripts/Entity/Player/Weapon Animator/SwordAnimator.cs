@@ -116,14 +116,14 @@ namespace Entity.Player {
                     }
                     float angle = positionAngle;
                     Debug.Log($"Starting spin with charge: {charge}");
-                    while (timer <= attackTime * charge) {
+                    while (timer <= charge) {
                         angle += Time.fixedDeltaTime * 360f * charge;
                         timer += Time.fixedDeltaTime;
                         weaponController.transform.localPosition = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0f) * radius * 2f;
                         weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.up, (Vector2) weaponController.transform.localPosition.normalized)), Time.fixedDeltaTime * rotationSpeed);
                         // weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, angle), Time.fixedDeltaTime * rotationSpeed);
                         if (timer >= attackTime) {
-                            spriteRenderer.color = Color.Lerp(Color.red, Color.white, timer * 0.5f / attackTime); // Last half of spin, return to normal colour
+                            spriteRenderer.color = Color.Lerp(Color.red, Color.white, timer / charge); // Last half of spin, return to normal colour
                         }
                         damageCallback?.Invoke(charge);
                         yield return Yielders.waitForFixedUpdate;
