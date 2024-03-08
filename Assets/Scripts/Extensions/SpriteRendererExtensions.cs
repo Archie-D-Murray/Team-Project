@@ -13,6 +13,10 @@ namespace Utilities {
             monoBehaviour.StartCoroutine(FlashDamage(spriteRenderer, flashMaterial, originalMaterial, duration));
         }
 
+        public static void FadeColour(this SpriteRenderer spriteRenderer, Color colour, float duration, MonoBehaviour monoBehaviour) {
+            monoBehaviour.StartCoroutine(FadeColour(spriteRenderer, colour, duration));
+        }
+
         private static IEnumerator FlashDamage(SpriteRenderer spriteRenderer, Material flashMaterial, Material originalMaterial, float duration) {
             spriteRenderer.material = flashMaterial;
             yield return Yielders.WaitForSeconds(duration);
@@ -23,6 +27,16 @@ namespace Utilities {
             spriteRenderer.material.color = flashColour;
             yield return Yielders.WaitForSeconds(duration);
             spriteRenderer.material.color = originalColour;
+        }
+
+        private static IEnumerator FadeColour(SpriteRenderer spriteRenderer, Color colour, float duration) {
+            float timer = 0f;
+            Color originalColour = spriteRenderer.color;
+            while (spriteRenderer.color != colour) {
+                spriteRenderer.color = Color.Lerp(originalColour, colour, timer / duration);
+                timer += Time.fixedDeltaTime;
+                yield return Yielders.waitForFixedUpdate;
+            }
         }
     }
 }

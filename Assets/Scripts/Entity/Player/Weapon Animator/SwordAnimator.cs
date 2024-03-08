@@ -103,7 +103,7 @@ namespace Entity.Player {
                     float charge = 0f;
                     allowMouseRotation = false;
                     Collider2D collider = weaponController.transform.parent.GetComponent<Collider2D>();
-                    Vector3 startPos = new Vector3(Mathf.Sin(positionAngle * Mathf.Deg2Rad), Mathf.Cos(positionAngle * Mathf.Deg2Rad), 0f) * radius * 2f;
+                    Vector3 startPos = new Vector3(Mathf.Sin(positionAngle * Mathf.Deg2Rad), Mathf.Cos(positionAngle * Mathf.Deg2Rad), 0f) * 2f;
                     while (Utilities.Input.instance.playerControls.Gameplay.UseSpellTwo.ReadValue<float>() != 0f) {
                         charge = Mathf.Min(charge + Time.fixedDeltaTime, 2f);
                         spriteRenderer.color = Color.Lerp(Color.white, Color.red, charge / 2f);
@@ -145,7 +145,7 @@ namespace Entity.Player {
 
         protected override void WeaponPositionRotation(float positionAngle, float weaponRotationOffset = 0) {
             positionOffset = new Vector2(Mathf.Sin(positionAngle * Mathf.Deg2Rad), Mathf.Cos(positionAngle * Mathf.Deg2Rad));
-            weaponController.transform.localPosition = Vector3.MoveTowards(weaponController.transform.localPosition, positionOffset * radius, 10f * Time.fixedDeltaTime);
+            weaponController.transform.localPosition = Vector3.MoveTowards(weaponController.transform.localPosition, positionOffset, 10f * Time.fixedDeltaTime);
             weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.AngleAxis(weaponRotationOffset - positionAngle, Vector3.forward), rotationSpeed * Time.fixedDeltaTime);
         }
     }

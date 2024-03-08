@@ -29,7 +29,7 @@ namespace Entity.Player {
         
         protected virtual void WeaponPositionRotation(float positionAngle, float weaponRotationOffset = 0f) {
             positionOffset = new Vector2(Mathf.Sin(positionAngle * Mathf.Deg2Rad), Mathf.Cos(positionAngle * Mathf.Deg2Rad));
-            weaponController.transform.localPosition = positionOffset * radius;
+            weaponController.transform.localPosition = positionOffset;
             weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.AngleAxis(weaponRotationOffset - positionAngle, Vector3.forward), rotationSpeed * Time.fixedDeltaTime);
         }
     }

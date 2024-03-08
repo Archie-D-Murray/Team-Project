@@ -19,6 +19,7 @@ public class ChasingEnemy : EnemyScript
         agent = GetComponent<NavMeshAgent>();
         agent.updateUpAxis = false;
         agent.updateRotation = false;
+        health.onDamage += GetComponent<KnockbackHandler>().Knockback;
         if (stats.GetStat(StatType.SPEED, out float speed)) {
             agent.speed = speed;
         }

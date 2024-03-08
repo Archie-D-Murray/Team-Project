@@ -34,7 +34,7 @@ namespace Attack {
             // GameObject.Instantiate(AssetServer.instance.slash, origin.position, origin.rotation);
             foreach (Collider2D enemy in Physics2D.OverlapCircleAll(origin.position, data.radius, enemyLayer)) {
                 if (enemy.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
-                    health.Damage(damage * data.damageModifier, weaponController.transform.position);
+                    health.Damage(damage * data.damageModifier, origin.position);
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace Attack {
         private void Stab(Transform origin, float angle) {
             foreach (Collider2D enemy in Physics2D.OverlapBoxAll(weaponController.transform.position, new Vector2(data.radius * 0.5f, data.radius * 2f), weaponController.transform.eulerAngles.z, enemyLayer)) {
                 if (enemy.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
-                    health.Damage(damage * data.stabDamageModifier);
+                    health.Damage(damage * data.stabDamageModifier, origin.position);
                 }
             }
         }
@@ -82,7 +82,7 @@ namespace Attack {
         private void SpinAttack(float charge, Transform origin) {
             foreach (Collider2D enemy in Physics2D.OverlapCircleAll(origin.position, data.radius, enemyLayer)) {
                 if (enemy.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
-                    health.Damage(damage * charge * data.spinDamageModifier * Time.fixedDeltaTime);
+                    health.Damage(damage * charge * data.spinDamageModifier * Time.fixedDeltaTime, origin.position);
                 }
             }
         }

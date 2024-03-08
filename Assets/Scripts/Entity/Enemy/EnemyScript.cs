@@ -35,7 +35,6 @@ public class EnemyScript : MonoBehaviour {
             // Could spawn particles, give player xp, etc...
             Destroy(gameObject);
         };
-        health.onDamage += GetComponent<KnockbackHandler>().Knockback;
         playerLayer = 1 << LayerMask.NameToLayer("Player");
     }
 
