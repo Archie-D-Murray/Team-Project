@@ -28,7 +28,16 @@ namespace Entity {
             yield return Yielders.WaitForSeconds(delay);
             rb2D.velocity = Vector2.zero;
             if (agent) { //Support for stationary enemies that can be moved - probably just shouldn't be on them...?
-                agent.Warp(rb2D.position); //No! Bad snapping!
+                if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 1f, NavMesh.AllAreas)) {
+                    Debug.Log("Pos:" + hit.position);
+                    while (((Vector2) transform.position - (Vector2) hit.position).sqrMagnitude >= 0.01f) {
+                        rb2D.MovePosition(Vector2.MoveTowards(rb2D.position, hit.position, Time.fixedDeltaTime));
+                        yield return Yielders.waitForFixedUpdate;
+                    }
+                    agent.Warp((Vector2) hit.position);
+                } else {
+                    agent.Warp(rb2D.position); //No! Bad snapping!
+                }
                 yield return Yielders.waitForFixedUpdate;
                 agent.updatePosition = true;
             }

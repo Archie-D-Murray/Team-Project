@@ -24,6 +24,10 @@ namespace Entity.Player {
             weaponAnimator?.Attack(attackTime);
         }
 
+        private void OnTriggerEnter2D(Collider2D collider) {
+            weaponAnimator?.OnTriggerEnter2D(collider);
+        }
+
         private bool IsSameType(ItemType type) {
             if (weaponAnimator == null) {
                 return false;

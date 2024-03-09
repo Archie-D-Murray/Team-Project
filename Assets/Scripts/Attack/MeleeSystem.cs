@@ -8,6 +8,7 @@ using Entity;
 using Data;
 using Entity.Player;
 using System;
+using UI;
 
 namespace Attack {
     public class MeleeSystem : IAttackSystem {
@@ -34,7 +35,7 @@ namespace Attack {
             // GameObject.Instantiate(AssetServer.instance.slash, origin.position, origin.rotation);
             foreach (Collider2D enemy in Physics2D.OverlapCircleAll(origin.position, data.radius, enemyLayer)) {
                 if (enemy.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
-                    health.Damage(damage * data.damageModifier, origin.position);
+                    Damage(health, damage * data.damageModifier, origin.position);
                 }
             }
         }
@@ -67,6 +68,15 @@ namespace Attack {
             }
         }
 
+        private void Damage(Health entity, float damage, Vector3? position = null) {
+            if (position != null) {
+                entity.Damage(damage, position);
+            } else {
+                entity.Damage(damage);
+            }
+            DamageNumberManager.instance.DisplayDamage($"{damage:0}", entity.transform.position);
+        }
+
         private void ResetAttackState() {
             canAttack = true;
         }
@@ -74,7 +84,7 @@ namespace Attack {
         private void Stab(Transform origin, float angle) {
             foreach (Collider2D enemy in Physics2D.OverlapBoxAll(weaponController.transform.position, new Vector2(data.radius * 0.5f, data.radius * 2f), weaponController.transform.eulerAngles.z, enemyLayer)) {
                 if (enemy.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
-                    health.Damage(damage * data.stabDamageModifier, origin.position);
+                    Damage(health, damage * data.stabDamageModifier, origin.position);
                 }
             }
         }
@@ -82,7 +92,7 @@ namespace Attack {
         private void SpinAttack(float charge, Transform origin) {
             foreach (Collider2D enemy in Physics2D.OverlapCircleAll(origin.position, data.radius, enemyLayer)) {
                 if (enemy.TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
-                    health.Damage(damage * charge * data.spinDamageModifier * Time.fixedDeltaTime, origin.position);
+                    Damage(health, damage * charge * data.spinDamageModifier * Time.fixedDeltaTime, origin.position);
                 }
             }
         }

@@ -2,13 +2,18 @@ using UnityEngine;
 using Utilities;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 namespace Entity.Player {
     [Serializable] public class SwordAnimator : WeaponAnimator {
         [SerializeField] private float swingRotation = 180f;
         [SerializeField] private float swingDirection = 1f;
         [SerializeField] private float angleOffset = 90f;
+        [SerializeField] private float charge = 0f;
+        [SerializeField] private Quaternion stabRotation;
 
+        [SerializeField] private List<Collider2D> enemies;
+ 
         [Serializable] public enum AttackState { NONE, NORMAL, STAB, CHARGE, SPIN }
 
         public AttackState attackState = AttackState.NONE;
@@ -86,13 +91,13 @@ namespace Entity.Player {
                     Vector3 targetPos = weaponController.transform.parent.position + (Vector3) Utilities.Input.instance.VectorToMouse(weaponController.transform.parent) * 10f * radius;
                     Vector3 initialPos = weaponController.transform.parent.position;
                     Debug.Log($"Player pos: {weaponController.transform.parent.position}, target: {targetPos}");
-                    Quaternion rotation = Quaternion.AngleAxis(Utilities.Input.instance.AngleToMouse(weaponController.transform.parent), Vector3.back);
+                    stabRotation = Quaternion.AngleAxis(Utilities.Input.instance.AngleToMouse(weaponController.transform.parent), Vector3.back);
                     while (timer <= attackTime) {
                         timer += Time.fixedDeltaTime;
-                        weaponController.transform.rotation = rotation;
+                        weaponController.transform.rotation = stabRotation;
                         weaponController.transform.position = Vector3.Lerp(initialPos, targetPos, timer / attackTime);
                         if (timer + Time.fixedDeltaTime >= attackTime) {
-                            damageCallback?.Invoke(rotation.eulerAngles.z);
+                            damageCallback?.Invoke(stabRotation.eulerAngles.z);
                         }
                         yield return Yielders.waitForFixedUpdate;
                     }
@@ -100,7 +105,7 @@ namespace Entity.Player {
                     break;
 
                 case AttackState.CHARGE:
-                    float charge = 0f;
+                    charge = 0f;
                     allowMouseRotation = false;
                     Collider2D collider = weaponController.transform.parent.GetComponent<Collider2D>();
                     Vector3 startPos = new Vector3(Mathf.Sin(positionAngle * Mathf.Deg2Rad), Mathf.Cos(positionAngle * Mathf.Deg2Rad), 0f) * 2f;
@@ -115,13 +120,18 @@ namespace Entity.Player {
                         yield return Yielders.waitForFixedUpdate;
                     }
                     float angle = positionAngle;
+                    float attackTick = 0f;
                     Debug.Log($"Starting spin with charge: {charge}");
                     while (timer <= attackTime * charge) {
                         angle += Time.fixedDeltaTime * 360f * charge;
                         timer += Time.fixedDeltaTime;
+                        attackTick += Time.fixedDeltaTime;
                         weaponController.transform.localPosition = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0f) * radius * 2f;
                         weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.up, (Vector2) weaponController.transform.localPosition.normalized)), Time.fixedDeltaTime * rotationSpeed);
                         // weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, angle), Time.fixedDeltaTime * rotationSpeed);
+                        if (attackTick >= 0.25f) {
+                            attackTick -= 0.25f;
+                        }
                         if (timer >= attackTime) {
                             spriteRenderer.color = Color.Lerp(Color.red, Color.white, timer * 0.5f / attackTime); // Last half of spin, return to normal colour
                         }
@@ -131,6 +141,7 @@ namespace Entity.Player {
                     spriteRenderer.color = Color.white;
                     onAttackFinish?.Invoke();
                     allowMouseRotation = true;
+                    charge = 0f;
                     break;
             }
             attackState = AttackState.NONE;
@@ -147,6 +158,28 @@ namespace Entity.Player {
             positionOffset = new Vector2(Mathf.Sin(positionAngle * Mathf.Deg2Rad), Mathf.Cos(positionAngle * Mathf.Deg2Rad));
             weaponController.transform.localPosition = Vector3.MoveTowards(weaponController.transform.localPosition, positionOffset, 10f * Time.fixedDeltaTime);
             weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.AngleAxis(weaponRotationOffset - positionAngle, Vector3.forward), rotationSpeed * Time.fixedDeltaTime);
+        }
+
+        public override void OnTriggerEnter2D(Collider2D enemy) {
+            if (attackState == AttackState.NONE) {
+                return;
+            }
+            if (!enemies.Contains(enemy)) {
+                enemies.Add(enemy);
+                if (enemy.TryGetComponent(out Health health)) {
+                    switch (attackState) {
+                        case AttackState.NORMAL:
+                            // onDamage?.Invoke(health, 0f);
+                            break;
+                        case AttackState.CHARGE:
+                            // onDamage?.Invoke(health, charge); //Would apply 0.25x modifier in damage callback function!
+                            break;
+                        case AttackState.STAB:
+                            // onDamage?.Invoke(health, stabRotation.eulerAngles.z);
+                            break;
+                    }
+                }
+            }
         }
     }
 }
