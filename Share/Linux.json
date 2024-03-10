@@ -1,0 +1,17 @@
+{
+    "m_Id": "Linux",
+    "m_ParentId": "",
+    "m_Entries": [
+        {
+            "identifier": {
+                "path": "Main Menu/File/Exit"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 113,
+                    "m_Modifiers": 2
+                }
+            ]
+        }
+    ]
+}
