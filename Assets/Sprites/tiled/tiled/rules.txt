@@ -1,0 +1,24 @@
+# original LPC shape
+automapping/rule_mountains_001.tmx
+automapping/rule_mountains_002.tmx
+automapping/rule_mountains_003.tmx
+automapping/rule_mountains_004.tmx
+automapping/rule_mountains_005.tmx
+automapping/rule_mountains_006.tmx
+automapping/rule_mountains_007.tmx
+automapping/rule_mountains_008.tmx
+automapping/rule_mountains_009.tmx
+automapping/rule_mountains_010.tmx
+automapping/rule_mountains_011.tmx
+automapping/rule_mountains_012.tmx
+automapping/rule_mountains_013.tmx
+automapping/rule_mountains_014.tmx
+automapping/rule_mountains_015.tmx
+
+# 9-tile shape
+automapping/rule_mountains_101.tmx
+
+
+# Round Cliffs (Jetrel)
+automapping/rule_mountains_201.tmx
+automapping/rule_mountains_202.tmx

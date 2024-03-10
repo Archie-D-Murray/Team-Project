@@ -9,6 +9,7 @@ namespace Entity.Player {
         [SerializeField] private float swingRotation = 180f;
         [SerializeField] private float swingDirection = 1f;
         [SerializeField] private float angleOffset = 90f;
+        [SerializeField] private float spriteOffset = -45f;
         [SerializeField] private float charge = 0f;
         [SerializeField] private Quaternion stabRotation;
 
@@ -70,7 +71,7 @@ namespace Entity.Player {
                 case AttackState.NORMAL:
                     yield return Yielders.waitForEndOfFrame;
                     allowMouseRotation = false;
-                    float startAngle = positionAngle + halfSwingRotation * 0.25f;
+                    float startAngle = positionAngle;
                     float currentAngle = startAngle;
                     // Jump to halfway (may want to tune this)
                     float endAngle = positionAngle + swingDirection * swingRotation;
@@ -78,7 +79,8 @@ namespace Entity.Player {
                     while (timer <= attackTime) {
                         timer += Time.fixedDeltaTime;
                         currentAngle = Mathf.Lerp(startAngle, endAngle, timer / attackTime);
-                        WeaponPositionRotation(currentAngle, Mathf.Lerp(0f, -angleOffset * swingDirection, timer / attackTime));
+                        weaponController.transform.localPosition = new Vector2(Mathf.Sin(currentAngle * Mathf.Deg2Rad), Mathf.Cos(currentAngle * Mathf.Deg2Rad));
+                        weaponController.transform.localRotation = Quaternion.RotateTowards(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, -currentAngle + spriteOffset + Mathf.Lerp(0f, -angleOffset * swingDirection, timer / attackTime)), 360f * Time.fixedDeltaTime / attackTime);
                         yield return Yielders.waitForFixedUpdate;
                     }
                     damageCallback?.Invoke(0f);
@@ -91,7 +93,7 @@ namespace Entity.Player {
                     Vector3 targetPos = weaponController.transform.parent.position + (Vector3) Utilities.Input.instance.VectorToMouse(weaponController.transform.parent) * 10f * radius;
                     Vector3 initialPos = weaponController.transform.parent.position;
                     Debug.Log($"Player pos: {weaponController.transform.parent.position}, target: {targetPos}");
-                    stabRotation = Quaternion.AngleAxis(Utilities.Input.instance.AngleToMouse(weaponController.transform.parent), Vector3.back);
+                    stabRotation = Quaternion.AngleAxis(Utilities.Input.instance.AngleToMouse(weaponController.transform.parent) - spriteOffset, Vector3.back);
                     while (timer <= attackTime) {
                         timer += Time.fixedDeltaTime;
                         weaponController.transform.rotation = stabRotation;
@@ -112,7 +114,7 @@ namespace Entity.Player {
                     while (Utilities.Input.instance.playerControls.Gameplay.UseSpellTwo.ReadValue<float>() != 0f) {
                         charge = Mathf.Min(charge + Time.fixedDeltaTime, 2f);
                         spriteRenderer.color = Color.Lerp(Color.white, Color.red, charge / 2f);
-                        Quaternion spinRotation = Quaternion.AngleAxis(Vector2.SignedAngle(Vector2.up, weaponController.transform.localPosition), Vector3.forward);
+                        Quaternion spinRotation = Quaternion.AngleAxis(Vector2.SignedAngle(Vector2.up, weaponController.transform.localPosition) + spriteOffset, Vector3.forward);
                         Debug.Log($"Current rotation: {weaponController.transform.localRotation.eulerAngles}, Target rotation: {spinRotation.eulerAngles}");
                         Debug.Log($"Interpolated rotation: {Quaternion.RotateTowards(weaponController.transform.localRotation, spinRotation, 360f * Time.fixedDeltaTime).eulerAngles}");
                         weaponController.transform.localRotation = Quaternion.RotateTowards(weaponController.transform.localRotation, spinRotation, 360f * Time.fixedDeltaTime);
@@ -122,17 +124,17 @@ namespace Entity.Player {
                     float angle = positionAngle;
                     float attackTick = 0f;
                     Debug.Log($"Starting spin with charge: {charge}");
-                    while (timer <= attackTime * charge) {
+                    while (timer <= charge) {
                         angle += Time.fixedDeltaTime * 360f * charge;
                         timer += Time.fixedDeltaTime;
                         attackTick += Time.fixedDeltaTime;
-                        weaponController.transform.localPosition = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0f) * radius * 2f;
-                        weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.up, (Vector2) weaponController.transform.localPosition.normalized)), Time.fixedDeltaTime * rotationSpeed);
+                        weaponController.transform.localPosition = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0f) * radius;
+                        weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.up, (Vector2) weaponController.transform.localPosition.normalized) + spriteOffset), Time.fixedDeltaTime * rotationSpeed);
                         // weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, angle), Time.fixedDeltaTime * rotationSpeed);
                         if (attackTick >= 0.25f) {
                             attackTick -= 0.25f;
                         }
-                        if (timer >= attackTime) {
+                        if (timer >= charge * 0.5f) {
                             spriteRenderer.color = Color.Lerp(Color.red, Color.white, timer * 0.5f / attackTime); // Last half of spin, return to normal colour
                         }
                         damageCallback?.Invoke(charge);
@@ -151,7 +153,7 @@ namespace Entity.Player {
         public override void FixedUpdate() {
             if (!allowMouseRotation) { return; }
             positionAngle = Utilities.Input.instance.AngleToMouse(weaponController.transform.parent) - 90f * swingDirection;
-            WeaponPositionRotation(positionAngle, angleOffset * swingDirection);
+            WeaponPositionRotation(positionAngle, angleOffset * swingDirection + spriteOffset);
         }
 
         protected override void WeaponPositionRotation(float positionAngle, float weaponRotationOffset = 0) {

@@ -41,7 +41,7 @@ namespace UI {
 
         private void UpdateReadouts() {
             xpReadout.text = $"XP: {level.currentXP} / {level.levelXP} ({level.xpProgress:0%})";
-            levelReadout.text = $"Level: {level.currentLevel} / {level.maxLevel} ({level.levelProgress:0%})";
+            levelReadout.text = level.currentLevel.ToString();
         }
     }
 }
