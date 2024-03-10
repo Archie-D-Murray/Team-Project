@@ -59,13 +59,6 @@ public class MovementController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E) && canMove && timeTimer < 0) {
             RewindTime();
         }
-        if (Input.GetKeyDown(KeyCode.P)) {
-            if (fade.activeInHierarchy == true) {
-                fade.GetComponent<Fading>().DoFade();
-            } else {
-                fade.SetActive(true);
-            }
-        }
     }
 
     private void FixedUpdate() {
