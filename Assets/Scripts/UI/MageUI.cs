@@ -56,7 +56,7 @@ public class MageUI : MonoBehaviour {
 
     public void SetSlot(int index, SpellData spell) {
         foreach (Image image in spellHotBarSlots) {
-            if (image.sprite == spellSelection.icon) {
+            if (image.sprite == spellSelection.sprite) {
                 image.sprite = noSpellIcon;
             }
         }
