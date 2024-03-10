@@ -21,9 +21,8 @@ namespace Attack.Components {
             if (collision.TryGetComponent(out Health health)) { // Hit an 'enemy entity'
                 health.Damage(damage, transform.position);
                 DamageNumberManager.instance.DisplayDamage($"{damage:0}", collision.ClosestPoint(transform.position));
-            } else { // Hit an 'enemy projectile' or a wall
-                Destroy(gameObject);
             }
+            Destroy(gameObject);
         }
     }
 }

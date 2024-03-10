@@ -1,10 +1,17 @@
 using System.Collections.Generic;
 
+using Entity.Player;
+
 using UnityEngine;
 
 namespace Entity.Enemy {
     public class EnemyManager : MonoBehaviour {
         [SerializeField] private List<EnemyScript> enemies;
+        public Level playerLevel;
+
+        private void Awake() {
+            playerLevel = FindObjectOfType<PlayerController>().GetComponent<Level>();
+        }
 
         public void RegisterEnemy(EnemyScript enemy) {
             if (!enemies.Contains(enemy)) {

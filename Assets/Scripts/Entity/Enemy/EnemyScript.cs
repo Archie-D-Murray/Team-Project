@@ -5,6 +5,7 @@ using Entity;
 using Utilities;
 
 using System;
+using Entity.Enemy;
 
 [Serializable] public enum EnemyType { STATIC, CHASING, SHOOTING }
 
@@ -13,9 +14,11 @@ public class EnemyScript : MonoBehaviour {
     [SerializeField] public int id;
 
     [SerializeField] private LayerMask playerLayer;
-
+    [SerializeField] protected int xpAmount = 60;
 
     [SerializeField] protected float distanceToPlayer;
+
+    [SerializeField] private bool standalone = false;
 
     protected Rigidbody2D rigidBody;
     protected BoxCollider2D boxCollider;
@@ -23,6 +26,7 @@ public class EnemyScript : MonoBehaviour {
     protected Health health;
     protected Animator animator;
     [SerializeField] protected CountDownTimer timer = new CountDownTimer(0f);
+    private EnemyManager enemyManager;
 
     // Start is called before the first frame update
     protected virtual void Start() {
@@ -31,11 +35,10 @@ public class EnemyScript : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
         stats = GetComponent<Stats>();
         health = GetComponent<Health>();
-        health.onDeath += () => {
-            // Could spawn particles, give player xp, etc...
-            Destroy(gameObject);
-        };
         playerLayer = 1 << LayerMask.NameToLayer("Player");
+        if (standalone) {
+            SetEnemyManager(FindFirstObjectByType<EnemyManager>());
+        }
     }
 
     protected virtual void InitEnemy() {
@@ -77,5 +80,13 @@ public class EnemyScript : MonoBehaviour {
             } else {
             }
         }
+    }
+
+    public void SetEnemyManager(EnemyManager enemyManager) {
+        this.enemyManager = enemyManager;
+        health.onDeath += () => { 
+            enemyManager.playerLevel.AddXP(xpAmount);
+            Destroy(gameObject);
+        };
     }
 }
