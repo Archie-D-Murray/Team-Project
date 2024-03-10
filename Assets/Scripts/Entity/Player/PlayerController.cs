@@ -27,6 +27,8 @@ namespace Entity.Player {
 
         [SerializeField] private Stats stats;
 
+        [SerializeField] private SpriteRenderer spriteRenderer;
+
         public IAttackSystem getAttackSystem => attackSystem;
         public PlayerClass getPlayerClass => playerClass;
         public Action<PlayerClass> onClassChange;
@@ -36,6 +38,7 @@ namespace Entity.Player {
             rb2D = GetComponent<Rigidbody2D>();
             stats = GetComponent<Stats>();
             weaponController = GetComponentInChildren<WeaponController>();
+            spriteRenderer = GetComponentsInChildren<SpriteRenderer>().First((SpriteRenderer spriteRenderer) => spriteRenderer.gameObject != weaponController.gameObject);
             attackSystem = null;
             DebugInitialise();
         }
@@ -43,6 +46,7 @@ namespace Entity.Player {
         public void DebugInitialise() {
             switch (playerClass) {
                 case PlayerClass.RANGED:
+                    spriteRenderer.material = AssetServer.instance.rangedMaterial;
                     BowData bowData = GetWeapon<BowData>();
                     if (!bowData) {
                         Debug.LogWarning("Could not find bow to initialise attackSystem, attacks will not work until this is initialised!");
@@ -52,6 +56,7 @@ namespace Entity.Player {
                     break;
 
                 case PlayerClass.MELEE:
+                    spriteRenderer.material = AssetServer.instance.meleeMaterial;
                     SwordData swordData = GetWeapon<SwordData>();
                     if (!swordData) {
                         Debug.LogWarning("Could not find sword to initialise attackSystem, attacks will not work until this is initialised!");
@@ -61,6 +66,7 @@ namespace Entity.Player {
                     break;
 
                 case PlayerClass.MAGE:
+                    spriteRenderer.material = AssetServer.instance.mageMaterial;
                     MageStaffData staffData = GetWeapon<MageStaffData>();
                     if (!staffData) {
                         Debug.LogWarning("Could not find mage staff to intialise attackSystem, attacks will not work intil this is initialised");

@@ -55,5 +55,6 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _SwapColour: {r: 0, g: 0.8314109, b: 1, a: 0}
+    - _SwapColorSecondary: {r: 0.8490566, g: 0.84223455, b: 0.04405483, a: 0}
+    - _SwapColour: {r: 1, g: 0.99777603, b: 0, a: 0}
   m_BuildTextureStacks: []

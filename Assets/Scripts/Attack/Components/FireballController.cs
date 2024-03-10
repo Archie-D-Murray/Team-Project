@@ -1,5 +1,7 @@
 using Entity;
 
+using UI;
+
 using UnityEngine;
 namespace Attack.Components {
     public class FireballController : MonoBehaviour {
@@ -27,6 +29,7 @@ namespace Attack.Components {
                 if (coll.TryGetComponent(out Health health)) {
                     Debug.Log($"Fireball Damaged {health.name}");
                     health.Damage(damage, transform.position);
+                    DamageNumberManager.instance.DisplayDamage($"{damage:0}", coll.ClosestPoint(transform.position));
                 } else {
                     Destroy(coll.gameObject);
                 }
