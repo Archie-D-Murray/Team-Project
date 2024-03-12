@@ -17,6 +17,10 @@ namespace Upgrades {
         [SerializeField] private bool canShow = true;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
+        private void Start() {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
         public void ResetCanShow() {
             canShow = true;
         }

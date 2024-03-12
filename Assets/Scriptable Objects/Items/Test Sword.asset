@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1035813074
   icon: {fileID: -1629465344, guid: 410154f10dcebef44bd9b135328781d9, type: 3}
-  sprite: {fileID: -275610361, guid: c9565ef608e3c4d47adc7d34cf3e216a, type: 3}
+  sprite: {fileID: 21300000, guid: 827265d833db96d468903ef24b91a112, type: 3}
   itemName: Crap sword
   maxCount: 1
   radius: 2

@@ -65,6 +65,10 @@ namespace Entity.Player {
             return Mathf.Max(0, config.XPForLevel(level) - xp);
         }
 
+        public float GetStatIncrease(StatType type) {
+            return Array.Find(config.levelIncrements, (Stat stat) => stat.type == type)?.value ?? 0f;
+        }
+
         public void LevelUpStat(StatType type) {
             stats.IncrementStat(type, Array.Find(config.levelIncrements, (Stat stat) => stat.type == type).value);
             unappliedLevels--;

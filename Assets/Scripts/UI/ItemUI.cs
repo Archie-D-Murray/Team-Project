@@ -33,7 +33,7 @@ namespace UI {
         public void Show(Item[] items, Inventory playerInventory, ItemChest originChest, bool isMultiAdd) {
             Utilities.Input.instance.playerControls.UI.Cancel.started += EscapeMenu;
             if (!chest || originChest != chest) { //Removes references to old chests
-                chest.ResetCanShow();
+                chest.OrNull()?.ResetCanShow();
                 shownItems = items.ToList();
                 inventory = playerInventory;
                 chest = originChest;
@@ -119,7 +119,7 @@ namespace UI {
         public void EscapeMenu(InputAction.CallbackContext _) {
             Utilities.Input.instance.playerControls.UI.Cancel.started -= EscapeMenu;
             canvas.FadeCanvas(0.1f, true, this);
-            chest.ResetCanShow();
+            chest.OrNull()?.ResetCanShow();
         }
     }
 }

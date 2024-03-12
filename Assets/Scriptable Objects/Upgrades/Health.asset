@@ -15,5 +15,5 @@ MonoBehaviour:
   stat: 0
   min: 10
   max: 50
-  icon: {fileID: 21300000, guid: a7509656986904778b9b80babc278b98, type: 3}
+  icon: {fileID: 1290019871, guid: ee1833f3372bdde44916c5ee71e80c8b, type: 3}
   step: 5

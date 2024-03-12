@@ -78,6 +78,8 @@ namespace UI {
                 GameObject itemSlot = Instantiate(itemSlotPrefab, inventoryLayout.transform);
                 itemSlots[i] = ItemSlot.FromItem(inventory.items[i], itemSlot, preview);
             }
+            inventory.onAddItem += UpdateInventory;
+            inventory.onRemoveItem += UpdateInventory;
         }
 
         public void Show() {
@@ -141,15 +143,20 @@ namespace UI {
                     button.onClick.AddListener(() => preview.SetItem(null));
                     return;
                 }
-                if (!(item.itemData.itemName == name && item.count == count)) {
-                    name = item.itemData.name;
-                    count = item.count;
-                    button.onClick.RemoveAllListeners();
-                    button.onClick.AddListener(() => preview.SetItem(item));
-                    icon.sprite = item.itemData.icon;
-                    sprite.sprite = item.itemData.sprite;
-                    UpdateUIElements();
+                Debug.Log($"Updating item: {item.itemData.name}");
+                if (itemText.alpha == 0f) {
+                    itemText.alpha = 1f;
+                    itemCount.alpha = 1f;
+                    icon.color = Color.white;
+                    sprite.color = Color.white;
                 }
+                name = item.itemData.name;
+                count = item.count;
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => preview.SetItem(item));
+                icon.sprite = item.itemData.icon;
+                sprite.sprite = item.itemData.sprite;
+                UpdateUIElements();
             }
 
             private void UpdateUIElements() {

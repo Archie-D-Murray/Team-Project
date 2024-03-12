@@ -79,13 +79,15 @@ namespace UI {
             foreach ((StatType type, int i) item in stats.statDict.Select((stat, i) => (stat.type, i))) {
                 GameObject statSlot = Instantiate(statPrefab, statLayout.transform);
                 statSlots[item.i] = new StatSlot();
-                statSlots[item.i].readout = statSlot.GetComponentInChildren<TMP_Text>();
+                statSlots[item.i].readout = statSlot.GetComponentsInChildren<TMP_Text>().First((TMP_Text text) => !text.transform.parent.gameObject.HasComponent<Button>());
                 statSlots[item.i].readout.text = stats.GetStatDisplay(item.type);
                 statSlots[item.i].icon = statSlot.GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<StatusIcon>());
                 statSlots[item.i].icon.sprite = Array.Find(statIcons, (StatIcon statIcon) => statIcon.type == item.type).icon;
                 statSlots[item.i].level = statSlot.GetComponentInChildren<Button>();
                 statSlots[item.i].level.onClick.AddListener(() => LevelUpClick(item.type));
                 statSlots[item.i].level.interactable = false;
+                statSlots[item.i].increase = statSlots[item.i].level.GetComponentInChildren<TMP_Text>();
+                statSlots[item.i].increase.text = string.Empty;
             }
         }
 
@@ -111,7 +113,10 @@ namespace UI {
             // Magic iteration that gives both index and variable using a tuple
             foreach ((StatType type, int i) item in stats.statDict.Select((stat, i) => (stat.type, i))) {
                 statSlots[item.i].readout.text = stats.GetStatDisplay(item.type);
-                statSlots[item.i].level.interactable = level.unappliedLevels > 0;
+                if (level.unappliedLevels > 0) {
+                    statSlots[item.i].level.interactable = true;
+                    statSlots[item.i].increase.text = $"+{level.GetStatIncrease(item.type)}";
+                }
             }
         }
     }

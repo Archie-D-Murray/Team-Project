@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -108,7 +108,931 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: chuchu slime enemy_11
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 60
+        width: 18
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4040237414b6774082f7097e9cf9b0e
+      internalID: 297390001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_12
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 60
+        width: 11
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc866ed3f27815640bacdc87c8cf01d9
+      internalID: 560889130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_13
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 58
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3564fdbc82c27a24e8f05629008cb303
+      internalID: -1937598471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_14
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 57
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05e426372243b4f4fab363aa83a9d736
+      internalID: 139985753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_15
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 58
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e54cc62daa19440408b1094df5d6b161
+      internalID: -326755437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_16
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 58
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ba838bc665c9194e846100e9346e01b
+      internalID: -328693204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_17
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 58
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0fe93942cbc6a540a9bc8aa90e02996
+      internalID: -319811971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_18
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 58
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d0cd1425ac4f34f89d67d8ede557b4
+      internalID: -34500575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_19
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 56
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c40665115bba514390b388a6f47e9c0
+      internalID: -279971521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_20
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 56
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb116678db488ff47a07b259821553a3
+      internalID: -1079337030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_21
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 56
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3072ffd946395942ada8d7dade85fef
+      internalID: -1106601699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_22
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 56
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d560f385771710b409f4d58509c828ad
+      internalID: 81112766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_23
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 55
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30e734787ac88b941b25da7469e21141
+      internalID: -845156117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_24
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 55
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c70425fce7a3a4243ac4345a80989133
+      internalID: -691920995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_25
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 54
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd3d6091f5420da41b88049780c6f34a
+      internalID: 1793593665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_26
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 54
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36654977c07c3844e9811ca770b6c136
+      internalID: -776796582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_27
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 54
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d272208f625909141ba0b4372ad8c7a5
+      internalID: 1461050696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_28
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 54
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd2fb65833087134f8eb09951dfc918a
+      internalID: 1528352120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_29
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 54
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e886f1560f79b8d438bdc031605b6e6c
+      internalID: -697466193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_30
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 54
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 236b0cf28ab1a0a42b6fd224de9b7a92
+      internalID: -89297019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_31
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 55
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3aa4ed9ae48c484dae04e74e664d8ba
+      internalID: -490931230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_32
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 55
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae19cd1abd940fc4796d608bacd2eb07
+      internalID: -641973632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_33
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 55
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b861f95b7e9eeb24ab54cf4b455d19b6
+      internalID: 1755171358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_34
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 56
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e752bc554c346943b54455c5f5a20bf
+      internalID: -2111230173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_35
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 55
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a22120c692e097543bf47e016302130a
+      internalID: 2035260602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_36
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 55
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3986e95d21597a44b55242d64a2e475
+      internalID: -1895868138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_46
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 8
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 328ac15b2b35d8740ac73ab02fc888f6
+      internalID: -603514513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_47
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 9
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2ef5d653e909924e918d0aafbc9666d
+      internalID: 1753467187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_48
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 9
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c1f0b44b8093854d8f8e74bc8841602
+      internalID: -1208662450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_49
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 15
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e845060854c97304fac862f6b3b57995
+      internalID: -1600335453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_50
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 8
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a5e7be7a4ef13e44b400915ca1ae819
+      internalID: 2096098389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_51
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 7
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 756702b33aaffc04caaa368024060137
+      internalID: -1578329738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_52
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 8
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 295274235e458a84c8b4f7ef660c7807
+      internalID: -1563483675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_53
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 8
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25a2db1918b7aa8429d5344abcc83868
+      internalID: -1481752622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_54
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 8
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac82a12e83a576d48a0780cbd14135e4
+      internalID: -1411514673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_55
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 8
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8852f3df060fbf54499d33d98c5c4bb4
+      internalID: -1737038460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_56
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 8
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: febfcfaf882d08d44bc3b91575a502ab
+      internalID: 1783906440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_57
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 3
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5534dd909d6f59a4f981f7f4f303ccd0
+      internalID: 930279220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_58
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 6
+        width: 23
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ba4c17a63f24e142ae1f0b482d34df2
+      internalID: 32878442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_59
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 7
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1eb750b5b9c77141b24c78f524f40da
+      internalID: -657898506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_60
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 6
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c742e9abbbe492c4da5c3089a9eb1b44
+      internalID: -1821508620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_61
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 5
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c03771cf059ca84b97332a918e71401
+      internalID: 1004057401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_62
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 7
+        width: 12
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82a5bb3924e7cc042b686730648c915e
+      internalID: 1278995446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuchu slime enemy_63
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 6
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dad0af855e8370c49be8dda084489c8c
+      internalID: 994354313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +1043,72 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chuchu slime enemy_0: 2134772925
+      chuchu slime enemy_1: 1842392072
+      chuchu slime enemy_10: 719192632
+      chuchu slime enemy_11: 297390001
+      chuchu slime enemy_12: 560889130
+      chuchu slime enemy_13: -1937598471
+      chuchu slime enemy_14: 139985753
+      chuchu slime enemy_15: -326755437
+      chuchu slime enemy_16: -328693204
+      chuchu slime enemy_17: -319811971
+      chuchu slime enemy_18: -34500575
+      chuchu slime enemy_19: -279971521
+      chuchu slime enemy_2: 1514307014
+      chuchu slime enemy_20: -1079337030
+      chuchu slime enemy_21: -1106601699
+      chuchu slime enemy_22: 81112766
+      chuchu slime enemy_23: -845156117
+      chuchu slime enemy_24: -691920995
+      chuchu slime enemy_25: 1793593665
+      chuchu slime enemy_26: -776796582
+      chuchu slime enemy_27: 1461050696
+      chuchu slime enemy_28: 1528352120
+      chuchu slime enemy_29: -697466193
+      chuchu slime enemy_3: -1066427869
+      chuchu slime enemy_30: -89297019
+      chuchu slime enemy_31: -490931230
+      chuchu slime enemy_32: -641973632
+      chuchu slime enemy_33: 1755171358
+      chuchu slime enemy_34: -2111230173
+      chuchu slime enemy_35: 2035260602
+      chuchu slime enemy_36: -1895868138
+      chuchu slime enemy_37: -1202571250
+      chuchu slime enemy_38: 1462260066
+      chuchu slime enemy_39: 2133327870
+      chuchu slime enemy_4: 1753050061
+      chuchu slime enemy_40: 838786712
+      chuchu slime enemy_41: 940724279
+      chuchu slime enemy_42: 1312453754
+      chuchu slime enemy_43: -1469657418
+      chuchu slime enemy_44: 514671788
+      chuchu slime enemy_45: 285710371
+      chuchu slime enemy_46: -603514513
+      chuchu slime enemy_47: 1753467187
+      chuchu slime enemy_48: -1208662450
+      chuchu slime enemy_49: -1600335453
+      chuchu slime enemy_5: 985186205
+      chuchu slime enemy_50: 2096098389
+      chuchu slime enemy_51: -1578329738
+      chuchu slime enemy_52: -1563483675
+      chuchu slime enemy_53: -1481752622
+      chuchu slime enemy_54: -1411514673
+      chuchu slime enemy_55: -1737038460
+      chuchu slime enemy_56: 1783906440
+      chuchu slime enemy_57: 930279220
+      chuchu slime enemy_58: 32878442
+      chuchu slime enemy_59: -657898506
+      chuchu slime enemy_6: 953949746
+      chuchu slime enemy_60: -1821508620
+      chuchu slime enemy_61: 1004057401
+      chuchu slime enemy_62: 1278995446
+      chuchu slime enemy_63: 994354313
+      chuchu slime enemy_64: -1423429424
+      chuchu slime enemy_7: -1383880058
+      chuchu slime enemy_8: 1276093915
+      chuchu slime enemy_9: 2058554309
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

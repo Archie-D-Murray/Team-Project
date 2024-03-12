@@ -29,7 +29,6 @@ namespace Entity {
             rb2D.velocity = Vector2.zero;
             if (agent) { //Support for stationary enemies that can be moved - probably just shouldn't be on them...?
                 if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 1f, NavMesh.AllAreas)) {
-                    Debug.Log("Pos:" + hit.position);
                     while (((Vector2) transform.position - (Vector2) hit.position).sqrMagnitude >= 0.01f) {
                         rb2D.MovePosition(Vector2.MoveTowards(rb2D.position, hit.position, Time.fixedDeltaTime));
                         yield return Yielders.waitForFixedUpdate;

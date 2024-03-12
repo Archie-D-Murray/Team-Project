@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Entity.Player {
     public class WeaponController : MonoBehaviour {
         [SerializeField, SerializeReference] private WeaponAnimator weaponAnimator;
-        public WeaponAnimator GetWeaponAnimator() => weaponAnimator;
+        public T GetWeaponAnimator<T>() where T : WeaponAnimator => weaponAnimator as T;
 
         public void SetWeapon<T>(T weapon) where T : ItemData {
             weaponAnimator = weapon.InferItemType() switch {
