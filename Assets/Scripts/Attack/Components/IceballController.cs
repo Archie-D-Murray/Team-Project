@@ -1,5 +1,7 @@
 using Entity;
 
+using UI;
+
 using UnityEngine;
 
 namespace Attack.Components {
@@ -33,6 +35,7 @@ namespace Attack.Components {
             foreach (Collider2D enemy in Physics2D.OverlapCircleAll(transform.position, radius, enemyLayer)) {
                 if (enemy.TryGetComponent(out Health health) && enemy.TryGetComponent(out Stats stats)) {
                     health.Damage(tickDamage);
+                    DamageNumberManager.instance.DisplayDamage($"{tickDamage:0}", enemy.ClosestPoint(transform.position));
                     stats.AddStatModifer(StatType.SPEED, slowAmount, tickRate);
                 }
             }

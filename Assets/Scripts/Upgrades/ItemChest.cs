@@ -7,12 +7,19 @@ using Items;
 
 using UnityEngine;
 
+using Utilities;
+
 namespace Upgrades {
     public class ItemChest : MonoBehaviour {
         [SerializeField] private bool giveAll = true;
         [SerializeField] private List<Item> items;
         [SerializeField] private bool looted = false;
         [SerializeField] private bool canShow = true;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+
+        private void Start() {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
 
         public void ResetCanShow() {
             canShow = true;
@@ -22,12 +29,20 @@ namespace Upgrades {
             items.Remove(item);
             if (items.Count == 0) {
                 looted = true;
+                if (spriteRenderer.color.a == 1f) {
+                    spriteRenderer.FadeColour(Color.clear, 0.5f, this);
+                    Destroy(gameObject);
+                }
             }
         }
 
         public void RemoveAll() {
             items.Clear();
             looted = true;
+            if (spriteRenderer.color.a == 1f) {
+                spriteRenderer.FadeColour(Color.clear, 0.5f, this);
+                Destroy(gameObject);
+            }
         }
 
         private void OnTriggerStay2D(Collider2D collider) {

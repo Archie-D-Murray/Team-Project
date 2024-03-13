@@ -17,12 +17,12 @@ namespace Entity {
         };
 
         #region Enum => String cache
-        private const string Health = "Max HEALTH";
-        private const string AttackSpeed = "Attack SPEED";
+        private const string Health = "MAX HEALTH";
+        private const string AttackSpeed = "ATTACK SPEED";
         private const string Speed = "SPEED";
         private const string Damage = "DAMAGE";
         private const string Magic = "MAGIC";
-        private const string Mana = "Max MANA";
+        private const string Mana = "MAX MANA";
         #endregion
 
         public Stat[] statDict = Stats.DefaultStats;

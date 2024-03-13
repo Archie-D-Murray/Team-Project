@@ -9,5 +9,6 @@ namespace UI {
         public TMP_Text readout;
         public Image icon;
         public Button level;
+        public TMP_Text increase;
     }
 }

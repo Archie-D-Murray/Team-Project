@@ -10,6 +10,7 @@ using TMPro;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 using Upgrades;
 
@@ -21,6 +22,7 @@ namespace UI {
         [SerializeField] private Inventory inventory;
         [SerializeField] private ItemChest chest;
         [SerializeField] private Button takeAll;
+        [SerializeField] private bool isMultiAdd;
 
         private void Start() {
             ItemUIManager.StartSingleton();
@@ -29,16 +31,20 @@ namespace UI {
         }
 
         public void Show(Item[] items, Inventory playerInventory, ItemChest originChest, bool isMultiAdd) {
-            if (chest) {
-                return;
+            Utilities.Input.instance.playerControls.UI.Cancel.started += EscapeMenu;
+            if (!chest || originChest != chest) { //Removes references to old chests
+                chest.OrNull()?.ResetCanShow();
+                shownItems = items.ToList();
+                inventory = playerInventory;
+                chest = originChest;
+                if (inventory != playerInventory) {
+                    inventory.onAddItem += UpdateItems;
+                    inventory.onRemoveItem += UpdateItems;
+                }
+                this.isMultiAdd = isMultiAdd;
             }
             canvas.FadeCanvas(0.1f, false, this);
-            shownItems = items.ToList();
-            inventory = playerInventory;
-            chest = originChest;
-            inventory.onAddItem += UpdateItems;
-            inventory.onRemoveItem += UpdateItems;
-            ShowItems(isMultiAdd);
+            ShowItems(this.isMultiAdd);
         }
 
         public void ShowItems(bool isMultiAdd) {
@@ -107,6 +113,13 @@ namespace UI {
                 }
                 Destroy(child.gameObject);
             }
+            Utilities.Input.instance.playerControls.UI.Cancel.started -= EscapeMenu;
+        }
+
+        public void EscapeMenu(InputAction.CallbackContext _) {
+            Utilities.Input.instance.playerControls.UI.Cancel.started -= EscapeMenu;
+            canvas.FadeCanvas(0.1f, true, this);
+            chest.OrNull()?.ResetCanShow();
         }
     }
 }

@@ -11,9 +11,7 @@ namespace Entity {
     public class ShootingEnemy : EnemyScript {
 
         public GameObject projectile;
-        private Transform playerTransform;
         [SerializeField] private float aggroRange;
-        [SerializeField] private float shootingRange;
         NavMeshAgent agent;
 
         private CountDownTimer attackTimer = new CountDownTimer(0f);
@@ -27,6 +25,7 @@ namespace Entity {
             agent = GetComponent<NavMeshAgent>();
             agent.updateUpAxis = false;
             agent.updateRotation = false;
+            health.onDamage += GetComponent<KnockbackHandler>().Knockback;
             if (stats.GetStat(StatType.SPEED, out float speed)) {
                 agent.speed = speed;
             }
@@ -36,24 +35,23 @@ namespace Entity {
                 agent.speed = amount;
             };
 
-            playerTransform = FindObjectOfType<MovementController>().OrNull()?.transform ?? null;
             if (!playerTransform) {
                 Debug.LogError("Could not find player!");
                 Destroy(this);
             }
-            shootingRange = 10;
+            attackRange = 10;
         }
 
         protected override void EnemyMovement() {
             distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-            if (distanceToPlayer > shootingRange && Vector3.Distance(agent.destination, playerTransform.position) > 1.0f) {
+            if (distanceToPlayer > attackRange && Vector3.Distance(agent.destination, playerTransform.position) > 1.0f) {
                 agent.destination = playerTransform.position;
             }
         }
 
         protected override void EnemyAttacks() {
             distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-            if (distanceToPlayer < shootingRange && timer.isFinished) {
+            if (distanceToPlayer < attackRange && timer.isFinished) {
                 if (stats.GetStat(StatType.ATTACK_SPEED, out float attackSpeed) && stats.GetStat(StatType.DAMAGE, out float damage)) {
                     projectile.GetComponent<EnemyProjectile>().SetDamage(damage);
                     Instantiate(projectile, transform.position, Quaternion.identity);
@@ -61,17 +59,6 @@ namespace Entity {
                 }
                 
             }
-        }
-
-        protected new void OnTriggerEnter2D(Collider2D collision) {
-            base.OnTriggerEnter2D(collision);
-        }
-
-
-
-
-
-
-
+        } 
     }
 }

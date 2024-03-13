@@ -1,10 +1,10 @@
 git pull
-if (Test-Path D:\Unity\Hub\Editor\2022.3.1f1\Editor\Unity.exe -PathType Leaf) {
+if ((Test-Path D:\Unity\Hub\Editor\2022.3.1f1\Editor\Unity.exe -PathType Leaf) -eq "True") {
     echo "Starting Unity..."
     D:\Unity\Hub\Editor\2022.3.1f1\Editor\Unity.exe --projectPath .
     echo "Starting Visual Studio..."
     start devenv Team-Project.sln
-} elseif (Test-Path 'C:\Program Files\Unity\Hub\Editor\2022.3.1f1\Editor\Unity.exe' -PathType Leaf) {
+} elseif ((Test-Path 'C:\Program Files\Unity\Hub\Editor\2022.3.1f1\Editor\Unity.exe' -PathType Leaf) -eq "True") {
     echo "Starting Unity..."
     'C:\Program Files\Unity\Hub\Editor\2022.3.1f1\Editor\Unity.exe' --projectPath .
     echo "Starting Visual Studio..."

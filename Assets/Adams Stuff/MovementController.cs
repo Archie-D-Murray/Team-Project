@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using Entity;
+
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -23,6 +25,7 @@ public class MovementController : MonoBehaviour {
     private Rigidbody2D rigidBody;
     private BoxCollider2D coll;
     private Animator animator;
+    private Health health;
 
     [SerializeField] private float timeCooldown = 3f;
     private float timeTimer = 0;
@@ -35,6 +38,7 @@ public class MovementController : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
+        health = GetComponent<Health>();
         SetupPreviousPos();
     }
 
@@ -52,19 +56,13 @@ public class MovementController : MonoBehaviour {
     }
 
     private void HandleInputs() {
-        inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (Input.GetKeyDown("space") && canMove && inputDirection.magnitude != 0 && dashTimer < 0) {
+        inputDirection = Utilities.Input.instance.playerControls.Gameplay.Move.ReadValue<Vector2>();
+        if (Utilities.Input.instance.playerControls.Gameplay.Dash.IsPressed() && canMove && inputDirection.magnitude != 0 && dashTimer < 0) {
             StartCoroutine(Dash());
+            health.SetInvulnerable(dashDuration);
         }
-        if (Input.GetKeyDown(KeyCode.E) && canMove && timeTimer < 0) {
+        if (Utilities.Input.instance.playerControls.Gameplay.Rewind.IsPressed() && canMove && timeTimer < 0) {
             RewindTime();
-        }
-        if (Input.GetKeyDown(KeyCode.P)) {
-            if (fade.activeInHierarchy == true) {
-                fade.GetComponent<Fading>().DoFade();
-            } else {
-                fade.SetActive(true);
-            }
         }
     }
 
@@ -78,13 +76,14 @@ public class MovementController : MonoBehaviour {
 
     private IEnumerator Dash() {
         canMove = false;
-        coll.excludeLayers = exclusionLayers;
-        animator.SetTrigger("dash");
+        // NOTE: Migrated towards setting health to invulnerable to allow for I-Frame detection
+        // coll.excludeLayers = exclusionLayers; 
+        // animator.SetTrigger("dash"); TODO: We don't have a dash animation yet!
         velocity = inputDirection.normalized * dashSpeed;
         yield return new WaitForSeconds(dashDuration);
         dashTimer = dashCooldown;
         canMove = true;
-        coll.excludeLayers = emptyLayer;
+        // coll.excludeLayers = emptyLayer;
     }
 
     private void RewindTime() {

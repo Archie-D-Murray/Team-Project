@@ -37,14 +37,12 @@ namespace Items {
             } else {
                 int index = Array.IndexOf(items, Array.Find(items, ((Item inventoryItem) => inventoryItem.itemData == item.itemData)));
                 if (index >= 0 && index < items.Length) {
-                    Debug.Log($"Adding {item.itemData.itemName} to existing stack at index {index}");
                     if (items[index].count + count < item.itemData.maxCount) {
                         items[index].count += count;
                         onAddItem?.Invoke();
                         return;
                     }
                 } else {
-                    Debug.Log($"Looking for an empty slot in inventory for {item.itemData.itemName}");
                     for (int i = 0; i < items.Length; i++) {
                         if (!items[i].itemData) {
                             items[i] = item;

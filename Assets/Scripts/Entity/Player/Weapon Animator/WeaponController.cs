@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Entity.Player {
     public class WeaponController : MonoBehaviour {
         [SerializeField, SerializeReference] private WeaponAnimator weaponAnimator;
-        public WeaponAnimator GetWeaponAnimator() => weaponAnimator;
+        public T GetWeaponAnimator<T>() where T : WeaponAnimator => weaponAnimator as T;
 
         public void SetWeapon<T>(T weapon) where T : ItemData {
             weaponAnimator = weapon.InferItemType() switch {
@@ -22,6 +22,10 @@ namespace Entity.Player {
 
         public void Attack(float attackTime) {
             weaponAnimator?.Attack(attackTime);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider) {
+            weaponAnimator?.OnTriggerEnter2D(collider);
         }
 
         private bool IsSameType(ItemType type) {

@@ -17,8 +17,8 @@ namespace Upgrades {
             }
         }
 
-        public void ShowUpgrades(Upgrade[] upgrades) {
-            upgradeUI.Show(upgrades, playerStats);
+        public void ShowUpgrades(Upgrade[] upgrades, LootBox lootBox) {
+            upgradeUI.Show(upgrades, playerStats, lootBox);
         }
     }
 }

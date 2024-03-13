@@ -17,7 +17,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 827265d833db96d468903ef24b91a112, type: 3}
   itemName: Crap sword
   maxCount: 1
-  radius: 0.5
+  radius: 2
   damageModifier: 1
   attackSpeedModifier: 1
   stabDamageModifier: 1
