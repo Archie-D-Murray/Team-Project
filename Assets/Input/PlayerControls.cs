@@ -89,6 +89,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""3fd74f26-9bb7-41df-a874-341a0ed67bd2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rewind"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1ae260c-5222-489b-b42e-ffdfb277ed65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -210,6 +228,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseSpellThree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3629c30e-77d6-4e63-9a0f-0cb7802b0caf"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38861a7e-84e6-4927-a39c-3e2ef1b6f79c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rewind"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -869,6 +909,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_UseSpellOne = m_Gameplay.FindAction("UseSpellOne", throwIfNotFound: true);
         m_Gameplay_UseSpellTwo = m_Gameplay.FindAction("UseSpellTwo", throwIfNotFound: true);
         m_Gameplay_UseSpellThree = m_Gameplay.FindAction("UseSpellThree", throwIfNotFound: true);
+        m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        m_Gameplay_Rewind = m_Gameplay.FindAction("Rewind", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -955,6 +997,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_UseSpellOne;
     private readonly InputAction m_Gameplay_UseSpellTwo;
     private readonly InputAction m_Gameplay_UseSpellThree;
+    private readonly InputAction m_Gameplay_Dash;
+    private readonly InputAction m_Gameplay_Rewind;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -966,6 +1010,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @UseSpellOne => m_Wrapper.m_Gameplay_UseSpellOne;
         public InputAction @UseSpellTwo => m_Wrapper.m_Gameplay_UseSpellTwo;
         public InputAction @UseSpellThree => m_Wrapper.m_Gameplay_UseSpellThree;
+        public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
+        public InputAction @Rewind => m_Wrapper.m_Gameplay_Rewind;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -996,6 +1042,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseSpellThree.started += instance.OnUseSpellThree;
             @UseSpellThree.performed += instance.OnUseSpellThree;
             @UseSpellThree.canceled += instance.OnUseSpellThree;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+            @Rewind.started += instance.OnRewind;
+            @Rewind.performed += instance.OnRewind;
+            @Rewind.canceled += instance.OnRewind;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -1021,6 +1073,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseSpellThree.started -= instance.OnUseSpellThree;
             @UseSpellThree.performed -= instance.OnUseSpellThree;
             @UseSpellThree.canceled -= instance.OnUseSpellThree;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+            @Rewind.started -= instance.OnRewind;
+            @Rewind.performed -= instance.OnRewind;
+            @Rewind.canceled -= instance.OnRewind;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1222,6 +1280,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnUseSpellOne(InputAction.CallbackContext context);
         void OnUseSpellTwo(InputAction.CallbackContext context);
         void OnUseSpellThree(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnRewind(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 
 using Data;
+using Utilities;
+using System.Collections;
 
 namespace Entity {
     [RequireComponent(typeof(Stats))]
@@ -11,9 +13,15 @@ namespace Entity {
         public float getPercentHealth => Mathf.Clamp01(currentHealth / maxHealth);
         public float getCurrentHealth => currentHealth;
         public float getMaxHealth => maxHealth;
+        public bool isInvulnerable => invulnerable;
         public Action<float, KnockbackData> onDamage;
         public Action<float> onHeal;
         public Action onDeath;
+        public Action onInvulnerableDamage;
+        
+        private float invulnerabilityTimer = 0f;
+        private bool invulnerable = false;
+        private Coroutine invulnerabilityReset = null;
 
         [SerializeField] private float currentHealth;
         [SerializeField] private float maxHealth;
@@ -46,6 +54,9 @@ namespace Entity {
         public void Damage(float damage, Vector2? entityPos = null) {
             if (currentHealth == 0.0f) { //Don't damage dead things!
                 return;
+            } else if (invulnerable) {
+                onInvulnerableDamage?.Invoke();
+                return;
             }
             damage = Mathf.Max(damage, 0.0f);
             if (damage != 0.0f) {
@@ -70,6 +81,21 @@ namespace Entity {
 
         public void OnDeserialize(GameData data) {
             currentHealth = data.playerData.playerCurrentHealth;
+        }
+
+        public void SetInvulnerable(float time) {
+            if (invulnerabilityReset != null) {
+                StopCoroutine(invulnerabilityReset);
+            }
+            invulnerabilityTimer += time;
+            invulnerabilityReset = StartCoroutine(InvulnerabilityReset());
+        }
+
+        private IEnumerator InvulnerabilityReset() {
+            while (invulnerabilityTimer >= 0f) {
+                invulnerabilityTimer -= Time.fixedDeltaTime;
+                yield return Yielders.waitForFixedUpdate;
+            }
         }
     }
 }

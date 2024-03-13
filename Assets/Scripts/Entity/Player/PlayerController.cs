@@ -32,6 +32,7 @@ namespace Entity.Player {
         public IAttackSystem getAttackSystem => attackSystem;
         public PlayerClass getPlayerClass => playerClass;
         public Action<PlayerClass> onClassChange;
+        public Action<ItemData, ItemType> onItemEquip;
 
         private void Awake() {
             animator = GetComponentInChildren<Animator>();
@@ -143,8 +144,10 @@ namespace Entity.Player {
                 } else {
                     ReInitialiseAttackSystem<T>(itemData as T);
                 }
+                onItemEquip?.Invoke(itemData as T, itemData.InferItemType());
             } else {
                 attackSystem = null;
+                onItemEquip?.Invoke(null, ItemType.ITEM);
             }
         }
 
