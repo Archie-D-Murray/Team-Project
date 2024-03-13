@@ -8,7 +8,7 @@ using System;
 using Entity.Enemy;
 using Entity.Player;
 
-[Serializable] public enum EnemyType { STATIC, CHASING, SHOOTING }
+[Serializable] public enum EnemyType { STATIC, CHASING, SHOOTING, BOSS }
 
 public class EnemyScript : MonoBehaviour {
     [SerializeField] public EnemyType type;

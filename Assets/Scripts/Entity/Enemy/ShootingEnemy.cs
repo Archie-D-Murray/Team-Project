@@ -12,6 +12,7 @@ namespace Entity {
 
         public GameObject projectile;
         [SerializeField] private float aggroRange;
+        [SerializeField] private float projectileSpeed;
         NavMeshAgent agent;
 
         private CountDownTimer attackTimer = new CountDownTimer(0f);
@@ -54,6 +55,7 @@ namespace Entity {
             if (distanceToPlayer < attackRange && timer.isFinished) {
                 if (stats.GetStat(StatType.ATTACK_SPEED, out float attackSpeed) && stats.GetStat(StatType.DAMAGE, out float damage)) {
                     projectile.GetComponent<EnemyProjectile>().SetDamage(damage);
+                    projectile.GetComponent<EnemyProjectile>().SetProjectileSpeed(projectileSpeed);
                     Instantiate(projectile, transform.position, Quaternion.identity);
                     timer.Restart(1f / Mathf.Max(0.001f, attackSpeed));
                 }
