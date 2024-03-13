@@ -94,10 +94,10 @@ namespace UI {
                     playerController.SetWeapon<BowData>(item.itemData as BowData);
                     break;
                 case ItemType.MELEE:
-                    Debug.Log("Not implemented yet!");
+                    playerController.SetWeapon<SwordData>(item.itemData as SwordData);
                     break;
                 case ItemType.MAGE:
-                    Debug.Log("Not implemented yet!");
+                    playerController.SetWeapon<MageStaffData>(item.itemData as MageStaffData);
                     break;
                 default:
                     Debug.LogError("Item is no valid!");

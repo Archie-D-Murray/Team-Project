@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 
+using Items;
+
 using UnityEngine;
 using UnityEngine.U2D;
 
@@ -22,6 +24,11 @@ namespace Entity.Player {
         public override void FixedUpdate() {
             positionAngle = Utilities.Input.instance.AngleToMouse(weaponController.transform.parent);
             WeaponPositionRotation(positionAngle, 0f);
+        }
+
+        public void SetWeapon(BowData data) {
+            frames = data.frames;
+            spriteRenderer.sprite = data.frames[data.frames.Length - 1];
         }
 
         protected override IEnumerator WeaponAttack(float attackTime) {

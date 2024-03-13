@@ -89,6 +89,7 @@ namespace Attack {
 
         public void SetWeapon<T>(T item) where T : ItemData {
             data = item as SwordData;
+            swordAnimator.SetWeapon(item as SwordData);
         }
     }
 }

@@ -77,6 +77,7 @@ namespace Attack {
                 return;
             }
             this.bow = bow as BowData;
+            weaponController.GetWeaponAnimator<RangedAnimator>().SetWeapon(bow as BowData);
         }
 
         public ItemData GetWeapon() {

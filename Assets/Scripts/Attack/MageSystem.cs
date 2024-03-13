@@ -121,6 +121,7 @@ namespace Attack {
                 return;
             }
             this.staff = staff as MageStaffData;
+            weaponController.GetWeaponAnimator<MageStaffAnimator>().SetWeapon(staff as MageStaffData);
         }
 
         public ItemData GetWeapon() {

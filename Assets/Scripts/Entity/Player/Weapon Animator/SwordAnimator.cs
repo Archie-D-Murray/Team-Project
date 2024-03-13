@@ -3,6 +3,7 @@ using Utilities;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using Items;
 
 namespace Entity.Player {
     [Serializable] public class SwordAnimator : WeaponAnimator {
@@ -153,6 +154,10 @@ namespace Entity.Player {
             if (!allowMouseRotation) { return; }
             positionAngle = Utilities.Input.instance.AngleToMouse(weaponController.transform.parent) - 90f * swingDirection;
             WeaponPositionRotation(positionAngle, angleOffset * swingDirection + spriteOffset);
+        }
+
+        public void SetWeapon(SwordData data) {
+            spriteRenderer.sprite = data.sprite;
         }
 
         protected override void WeaponPositionRotation(float positionAngle, float weaponRotationOffset = 0) {

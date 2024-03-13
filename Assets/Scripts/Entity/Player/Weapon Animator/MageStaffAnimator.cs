@@ -1,5 +1,8 @@
 using System;
 using System.Collections;
+
+using Items;
+
 using UnityEngine;
 
 using Utilities;
@@ -47,6 +50,10 @@ namespace Entity.Player {
                 yield return Yielders.waitForFixedUpdate;
             }
             allowMouseRotation = true;
+        }
+
+        public void SetWeapon(MageStaffData data) {
+            spriteRenderer.sprite = data.sprite;
         }
     }
 }
