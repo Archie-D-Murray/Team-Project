@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cfb68d9d346834989a378e8a94ddcc, type: 3}
+  m_Name: Royal Bow
+  m_EditorClassIdentifier: 
+  id: -1813082027
+  icon: {fileID: 1143440252, guid: 410154f10dcebef44bd9b135328781d9, type: 3}
+  sprite: {fileID: -1945515624, guid: 1389237a0d9eaa744bcc5b54170e8cd4, type: 3}
+  itemName: Royal Bow
+  maxCount: 1
+  damageModifier: 5
+  drawTimeModifier: 0.5
+  projectileSpeed: 750
+  missileDuration: 2
+  projectiles: 3
+  spreadAngle: 90
+  projectile: {fileID: 8508758827916593260, guid: 26a8e135a7502264384a673c28d9e0fc, type: 3}
+  frames:
+  - {fileID: -1009162342, guid: 1389237a0d9eaa744bcc5b54170e8cd4, type: 3}
+  - {fileID: -135509553, guid: 1389237a0d9eaa744bcc5b54170e8cd4, type: 3}
+  - {fileID: -1945515624, guid: 1389237a0d9eaa744bcc5b54170e8cd4, type: 3}

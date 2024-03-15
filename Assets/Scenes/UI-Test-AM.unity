@@ -2209,7 +2209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3105323449848903384, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: playerClass
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3105323449848903384, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: debugInitialise
@@ -2485,11 +2485,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1194938720634645676, guid: 1c4704d95bb62884386f1b65ce9dfe89, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -413.221
+      value: -413.22095
       objectReference: {fileID: 0}
     - target: {fileID: 1194938720634645676, guid: 1c4704d95bb62884386f1b65ce9dfe89, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -18.292145
+      value: -18.292114
       objectReference: {fileID: 0}
     - target: {fileID: 1194938720634645676, guid: 1c4704d95bb62884386f1b65ce9dfe89, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2790,7 +2790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7547573570035883472, guid: a3e8ca24b536b7540bc91a359103cd5a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -18.289948
+      value: -18.289917
       objectReference: {fileID: 0}
     - target: {fileID: 7547573570035883472, guid: a3e8ca24b536b7540bc91a359103cd5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3551,14 +3551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5298e09a5dd254388a3356e3823649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: a378170a4e703fb4ca92e5e740dce1db, type: 2}
-  - {fileID: 11400000, guid: 3f03bca02034de047b5a772471c15973, type: 2}
-  - {fileID: 11400000, guid: 9b64cd2c98a4f5043a080a3549ea9bc2, type: 2}
-  - {fileID: 11400000, guid: e17901be3dca61c4cae84994e204e3a0, type: 2}
-  - {fileID: 11400000, guid: 9b4d2b1c18ab3ea45a3ebe899d835094, type: 2}
-  spells:
-  - {fileID: 11400000, guid: c32bbb295046ff84cb459cfa1209b22c, type: 2}
 --- !u!4 &1106140318
 Transform:
   m_ObjectHideFlags: 0
