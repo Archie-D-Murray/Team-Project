@@ -5619,7 +5619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3105323449848903384, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: playerClass
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3776379182195436073, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: m_Sprite
@@ -8504,8 +8504,8 @@ MonoBehaviour:
   - itemData: {fileID: 11400000, guid: 326d4b0b8577aeb4a91660308035492e, type: 2}
     type: 3
     count: 1
-  - itemData: {fileID: 11400000, guid: 9b64cd2c98a4f5043a080a3549ea9bc2, type: 2}
-    type: 0
+  - itemData: {fileID: 11400000, guid: 7b61c32e6b2b13a4099f816103150624, type: 2}
+    type: 2
     count: 1
   looted: 0
   canShow: 1

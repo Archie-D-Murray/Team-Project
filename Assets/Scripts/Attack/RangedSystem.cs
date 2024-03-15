@@ -18,14 +18,12 @@ namespace Attack {
         private Transform origin;
         private WeaponController weaponController;
         private BowData bow;
-        private GameObject projectilePrefab;
 
         public RangedSystem(Stats stats, Transform origin, WeaponController weaponController, BowData bow) {
             this.stats = stats;
             this.origin = origin;
             this.weaponController = weaponController;
             if (bow && bow is BowData) {
-                this.projectilePrefab = bow.projectile;
                 this.bow = bow;
                 ResetAttackTimer();
             } else {
@@ -50,7 +48,7 @@ namespace Attack {
                         spreadStart,
                         Vector3.back
                     );
-                    GameObject projectile = UnityEngine.Object.Instantiate(projectilePrefab, origin.position, rotation);
+                    GameObject projectile = UnityEngine.Object.Instantiate(bow.projectile, origin.position, rotation);
                     projectile.GetOrAddComponent<EntityDamager>().Init(damage * bow.damageModifier);
                     projectile.GetOrAddComponent<LinearProjectileMover>().Init(bow.projectileSpeed);
                     projectile.GetOrAddComponent<AutoDestroy>().Init(bow.missileDuration);
