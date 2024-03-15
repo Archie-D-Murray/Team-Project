@@ -5751,7 +5751,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42b679270c1b004a93ee1d76af22cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorials: []
+  tutorials:
+  - {fileID: 11400000, guid: cf9518ed2e8c2820497a6c48b8851a21, type: 2}
   tutorialPrefab: {fileID: 462028665919932630, guid: 834e5859a07842c4aac9bb84e9e42bbe, type: 3}
   canvas: {fileID: 0}
   playerController: {fileID: 0}

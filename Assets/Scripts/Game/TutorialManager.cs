@@ -10,21 +10,25 @@ namespace Tutorial {
     public class TutorialManager : MonoBehaviour {
         public Tutorial[] tutorials;
         [SerializeField] private GameObject tutorialPrefab;
-        [SerializeField] private Transform canvas;
+        [SerializeField] private CanvasGroup canvas;
         [SerializeField] private PlayerController playerController;
         [SerializeField] private Health playerHealth;
         CanvasGroup[] tutorialCanvases;
         private int tutorialIndex = 0;
+        private bool finished = false;
 
         private void Start() {
-            canvas = transform;
+            canvas = GetComponent<CanvasGroup>();
             tutorialCanvases = new CanvasGroup[tutorials.Length];
             playerController = FindFirstObjectByType<PlayerController>();
             playerHealth = playerController.GetComponent<Health>();
             for (int i = 0; i < tutorialCanvases.Length; i++) {
-                tutorialCanvases[i] = Instantiate(tutorialPrefab, canvas).GetComponent<CanvasGroup>();
+                tutorialCanvases[i] = Instantiate(tutorialPrefab, canvas.transform).GetComponent<CanvasGroup>();
                 tutorialCanvases[i].alpha = 0f;
                 tutorialCanvases[i].GetComponentInChildren<TMP_Text>().text = tutorials[i].text;
+            }
+            if (canvas.alpha != 1f) {
+                canvas.FadeAlpha(0.5f, false, this);
             }
 
             foreach (Tutorial tutorial in tutorials) {
@@ -55,10 +59,14 @@ namespace Tutorial {
                         break;
                 }
             }
-            tutorialCanvases[0].FadeCanvas(1f, false, this);
+            tutorialCanvases[0].FadeCanvas(0.5f, false, this);
         }
 
         private void TryComplete(Tutorial tutorial) {
+            Debug.Log("Completed");
+            if (finished) {
+                return;
+            }
             if (tutorials[tutorialIndex] == tutorial) {
                 UnsubscribeListener(tutorial);
                 NextPrompt();
@@ -98,13 +106,14 @@ namespace Tutorial {
             if (tutorialIndex >= tutorials.Length) {
                 return;
             }
-            tutorialCanvases[tutorialIndex].FadeCanvas(1f, true, this);
+            tutorialCanvases[tutorialIndex].FadeAlpha(1f, true, this);
             tutorialIndex++;
             if (tutorialIndex < tutorials.Length) {
-                tutorialCanvases[tutorialIndex].FadeCanvas(1f, false, this);
+                tutorialCanvases[tutorialIndex].FadeAlpha(1f, false, this);
             } else if (tutorialIndex >= tutorials.Length) { //Player finished tutorial
-                tutorialCanvases[^1].FadeCanvas(1f, true, this);
+                tutorialCanvases[^1].FadeAlpha(1f, true, this);
                 Debug.Log("Tutorial Finished");
+                finished = true;
                 Destroy(gameObject, 1.5f);
             }
         }
