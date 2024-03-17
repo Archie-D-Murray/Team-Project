@@ -15,6 +15,10 @@ public class EnemyProjectile : MonoBehaviour {
         projectileDamage = damage;
     }
 
+    public void SetProjectileSpeed(float speed) {
+        projectileSpeed = speed;
+    }
+
 
     // Start is called before the first frame update
     private void Start() {
@@ -23,7 +27,6 @@ public class EnemyProjectile : MonoBehaviour {
             Debug.LogError("Could not find player!");
             Destroy(this);
         }
-        projectileSpeed = 2.0f;
         playerLayer = 1 << LayerMask.NameToLayer("Player");
         wallLayer = 1 << LayerMask.NameToLayer("Obstacle");
         rigidBodyComponent = GetComponent<Rigidbody2D>();
