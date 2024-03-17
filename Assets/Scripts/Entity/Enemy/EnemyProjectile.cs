@@ -12,7 +12,7 @@ public class EnemyProjectile : MonoBehaviour {
     }
 
     // Start is called before the first frame update
-    private void Start() {
+    private void Awake() {
         rigidBodyComponent = GetComponent<Rigidbody2D>();
     }
 

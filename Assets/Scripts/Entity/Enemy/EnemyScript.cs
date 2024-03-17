@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 using Entity;
 using Utilities;
 
@@ -95,9 +94,9 @@ public class EnemyScript : MonoBehaviour {
     //     }
     // }
 
-    public void SetEnemyManager(EnemyManager enemyManager) {
+    public virtual void SetEnemyManager(EnemyManager enemyManager) {
         this.enemyManager = enemyManager;
-        health.onDeath += () => { 
+        health.onDeath += () => {
             enemyManager.playerLevel.AddXP(xpAmount);
             Destroy(gameObject);
         };

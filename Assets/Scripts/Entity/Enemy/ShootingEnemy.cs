@@ -55,7 +55,7 @@ namespace Entity {
             if (distanceToPlayer < attackRange && timer.isFinished) {
                 if (stats.GetStat(StatType.ATTACK_SPEED, out float attackSpeed) && stats.GetStat(StatType.DAMAGE, out float damage)) {
                     Instantiate(projectilePrefab, transform.position, Quaternion.identity)
-                        .GetComponent<EnemyProjectile>()
+                        .GetOrAddComponent<EnemyProjectile>()
                         .Init(projectileSpeed, damage, (Vector2) (playerTransform.position - transform.position).normalized);
                     timer.Restart(1f / Mathf.Max(0.001f, attackSpeed));
                 }

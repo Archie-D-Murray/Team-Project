@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using Entity.Player;
@@ -24,11 +25,15 @@ namespace Entity.Enemy {
         public void UnregisterEnemy(EnemyScript enemy) {
             if (enemies.Contains(enemy)) {
                 enemies.Remove(enemy);
-                if (enemies.Count == 0) {
-                    GameManager.instance.onLevelClear?.Invoke();
-                }
+                CheckLevelClear();
             } else {
                 Debug.LogWarning($"Tried to unregister enemy {enemy.name} that has already been unregistered?...");
+            }
+        }
+
+        public void CheckLevelClear() {
+            if (enemies.Count == 0 && GameManager.instance.bossState != BossState.ALIVE) {
+                GameManager.instance.onLevelClear?.Invoke();
             }
         }
     }

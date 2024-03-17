@@ -6,8 +6,12 @@ using Data;
 using Utilities;
 
 using System.Collections;
+using Entity.Enemy;
+
 
 namespace Entity {
+    [Serializable] public enum BossState { NONE, ALIVE, DEAD }
+
     public class BossEnemy : EnemyScript {
 
         public GameObject bossProjectilePrefab;
@@ -36,13 +40,12 @@ namespace Entity {
                 if (type != StatType.SPEED) { return; }
                 agent.speed = amount;
             };
+            GameManager.instance.RegisterBossSpawn();
 
             if (!playerTransform) {
                 Debug.LogError("Could not find player!");
                 Destroy(this);
             }
-
-
         }
 
         protected override void EnemyMovement() {
@@ -58,7 +61,7 @@ namespace Entity {
                         StartCoroutine(ChargeAttack());
                     } else {
                         GameObject bossProjectile = Instantiate(bossProjectilePrefab, transform.position, Quaternion.identity);
-                        bossProjectile.GetComponent<EnemyProjectile>().Init(bossProjectileSpeed, damage, (Vector2)(playerTransform.position - transform.position).normalized);
+                        bossProjectile.GetOrAddComponent<EnemyProjectile>().Init(bossProjectileSpeed, damage, (Vector2)(playerTransform.position - transform.position).normalized);
                     }
 
 
@@ -71,6 +74,10 @@ namespace Entity {
             }
         }
 
+        public override void SetEnemyManager(EnemyManager enemyManager) {
+            health.onDeath += () => GameManager.instance.RegisterBossDeath();
+            base.SetEnemyManager(enemyManager);
+        }
 
         private IEnumerator ChargeAttack() {
             if (stats.GetStat(StatType.SPEED, out float speed)) {

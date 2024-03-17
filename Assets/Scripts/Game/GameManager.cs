@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 
+using Entity;
 using Entity.Enemy;
 
 using UnityEngine;
@@ -13,6 +14,7 @@ public class GameManager : Singleton<GameManager> {
     public GameObject levelDoor;
     public Fading screenFader;
     public Action onLevelClear = delegate { };
+    public BossState bossState;
 
     private Coroutine levelLoad = null;
 
@@ -29,6 +31,15 @@ public class GameManager : Singleton<GameManager> {
 
     public void LoadNextLevel() {
         levelLoad ??= StartCoroutine(LoadNext());
+    }
+
+    public void RegisterBossSpawn() {
+        bossState = BossState.ALIVE;
+    }
+
+    public void RegisterBossDeath() {
+        bossState = BossState.DEAD;
+        enemyManager.CheckLevelClear();
     }
 
     private IEnumerator LoadNext() {
