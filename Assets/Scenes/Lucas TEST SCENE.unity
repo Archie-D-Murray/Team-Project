@@ -5532,6 +5532,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+      propertyPath: stats.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+      propertyPath: stats.Array.data[3].type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+      propertyPath: stats.Array.data[4].type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+      propertyPath: stats.Array.data[5].type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+      propertyPath: stats.Array.data[3].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+      propertyPath: stats.Array.data[4].value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+      propertyPath: stats.Array.data[5].value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: statDict.Array.data[2].value
       value: 5
       objectReference: {fileID: 0}
@@ -6386,6 +6414,9 @@ MonoBehaviour:
       playerCurrentMana: 0
       items: []
       spells: 
+      level: 0
+      xp: 0
+      unappliedLevels: 0
     sceneID: 0
   path: 
 --- !u!4 &955664616
@@ -6943,6 +6974,9 @@ MonoBehaviour:
   meleeMaterial: {fileID: 2100000, guid: d9233dd9d7ff00f4ebc7a9e662b79548, type: 2}
   rangedMaterial: {fileID: 2100000, guid: 0df9cb752337bb2468bfe1dbbe37b631, type: 2}
   mageMaterial: {fileID: 2100000, guid: 81813cd0a8efed443bafedff43eecc7d, type: 2}
+  meleeConfig: {fileID: 11400000, guid: 9cef4dee2c820a54780b4b10826c66be, type: 2}
+  rangedConfig: {fileID: 11400000, guid: 772b1d2b4596c944a96b67d96b47950b, type: 2}
+  mageConfig: {fileID: 11400000, guid: 56b7448a4242f8e458120346a538bf40, type: 2}
 --- !u!4 &1106140318
 Transform:
   m_ObjectHideFlags: 0

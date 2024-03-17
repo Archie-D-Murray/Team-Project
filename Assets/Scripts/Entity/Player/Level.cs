@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 
+using Data;
+
 using UnityEngine;
 
 namespace Entity.Player {
-    public class Level : MonoBehaviour {
+    public class Level : MonoBehaviour, ISerialize {
         [SerializeField] private LevelConfig config;
         [SerializeField] private Stats stats;
 
@@ -73,6 +75,22 @@ namespace Entity.Player {
             stats.IncrementStat(type, Array.Find(config.levelIncrements, (Stat stat) => stat.type == type).value);
             unappliedLevels--;
             Debug.Log($"Levelled up stat: {type}");
+        }
+        
+        public void SetConfig(LevelConfig config) {
+            this.config = config;
+        }
+
+        public void OnSerialize(ref GameData data) {
+            data.playerData.level = level;
+            data.playerData.xp = xp;
+            data.playerData.unappliedLevels = unappliedLevels;
+        }
+
+        public void OnDeserialize(GameData data) {
+            this.level = data.playerData.level;
+            this.xp = data.playerData.xp;
+            this.unappliedLevels = data.playerData.unappliedLevels;
         }
     }
 }

@@ -14,20 +14,14 @@ namespace Entity.Player {
     public class PlayerController : MonoBehaviour, ISerialize {
 
         [SerializeField] private IAttackSystem attackSystem;
-
         [SerializeField] private PlayerClass playerClass;
-
         [SerializeField] private Animator animator;
-
         [SerializeField] private Rigidbody2D rb2D;
-
         [SerializeField] private WeaponController weaponController;
-
         [SerializeField] private Vector2 lastDir;
-
         [SerializeField] private Stats stats;
-
         [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Level level;
 
         public IAttackSystem getAttackSystem => attackSystem;
         public PlayerClass getPlayerClass => playerClass;
@@ -38,6 +32,7 @@ namespace Entity.Player {
             animator = GetComponentInChildren<Animator>();
             rb2D = GetComponent<Rigidbody2D>();
             stats = GetComponent<Stats>();
+            level = GetComponent<Level>();
             weaponController = GetComponentInChildren<WeaponController>();
             spriteRenderer = GetComponentsInChildren<SpriteRenderer>().First((SpriteRenderer spriteRenderer) => spriteRenderer.gameObject != weaponController.gameObject);
             attackSystem = null;
@@ -54,6 +49,7 @@ namespace Entity.Player {
                     }
                     attackSystem = new RangedSystem(stats, transform, weaponController, bowData);
                     weaponController.SetWeapon(bowData);
+                    level.SetConfig(AssetServer.instance.rangedConfig);
                     break;
 
                 case PlayerClass.MELEE:
@@ -64,6 +60,7 @@ namespace Entity.Player {
                     }
                     attackSystem = new MeleeSystem(stats, transform, weaponController, swordData);
                     weaponController.SetWeapon(swordData);
+                    level.SetConfig(AssetServer.instance.meleeConfig);
                     break;
 
                 case PlayerClass.MAGE:
@@ -74,6 +71,7 @@ namespace Entity.Player {
                     }
                     attackSystem = new MageSystem(stats, transform, weaponController, staffData, GetComponent<Mana>());
                     weaponController.SetWeapon(staffData);
+                    level.SetConfig(AssetServer.instance.mageConfig);
                     break;
 
                 default:
@@ -113,14 +111,17 @@ namespace Entity.Player {
             }
             switch (playerClass) {
                 case PlayerClass.RANGED:
+                    level.SetConfig(AssetServer.instance.rangedConfig);
                     SetWeapon<BowData>(inventory.items[data.playerData.weaponIndex].itemData as BowData);
                     weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as BowData);
                     break;
                 case PlayerClass.MELEE:
+                    level.SetConfig(AssetServer.instance.meleeConfig);
                     SetWeapon<SwordData>(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
                     weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
                     break;
                 case PlayerClass.MAGE:
+                    level.SetConfig(AssetServer.instance.mageConfig);
                     SetWeapon<MageStaffData>(inventory.items[data.playerData.weaponIndex].itemData as MageStaffData);
                     weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as MageStaffData);
                     break;

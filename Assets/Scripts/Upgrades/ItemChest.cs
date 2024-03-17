@@ -46,7 +46,7 @@ namespace Upgrades {
         }
 
         private void OnTriggerStay2D(Collider2D collider) {
-            if (!collider.gameObject.HasComponent<PlayerController>() || looted || !canShow) {
+            if (!collider.gameObject.HasComponent<PlayerController>() || looted || !canShow || !UILock.instance.allowGameplay) {
                 return;
             }
             if (collider.TryGetComponent(out Inventory inventory) && Utilities.Input.instance.playerControls.Gameplay.Interact.ReadValue<float>() == 1f) {

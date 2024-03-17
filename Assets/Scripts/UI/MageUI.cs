@@ -33,18 +33,11 @@ public class MageUI : MonoBehaviour {
         mageSystem = playerController.getAttackSystem as MageSystem;
         spellHotBarSlots = FindFirstObjectByType<SpellHotbar>().GetComponentsInChildren<Image>().Where((Image image) => image.gameObject.HasComponent<SpellSlot>()).ToArray();
         Array.ForEach(spellHotBarSlots, (Image image) => image.sprite = noSpellIcon);
-        Utilities.Input.instance.playerControls.UI.SpellMenu.started += (InputAction.CallbackContext context) => Toggle();
+        Utilities.Input.instance.playerControls.UI.SpellMenu.started += (InputAction.CallbackContext context) => Show();
+        Utilities.Input.instance.playerControls.UI.Cancel.started += (InputAction.CallbackContext context) => Hide();
         if (playerController.getAttackSystem is not MageSystem) {
             gameObject.SetActive(false);
             return;
-        }
-    }
-
-    private void Toggle() {
-        if (canvas.alpha == 1f) {
-            Hide();
-        } else {
-            Show();
         }
     }
 
@@ -72,6 +65,7 @@ public class MageUI : MonoBehaviour {
     }
 
     public void Show() {
+        UILock.instance.OpenUI();
         for (int i = 0; i < mageSystem.GetSpells().Length; i++) {
             spellHotBarSlots[i].sprite = mageSystem.GetSpells()[i] ? mageSystem.GetSpells()[i].icon : noSpellIcon;
         }
@@ -100,6 +94,7 @@ public class MageUI : MonoBehaviour {
             }
             Destroy(child.gameObject);
         }
+        UILock.instance.CloseUI();
     }
 
     private void Update() {

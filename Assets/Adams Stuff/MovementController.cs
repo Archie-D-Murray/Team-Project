@@ -68,6 +68,15 @@ public class MovementController : MonoBehaviour {
 
     private void FixedUpdate() {
         InsertNewPosition();
+        if (!UILock.instance.allowGameplay) {
+            if (!canMove) {
+                rigidBody.velocity = velocity;
+                return;
+            } else {
+                rigidBody.velocity = Vector2.zero;
+                return;
+            }
+        }
         if (canMove) {
             velocity = inputDirection.normalized * speed;
         }

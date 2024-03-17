@@ -31,9 +31,11 @@ namespace UI {
             Utilities.Input.instance.playerControls.UI.Cancel.started -= EscapeMenu;
             lootBox.ResetCanShow();
             upgradeCanvas.FadeCanvas(0.1f, true, this);
+            UILock.instance.CloseUI();
         }
 
         public void Show(Upgrade[] upgrades, Stats stats, LootBox origin) {
+            UILock.instance.OpenUI();
             Utilities.Input.instance.playerControls.UI.Cancel.started += EscapeMenu;
             if (!lootBox || lootBox != origin) {
                 if (lootBox) {
@@ -59,6 +61,7 @@ namespace UI {
             }
             upgradeCanvas.FadeCanvas(0.1f, true, this);
             Utilities.Input.instance.playerControls.UI.Cancel.started -= EscapeMenu;
+            UILock.instance.CloseUI();
         }
     }
 }

@@ -31,6 +31,7 @@ namespace UI {
         }
 
         public void Show(Item[] items, Inventory playerInventory, ItemChest originChest, bool isMultiAdd) {
+            UILock.instance.OpenUI();
             Utilities.Input.instance.playerControls.UI.Cancel.started += EscapeMenu;
             if (!chest || originChest != chest) { //Removes references to old chests
                 chest.OrNull()?.ResetCanShow();
@@ -114,12 +115,14 @@ namespace UI {
                 Destroy(child.gameObject);
             }
             Utilities.Input.instance.playerControls.UI.Cancel.started -= EscapeMenu;
+            UILock.instance.CloseUI();
         }
 
         public void EscapeMenu(InputAction.CallbackContext _) {
             Utilities.Input.instance.playerControls.UI.Cancel.started -= EscapeMenu;
             canvas.FadeCanvas(0.1f, true, this);
             chest.OrNull()?.ResetCanShow();
+            UILock.instance.CloseUI();
         }
     }
 }

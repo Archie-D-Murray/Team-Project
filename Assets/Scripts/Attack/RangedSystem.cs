@@ -33,6 +33,9 @@ namespace Attack {
 
         public void FixedUpdate() {
             attackTimer.Update(Time.fixedDeltaTime);
+            if (!UILock.instance.allowGameplay) {
+                return;
+            }
             if (attackTimer.isFinished && Utilities.Input.instance.playerControls.Gameplay.Attack.IsPressed()) {
                 Attack(origin);
                 ResetAttackTimer();

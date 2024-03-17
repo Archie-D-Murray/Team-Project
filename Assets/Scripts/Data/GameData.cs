@@ -27,5 +27,8 @@ namespace Data {
         public float playerCurrentMana;
         public List<SerializableItem> items;
         public List<int> spells;
+        public int level;
+        public int xp;
+        public int unappliedLevels;
     }
 }

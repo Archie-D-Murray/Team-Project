@@ -35,6 +35,9 @@ namespace Attack {
         }
 
         public void FixedUpdate() {
+            if (!UILock.instance.allowGameplay) {
+                return;
+            }
             if (Utilities.Input.instance.playerControls.Gameplay.Attack.IsPressed() && canAttack) {
                 swordAnimator.attackState = SwordAnimator.AttackState.NORMAL;
                 swordAnimator.damageCallback += NormalAttack;

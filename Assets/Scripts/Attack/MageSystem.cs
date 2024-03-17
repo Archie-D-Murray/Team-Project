@@ -51,7 +51,7 @@ namespace Attack {
 
         public void FixedUpdate() {
             cooldown.Update(Time.fixedDeltaTime);
-            if (!cooldown.isFinished) {
+            if (!cooldown.isFinished || !UILock.instance.allowGameplay) {
                 return;
             }
             if (Utilities.Input.instance.playerControls.Gameplay.UseSpellOne.IsPressed()) {

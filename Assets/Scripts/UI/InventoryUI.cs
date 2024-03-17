@@ -83,6 +83,7 @@ namespace UI {
         }
 
         public void Show() {
+            UILock.instance.OpenUI();
             UpdateInventory();
             canvasGroup.FadeCanvas(0.1f, false, this);
         }
@@ -96,6 +97,7 @@ namespace UI {
 
         public void Hide() {
             canvasGroup.FadeCanvas(0.1f, true, this);
+            UILock.instance.CloseUI();
         }
 
         [Serializable] class ItemSlot {

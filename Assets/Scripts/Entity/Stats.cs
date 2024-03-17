@@ -5,15 +5,17 @@ using UnityEngine;
 
 using Data;
 using System.Linq;
+using System.Collections;
 
 namespace Entity {
-    public class Stats : MonoBehaviour, ISerialize {
-        private static Stat[] DefaultStats = new Stat[5] { 
+    public class Stats : MonoBehaviour, ISerialize, IEnumerable {
+        private static Stat[] DefaultStats = new Stat[6] { 
             new Stat(StatType.HEALTH      ,  10f),  
             new Stat(StatType.SPEED       ,   5f),
             new Stat(StatType.DAMAGE      ,   1f),
-            new Stat(StatType.MAGIC       ,   0f),
-            new Stat(StatType.ATTACK_SPEED,   1f)
+            new Stat(StatType.ATTACK_SPEED,   1f),
+            new Stat(StatType.MAGIC       ,   10f),
+            new Stat(StatType.MANA        ,  10f),
         };
 
         #region Enum => String cache
@@ -25,12 +27,14 @@ namespace Entity {
         private const string Mana = "MAX MANA";
         #endregion
 
-        public Stat[] statDict = Stats.DefaultStats;
+        [SerializeField] private Stat[] stats = Stats.DefaultStats;
         public Action<StatType, float> updateStat;
         public Dictionary<StatType, StatModifier> statModifers = new Dictionary<StatType, StatModifier>();
 
         private float lastUpdate = 0;
         private List<StatType> toRemove = new List<StatType>();
+
+        public int Length => stats.Length;
 
         private void Start() {
             lastUpdate = Time.time;
@@ -64,7 +68,7 @@ namespace Entity {
             return statInstance != null;
         }
 
-        private Stat FindStat(StatType type) => Array.Find(statDict, (Stat stat) => stat.type == type);
+        private Stat FindStat(StatType type) => Array.Find(stats, (Stat stat) => stat.type == type);
 
         public void UpdateStat(StatType type, float amount, bool setToValue = false) {
             Stat stat = FindStat(type);
@@ -101,16 +105,16 @@ namespace Entity {
         }
 
         public void OnSerialize(ref GameData data) {
-            data.playerData.stats = new List<Stat>(statDict.Length);
-            foreach (Stat stat in statDict) {
+            data.playerData.stats = new List<Stat>(stats.Length);
+            foreach (Stat stat in stats) {
                 data.playerData.stats.Add(stat);
             }
         }
 
         public void OnDeserialize(GameData data) {
-            statDict = new Stat[data.playerData.stats.Count];
+            stats = new Stat[data.playerData.stats.Count];
             for (int i = 0; i < data.playerData.stats.Count; i++) {
-                statDict[i] = data.playerData.stats[i];
+                stats[i] = data.playerData.stats[i];
             }
         }
 
@@ -122,5 +126,15 @@ namespace Entity {
                 Debug.LogWarning($"Tried to update stat that does not exist: {type}");
             }
         }
+
+        public IEnumerator GetEnumerator() {
+            return stats.GetEnumerator();
+        }
+
+        public IEnumerable<Stat> GetStats() {
+            return stats;
+        }
+
+        public Stat this[int index] => this.stats[index];
     }
 }

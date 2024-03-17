@@ -17,7 +17,6 @@ namespace Entity {
         public GameObject bossProjectilePrefab;
         public GameObject enemyMinion;
         NavMeshAgent agent;
-        private int numberOfAttack = 0;
         private CountDownTimer attackTimer = new CountDownTimer(0f);
         [SerializeField] private float bossProjectileSpeed;
         [SerializeField] private float chargeSpeed;
