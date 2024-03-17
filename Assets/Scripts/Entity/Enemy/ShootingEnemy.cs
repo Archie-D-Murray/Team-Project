@@ -10,7 +10,7 @@ using Utilities;
 namespace Entity {
     public class ShootingEnemy : EnemyScript {
 
-        public GameObject projectile;
+        [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private float aggroRange;
         [SerializeField] private float projectileSpeed;
         NavMeshAgent agent;
@@ -54,9 +54,9 @@ namespace Entity {
             distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
             if (distanceToPlayer < attackRange && timer.isFinished) {
                 if (stats.GetStat(StatType.ATTACK_SPEED, out float attackSpeed) && stats.GetStat(StatType.DAMAGE, out float damage)) {
-                    projectile.GetComponent<EnemyProjectile>().SetDamage(damage);
-                    projectile.GetComponent<EnemyProjectile>().SetProjectileSpeed(projectileSpeed);
-                    Instantiate(projectile, transform.position, Quaternion.identity);
+                    Instantiate(projectilePrefab, transform.position, Quaternion.identity)
+                        .GetComponent<EnemyProjectile>()
+                        .Init(projectileSpeed, damage, (Vector2) (playerTransform.position - transform.position).normalized);
                     timer.Restart(1f / Mathf.Max(0.001f, attackSpeed));
                 }
                 

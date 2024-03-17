@@ -5,16 +5,14 @@ using UnityEngine.AI;
 using Data;
 using Utilities;
 
-using Random = System.Random;
 using System.Collections;
 
 namespace Entity {
     public class BossEnemy : EnemyScript {
 
-        public GameObject bossProjectile;
+        public GameObject bossProjectilePrefab;
         public GameObject enemyMinion;
         NavMeshAgent agent;
-        private Random randomAttack = new Random();
         private int numberOfAttack = 0;
         private CountDownTimer attackTimer = new CountDownTimer(0f);
         [SerializeField] private float bossProjectileSpeed;
@@ -44,7 +42,7 @@ namespace Entity {
                 Destroy(this);
             }
 
-            
+
         }
 
         protected override void EnemyMovement() {
@@ -54,23 +52,19 @@ namespace Entity {
         protected override void EnemyAttacks() {
 
             if (timer.isFinished) {
-                numberOfAttack = randomAttack.Next(1, 21);
+                // numberOfAttack = UnityEngine.Random.Range(1, 21);
                 if (stats.GetStat(StatType.ATTACK_SPEED, out float attackSpeed) && stats.GetStat(StatType.DAMAGE, out float damage)) {
-                    if(numberOfAttack <= 8) {
+                    if (UnityEngine.Random.value <= 0.4f) { //40% Chance to do charge
                         StartCoroutine(ChargeAttack());
-                    }
-                    else if (numberOfAttack >= 9) {
-                        bossProjectile.GetComponent<EnemyProjectile>().SetDamage(damage);
-                        bossProjectile.GetComponent<EnemyProjectile>().SetProjectileSpeed(bossProjectileSpeed);
-                        Instantiate(bossProjectile, transform.position, Quaternion.identity);
+                    } else {
+                        GameObject bossProjectile = Instantiate(bossProjectilePrefab, transform.position, Quaternion.identity);
+                        bossProjectile.GetComponent<EnemyProjectile>().Init(bossProjectileSpeed, damage, (Vector2)(playerTransform.position - transform.position).normalized);
                     }
 
-                    
-                    if(health.getCurrentHealth <= health.getMaxHealth/2 ) {
+
+                    if (health.getCurrentHealth <= health.getMaxHealth / 2) {
                         StartCoroutine(SpawnEnemy());
                     }
-                    
-                    
                     timer.Restart(1f / Mathf.Max(0.001f, attackSpeed));
                 }
 
@@ -82,22 +76,19 @@ namespace Entity {
             if (stats.GetStat(StatType.SPEED, out float speed)) {
                 yield return new WaitForSeconds(3f);
                 agent.speed = chargeSpeed;
-                if (Physics2D.OverlapCircle(rigidBody.position, attackRange, playerLayer).TryGetComponent(out Health health) && stats.GetStat(StatType.DAMAGE, out float damage)) {
+                if ((Physics2D.OverlapCircle(rigidBody.position, attackRange, playerLayer).OrNull()?.TryGetComponent(out Health health) ?? false) && stats.GetStat(StatType.DAMAGE, out float damage)) {
                     health.Damage(damage);
                 }
                 yield return new WaitForSeconds(0.2f);
 
                 agent.speed = speed;
-                
+
             }
         }
 
         private IEnumerator SpawnEnemy() {
-
             yield return new WaitForSeconds(enemySpawnRate);
             Instantiate(enemyMinion, transform.position, Quaternion.identity);
-
-            
         }
     }
 }

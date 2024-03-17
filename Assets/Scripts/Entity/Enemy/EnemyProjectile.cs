@@ -1,39 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Entity.Player;
 using Entity;
 public class EnemyProjectile : MonoBehaviour {
 
-    private Transform playerTransform;
     private Rigidbody2D rigidBodyComponent;
-    [SerializeField] private LayerMask wallLayer;
-    [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float projectileDamage;
-    public void SetDamage(float damage) {
-        projectileDamage = damage;
+    
+    public void Init(float projectileSpeed, float projectileDamage, Vector2 dir) {
+        rigidBodyComponent.velocity = dir * projectileSpeed;
+        this.projectileDamage = projectileDamage;
     }
-
-    public void SetProjectileSpeed(float speed) {
-        projectileSpeed = speed;
-    }
-
 
     // Start is called before the first frame update
     private void Start() {
-        playerTransform = FindObjectOfType<PlayerController>().OrNull()?.transform ?? null;
-        if (!playerTransform) {
-            Debug.LogError("Could not find player!");
-            Destroy(this);
-        }
-        playerLayer = 1 << LayerMask.NameToLayer("Player");
-        wallLayer = 1 << LayerMask.NameToLayer("Obstacle");
         rigidBodyComponent = GetComponent<Rigidbody2D>();
-
-        Vector3 projectileDirection = playerTransform.position - transform.position;
-
-        rigidBodyComponent.velocity = new Vector2(projectileDirection.x, projectileDirection.y).normalized * projectileSpeed;
     }
 
 
