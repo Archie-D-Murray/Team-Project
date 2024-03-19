@@ -17,18 +17,11 @@ namespace UI {
         [Header("Debug")]
         [SerializeField] private float currentProgress;
         [SerializeField] private TMP_Text levelReadout;
-        [SerializeField] private TMP_Text xpReadout;
         [SerializeField] private Image bar;
 
         private void Start() {
-            bar = GetComponentsInChildren<Image>().FirstOrDefault((Image image) => image.gameObject.HasComponent<BarImage>());
-            foreach (TMP_Text text in GetComponentsInChildren<TMP_Text>()) {
-                if (text.gameObject.HasComponent<XPReadout>()) {
-                    xpReadout = text;
-                } else if (text.gameObject.HasComponent<LevelReadout>()) {
-                    levelReadout = text;
-                }
-            }
+            bar = GetComponent<Image>();
+            levelReadout = GetComponentInChildren<TMP_Text>();
             level.onEarnXP += (float _) => UpdateReadouts();
             level.onLevelUp += (int _) => UpdateReadouts();
             UpdateReadouts();
@@ -40,8 +33,7 @@ namespace UI {
         }
 
         private void UpdateReadouts() {
-            xpReadout.text = $"XP: {level.currentXP} / {level.levelXP} ({level.xpProgress:0%})";
-            levelReadout.text = level.currentLevel.ToString();
+            levelReadout.text = $"LVL: {level.currentLevel}";
         }
     }
 }

@@ -70,7 +70,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.241
+    - _OutlineWidth: 0.333
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
@@ -118,11 +118,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Damage Font
+  m_Name: Level Font
   m_EditorClassIdentifier: 
-  hashCode: -2054584616
+  hashCode: -1410411643
   material: {fileID: -4476552313153475566}
-  materialHashCode: -1930193928
+  materialHashCode: -1617894907
   m_Version: 1.1.0
   m_SourceFontFileGUID: 3d0a53fbcb1e10649b662945d28d6fef
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 3d0a53fbcb1e10649b662945d28d6fef, type: 3}
