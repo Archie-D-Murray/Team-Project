@@ -17,8 +17,8 @@ MonoBehaviour:
   sprite: {fileID: -939222297, guid: 4e4c0e1ba5511ff4c8ad38fd45dd4085, type: 3}
   itemName: Amateurs Bow
   maxCount: 1
-  damageModifier: 2.5
-  drawTimeModifier: 0.75
+  damageModifier: 1.5
+  drawTimeModifier: 0.001
   projectileSpeed: 400
   missileDuration: 2
   projectiles: 1

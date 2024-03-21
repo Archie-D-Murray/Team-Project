@@ -17,12 +17,12 @@ MonoBehaviour:
   sprite: {fileID: -1945515624, guid: 1389237a0d9eaa744bcc5b54170e8cd4, type: 3}
   itemName: Royal Bow
   maxCount: 1
-  damageModifier: 5
-  drawTimeModifier: 0.5
-  projectileSpeed: 750
+  damageModifier: 3
+  drawTimeModifier: 1
+  projectileSpeed: 600
   missileDuration: 2
   projectiles: 3
-  spreadAngle: 90
+  spreadAngle: 45
   projectile: {fileID: 8508758827916593260, guid: 26a8e135a7502264384a673c28d9e0fc, type: 3}
   frames:
   - {fileID: -1009162342, guid: 1389237a0d9eaa744bcc5b54170e8cd4, type: 3}
