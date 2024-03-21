@@ -17,12 +17,12 @@ MonoBehaviour:
   sprite: {fileID: 1334405678, guid: 8b09af79b1c92d044b683719643843ea, type: 3}
   itemName: Apollo's Bow
   maxCount: 1
-  damageModifier: 7
-  drawTimeModifier: 0.4
-  projectileSpeed: 750
+  damageModifier: 4
+  drawTimeModifier: 0.8
+  projectileSpeed: 700
   missileDuration: 2
   projectiles: 5
-  spreadAngle: 90
+  spreadAngle: 60
   projectile: {fileID: 8508758827916593260, guid: 1797c8e6b97d77144952af57a860abca, type: 3}
   frames:
   - {fileID: -1037849607, guid: 8b09af79b1c92d044b683719643843ea, type: 3}

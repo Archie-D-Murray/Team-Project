@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43bcc2d57591d9241a702ebf2bf009e7, type: 3}
+  m_Name: Proper Sword
+  m_EditorClassIdentifier: 
+  id: 1033028136
+  icon: {fileID: -1629465344, guid: 410154f10dcebef44bd9b135328781d9, type: 3}
+  sprite: {fileID: 21300000, guid: 69817fbb62d1fde45a97cd2967146013, type: 3}
+  itemName: Proper Sword
+  maxCount: 1
+  radius: 2.5
+  damageModifier: 1.5
+  attackSpeedModifier: 2
+  stabDamageModifier: 2
+  spinDamageModifier: 2.5

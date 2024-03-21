@@ -17,9 +17,9 @@ MonoBehaviour:
   sprite: {fileID: 832080717, guid: d8a15ff50324efb4ea3bc0655e380564, type: 3}
   itemName: Archers  Bow
   maxCount: 1
-  damageModifier: 4
-  drawTimeModifier: 0.5
-  projectileSpeed: 600
+  damageModifier: 2
+  drawTimeModifier: 1.25
+  projectileSpeed: 500
   missileDuration: 2
   projectiles: 1
   spreadAngle: 0

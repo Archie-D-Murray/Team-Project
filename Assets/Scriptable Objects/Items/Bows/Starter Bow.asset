@@ -18,7 +18,7 @@ MonoBehaviour:
   itemName: Starter  Bow
   maxCount: 1
   damageModifier: 1
-  drawTimeModifier: 1
+  drawTimeModifier: 2
   projectileSpeed: 400
   missileDuration: 2
   projectiles: 1

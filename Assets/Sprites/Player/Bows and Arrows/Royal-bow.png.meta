@@ -114,9 +114,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 23
-        height: 27
+        y: 46
+        width: 27
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: Royal-bow_1
       rect:
         serializedVersion: 2
-        x: 23
-        y: 0
-        width: 23
-        height: 27
+        x: 0
+        y: 23
+        width: 27
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: Royal-bow_2
       rect:
         serializedVersion: 2
-        x: 46
+        x: 0
         y: 0
-        width: 23
-        height: 27
+        width: 27
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
