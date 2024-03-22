@@ -36,7 +36,7 @@ namespace Entity.Player {
             weaponController = GetComponentInChildren<WeaponController>();
             spriteRenderer = GetComponentsInChildren<SpriteRenderer>().First((SpriteRenderer spriteRenderer) => spriteRenderer.gameObject != weaponController.gameObject);
             attackSystem = null;
-            DebugInitialise();
+            // DebugInitialise();
         }
 
         public void DebugInitialise(PlayerClass? newClass = null) {

@@ -35,7 +35,9 @@ public class GameManager : Singleton<GameManager> {
     }
 
     private void InitPlayer() {
+        Debug.Log(SaveManager.instance.playerSpawnClass);
         FindFirstObjectByType<PlayerController>().DebugInitialise(SaveManager.instance.playerSpawnClass);
+        Debug.Log("Inited player");
     }
 
     public void LoadNextLevel() {

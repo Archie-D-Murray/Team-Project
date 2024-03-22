@@ -14,7 +14,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject[] classPage;
 
     private void Start() {
-        GoMainPage();    
+        GoMainPage();
     }
 
     public void GoClassPage() {
@@ -36,6 +36,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void StartGame(int playerClass) {
+        Debug.Log($"Starting {(PlayerClass) playerClass} game");
         //singleton stuff idk lol
         SaveManager.instance.SetPlayerClass((PlayerClass) playerClass);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

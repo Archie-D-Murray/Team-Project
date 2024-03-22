@@ -14,7 +14,7 @@ namespace Data {
 
         [SerializeField] private List<ISerialize> serializeObjects;
 
-        public Entity.Player.PlayerClass playerSpawnClass { get; private set; }
+        public Entity.Player.PlayerClass playerSpawnClass;
 
         [SerializeField] string path;
 
