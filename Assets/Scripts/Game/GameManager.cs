@@ -31,11 +31,11 @@ public class GameManager : Singleton<GameManager> {
         }
         screenFader = FindFirstObjectByType<Fading>();
         screenFader.Fade(Color.clear);
+        InitPlayer();
     }
 
-    private void SpawnPlayer() {
-        PlayerController player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<PlayerController>();
-        player.DebugInitialise(SaveManager.instance.playerSpawnClass);
+    private void InitPlayer() {
+        FindFirstObjectByType<PlayerController>().DebugInitialise(SaveManager.instance.playerSpawnClass);
     }
 
     public void LoadNextLevel() {
