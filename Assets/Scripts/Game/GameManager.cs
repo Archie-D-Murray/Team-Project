@@ -61,4 +61,16 @@ public class GameManager : Singleton<GameManager> {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         yield return Yielders.waitForEndOfFrame;
     }
+
+    internal void LoadMainMenu() {
+        StartCoroutine(MainMenu());
+    }
+
+    private IEnumerator MainMenu() {
+        screenFader.Fade(Color.black);
+        while (!screenFader.isFinished) {
+            yield return Yielders.waitForEndOfFrame;
+        }
+        SceneManager.LoadScene(0);
+    }
 }

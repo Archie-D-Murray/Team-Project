@@ -91,5 +91,12 @@ namespace Data {
         public void SetPlayerClass(PlayerClass playerClass) {
             playerSpawnClass = playerClass;
         }
+
+        public void DeleteSave() {
+            if (!File.Exists(path)) {
+                return;
+            }
+            File.Delete(path);
+        }
     }
 }
