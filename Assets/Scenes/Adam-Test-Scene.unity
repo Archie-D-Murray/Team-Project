@@ -3230,6 +3230,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 845383371469242258, guid: 1da4a351f8c037941ac892482b928598, type: 3}
   m_PrefabInstance: {fileID: 1871505069}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &252936695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 252936697}
+  - component: {fileID: 252936696}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &252936696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252936695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2ab5e8e351cfd41882418d6e84c57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyManager: {fileID: 0}
+  levelDoor: {fileID: 0}
+  screenFader: {fileID: 0}
+  bossState: 0
+  playerPrefab: {fileID: 1480395804013001680, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+--- !u!4 &252936697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252936695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &292030908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 845383371469242258, guid: 1da4a351f8c037941ac892482b928598, type: 3}
@@ -3377,7 +3426,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7165087139544707320, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1696566285}
+      addedObject: {fileID: 1696566276}
   m_SourcePrefab: {fileID: 100100000, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
 --- !u!1001 &498039348
 PrefabInstance:
@@ -4106,6 +4155,9 @@ MonoBehaviour:
       playerCurrentMana: 0
       items: []
       spells: 
+      level: 0
+      xp: 0
+      unappliedLevels: 0
     sceneID: 0
   path: 
 --- !u!4 &955664616
@@ -4861,6 +4913,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c32bbb295046ff84cb459cfa1209b22c, type: 2}
   flashMaterial: {fileID: 2100000, guid: 7a015747d8a95a440a9b6ea52b111fac, type: 2}
   slash: {fileID: 0}
+  meleeMaterial: {fileID: 0}
+  rangedMaterial: {fileID: 0}
+  mageMaterial: {fileID: 0}
+  meleeConfig: {fileID: 0}
+  rangedConfig: {fileID: 0}
+  mageConfig: {fileID: 0}
 --- !u!4 &1106140318
 Transform:
   m_ObjectHideFlags: 0
@@ -5034,7 +5092,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7165087139544707320, guid: fe023d90ed04fa745b352bc2b415053d, type: 3}
   m_PrefabInstance: {fileID: 432260171}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1696566285
+--- !u!114 &1696566276
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5043,11 +5101,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1696566275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be833edaafebd703b8c7af3ba7b040a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 97bdac6f22b63fa4fb19d0d47c1a89a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 0}
   rb2D: {fileID: 0}
+  obstacles:
+    serializedVersion: 2
+    m_Bits: 0
+  delay: 0.5
+  agent: {fileID: 0}
 --- !u!4 &1725941140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 845383371469242258, guid: 1da4a351f8c037941ac892482b928598, type: 3}
@@ -8672,6 +8735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   looted: 0
+  canShow: 1
   upgrades:
   - {fileID: 11400000, guid: 04ed87daee308284e81466a2214c8887, type: 2}
   - {fileID: 11400000, guid: 77319743ffe176242994d4f84bac3949, type: 2}
