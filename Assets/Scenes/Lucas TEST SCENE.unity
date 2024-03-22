@@ -5531,6 +5531,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9042680454101819896, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+      propertyPath: items.Array.data[5].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: aab1e16bee37ff84caf8d7e91841d556, type: 2}
     - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: stats.Array.size
       value: 6
@@ -7982,7 +7986,7 @@ MonoBehaviour:
   - itemData: {fileID: 11400000, guid: e17901be3dca61c4cae84994e204e3a0, type: 2}
     type: 1
     count: 3
-  - itemData: {fileID: 11400000, guid: 326d4b0b8577aeb4a91660308035492e, type: 2}
+  - itemData: {fileID: 11400000, guid: 9a4cac3087cda8a4e9f29f8dddb2fb22, type: 2}
     type: 3
     count: 1
   - itemData: {fileID: 11400000, guid: 9b64cd2c98a4f5043a080a3549ea9bc2, type: 2}

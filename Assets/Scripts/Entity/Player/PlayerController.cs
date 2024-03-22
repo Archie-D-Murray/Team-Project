@@ -39,7 +39,10 @@ namespace Entity.Player {
             DebugInitialise();
         }
 
-        public void DebugInitialise() {
+        public void DebugInitialise(PlayerClass? newClass = null) {
+            if (newClass != null) {
+                playerClass = newClass.GetValueOrDefault(playerClass);
+            }
             switch (playerClass) {
                 case PlayerClass.RANGED:
                     spriteRenderer.material = AssetServer.instance.rangedMaterial;

@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 
+using Data;
+
 using Entity;
 using Entity.Enemy;
+using Entity.Player;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +20,7 @@ public class GameManager : Singleton<GameManager> {
     public BossState bossState;
 
     private Coroutine levelLoad = null;
+    [SerializeField] private GameObject playerPrefab;
 
     private void Start() {
         levelDoor = FindFirstObjectByType<LevelDoor>(FindObjectsInactive.Include).OrNull()?.gameObject;
@@ -27,6 +31,11 @@ public class GameManager : Singleton<GameManager> {
         }
         screenFader = FindFirstObjectByType<Fading>();
         screenFader.Fade(Color.clear);
+    }
+
+    private void SpawnPlayer() {
+        PlayerController player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<PlayerController>();
+        player.DebugInitialise(SaveManager.instance.playerSpawnClass);
     }
 
     public void LoadNextLevel() {

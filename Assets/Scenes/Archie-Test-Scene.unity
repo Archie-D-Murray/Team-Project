@@ -5844,6 +5844,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9042680454101819896, guid: c4355440c72d93d489999cfef79480ae, type: 3}
+      propertyPath: items.Array.data[5].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: aab1e16bee37ff84caf8d7e91841d556, type: 2}
     - target: {fileID: 9078072900660920934, guid: c4355440c72d93d489999cfef79480ae, type: 3}
       propertyPath: statDict.Array.data[2].value
       value: 5
@@ -6643,6 +6647,10 @@ PrefabInstance:
     - target: {fileID: 7165087139544707320, guid: 49cd8144ee3759f40b3b4e3d74bdf251, type: 3}
       propertyPath: m_Name
       value: ShootingEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165087139544707320, guid: 49cd8144ee3759f40b3b4e3d74bdf251, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8084363519355557401, guid: 49cd8144ee3759f40b3b4e3d74bdf251, type: 3}
       propertyPath: projectileSpeed
@@ -9313,7 +9321,7 @@ MonoBehaviour:
   - itemData: {fileID: 11400000, guid: e17901be3dca61c4cae84994e204e3a0, type: 2}
     type: 1
     count: 3
-  - itemData: {fileID: 11400000, guid: 326d4b0b8577aeb4a91660308035492e, type: 2}
+  - itemData: {fileID: 11400000, guid: c71e4e9b0aa88f447bdf52af019c042d, type: 2}
     type: 3
     count: 1
   - itemData: {fileID: 11400000, guid: 7b61c32e6b2b13a4099f816103150624, type: 2}

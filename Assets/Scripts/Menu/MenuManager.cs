@@ -1,5 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+
+using Data;
+
+using Entity.Player;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,6 +37,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame(int playerClass) {
         //singleton stuff idk lol
+        SaveManager.instance.SetPlayerClass((PlayerClass) playerClass);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

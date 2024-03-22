@@ -10,7 +10,7 @@ namespace Entity.Player {
         [SerializeField] private float swingRotation = 180f;
         [SerializeField] private float swingDirection = 1f;
         [SerializeField] private float angleOffset = 90f;
-        [SerializeField] private float spriteOffset = -45f;
+        [SerializeField] private float spriteOffset = 0f;
         [SerializeField] private float charge = 0f;
         [SerializeField] private Quaternion stabRotation;
         public float spinTickTime = 0.25f;

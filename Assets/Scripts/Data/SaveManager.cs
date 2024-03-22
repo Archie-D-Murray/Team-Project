@@ -5,12 +5,16 @@ using UnityEngine;
 using System.IO;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Entity.Player;
+using System;
 
 namespace Data {
     public class SaveManager : PersistentSingleton<SaveManager> {
         [SerializeField] private GameData data;
 
         [SerializeField] private List<ISerialize> serializeObjects;
+
+        public Entity.Player.PlayerClass playerSpawnClass { get; private set; }
 
         [SerializeField] string path;
 
@@ -82,6 +86,10 @@ namespace Data {
             } else {
                 return new List<ISerialize>(serializeObjects);
             }
+        }
+
+        public void SetPlayerClass(PlayerClass playerClass) {
+            playerSpawnClass = playerClass;
         }
     }
 }
