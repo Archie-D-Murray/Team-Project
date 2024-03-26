@@ -19,7 +19,7 @@ namespace Entity {
         public override void Knockback(float damage, KnockbackData data) {
             if (data.applyKnockback) {
                 movementController.enabled = false;
-                rb2D.AddForce((rb2D.position - data.pos).normalized * damage, ForceMode2D.Impulse);
+                rb2D.AddForce((rb2D.position - data.pos).normalized * magnitudeModifier * damage, ForceMode2D.Impulse);
                 StartCoroutine(ResetController());
             }
         }
