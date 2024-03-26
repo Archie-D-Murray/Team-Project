@@ -4,7 +4,6 @@ using System.Collections;
 using Items;
 
 using UnityEngine;
-using UnityEngine.U2D;
 
 using Utilities;
 
@@ -28,7 +27,7 @@ namespace Entity.Player {
 
         public void SetWeapon(BowData data) {
             frames = data.frames;
-            spriteRenderer.sprite = data.frames[data.frames.Length - 1];
+            spriteRenderer.sprite = data.frames[^1];
         }
 
         protected override IEnumerator WeaponAttack(float attackTime) {
@@ -39,7 +38,7 @@ namespace Entity.Player {
                 renderer.sprite = frames[Mathf.Clamp(Mathf.FloorToInt(3f * (timer / attackTime)), 0, frames.Length - 1)];
                 yield return Yielders.waitForFixedUpdate;
             }
-            renderer.sprite = frames[frames.Length - 1];
+            renderer.sprite = frames[^1];
         }
     }
 }
