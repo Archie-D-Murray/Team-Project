@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Entity {
     public abstract class KnockbackHandler : MonoBehaviour {
         [SerializeField] protected Health health;
+        [SerializeField] protected float magnitudeModifier = 0.25f;
         [SerializeField] protected Rigidbody2D rb2D;
         [SerializeField] protected LayerMask obstacles;
         [SerializeField] protected float delay = 0.5f;
