@@ -20,11 +20,11 @@ public class MenuManager : MonoBehaviour {
 
     private void Start() {
         if (CheckForExistingSave()) {
-            playButtonText.text = ">Continue";
+            playButtonText.text = "Continue";
             playButton.onClick.RemoveAllListeners();
             playButton.onClick.AddListener(ContinueFromSave);
         } else {
-            playButtonText.text = ">Play";
+            playButtonText.text = "Play";
             playButton.onClick.RemoveAllListeners();
             playButton.onClick.AddListener(GoClassPage);
         }

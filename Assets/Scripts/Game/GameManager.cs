@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager> {
 
     private Coroutine levelLoad = null;
 
+    const int LAST_LEVEL_INDEX = 2;
+
     private void Start() {
         levelDoor = FindFirstObjectByType<LevelDoor>(FindObjectsInactive.Include).OrNull()?.gameObject;
         if (levelDoor) {
@@ -41,7 +43,12 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void LoadNextLevel() {
-        levelLoad ??= StartCoroutine(LoadNext());
+        if (SceneManager.GetActiveScene().buildIndex != LAST_LEVEL_INDEX) {
+            levelLoad ??= StartCoroutine(LoadNext());
+        } else {
+            SaveManager.instance.DeleteSave();
+            LoadMainMenu();
+        }
     }
 
     public void RegisterBossSpawn() {
@@ -78,9 +85,7 @@ public class GameManager : Singleton<GameManager> {
 
     public void PlayerDeath() {
         onPlayerDeath?.Invoke();
-        if (File.Exists(SaveManager.instance.GetPath())) {
-            File.Delete(SaveManager.instance.GetPath());
-        }
+        SaveManager.instance.DeleteSave();
         LoadMainMenu();
     }
 }
