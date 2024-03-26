@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelIncrements:
   - type: 0
-    value: 10
+    value: 15
   - type: 1
-    value: 1
+    value: 5
   - type: 2
     value: 5
   - type: 3
     value: 1
   - type: 4
-    value: 0.125
+    value: 0.5
   baseLevelXP: 100
   levelIncrease: 1
   maxLevel: 10

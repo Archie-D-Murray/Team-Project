@@ -46,6 +46,10 @@ public class EnemyScript : MonoBehaviour {
         }
     }
 
+    public virtual void Stop() {
+        enabled = false;
+    }
+
     protected virtual void InitEnemy() {
         type = EnemyType.STATIC;
         id = Utilities.DeterministicHashCode.Hash(type.ToString() + name);
@@ -96,8 +100,11 @@ public class EnemyScript : MonoBehaviour {
 
     public virtual void SetEnemyManager(EnemyManager enemyManager) {
         this.enemyManager = enemyManager;
+        enemyManager.RegisterEnemy(this);
+        GameManager.instance.onPlayerDeath += Stop;
         health.onDeath += () => {
             enemyManager.playerLevel.AddXP(xpAmount);
+            enemyManager.UnregisterEnemy(this);
             Destroy(gameObject);
         };
     }

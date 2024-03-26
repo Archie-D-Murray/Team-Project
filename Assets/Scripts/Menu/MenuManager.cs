@@ -1,47 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 
 using Data;
 
 using Entity.Player;
 
+using TMPro;
+
+using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour
-{
-    [SerializeField] private GameObject[] mainPage;
-    [SerializeField] private GameObject[] classPage;
+public class MenuManager : MonoBehaviour {
+    [SerializeField] private Button playButton;
+    [SerializeField] private TMP_Text playButtonText;
+    [SerializeField] private CanvasGroup mainMenu;
+    [SerializeField] private CanvasGroup classMenu;
 
     private void Start() {
-        GoMainPage();    
+        if (CheckForExistingSave()) {
+            playButtonText.text = ">Continue";
+            playButton.onClick.RemoveAllListeners();
+            playButton.onClick.AddListener(ContinueFromSave);
+        } else {
+            playButtonText.text = ">Play";
+            playButton.onClick.RemoveAllListeners();
+            playButton.onClick.AddListener(GoClassPage);
+        }
+        mainMenu.FadeCanvas(0.1f, false, this);
+    }
+
+    public void ContinueFromSave() {
+        SaveManager.instance.Load();
     }
 
     public void GoClassPage() {
-        foreach(GameObject button in mainPage) {
-            button.SetActive(false);
-        }
-        foreach(GameObject button in classPage) {
-            button.SetActive(true);
-        }
+        mainMenu.FadeCanvas(0.1f, true, this);
+        classMenu.FadeCanvas(0.1f, false, this);
+    }
+
+    private bool CheckForExistingSave() {
+        return File.Exists(SaveManager.instance.GetPath());
     }
 
     public void GoMainPage() {
-        foreach (GameObject button in mainPage) {
-            button.SetActive(true);
-        }
-        foreach (GameObject button in classPage) {
-            button.SetActive(false);
-        }
+        mainMenu.FadeCanvas(0.1f, false, this);
+        classMenu.FadeCanvas(0.1f, true, this);
     }
 
     public void StartGame(int playerClass) {
-        //singleton stuff idk lol
-        SaveManager.instance.SetPlayerClass((PlayerClass) playerClass);
+        SaveManager.instance.SetPlayerClass((PlayerClass)playerClass);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Quit() {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
         Application.Quit();
+#endif
     }
 }

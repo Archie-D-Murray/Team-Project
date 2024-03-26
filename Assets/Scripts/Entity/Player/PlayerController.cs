@@ -9,6 +9,8 @@ using UnityEngine;
 
 using Data;
 
+using Utilities;
+
 namespace Entity.Player {
     [Serializable] public enum PlayerClass { RANGED, MELEE, MAGE }
     public class PlayerController : MonoBehaviour, ISerialize {
@@ -36,7 +38,17 @@ namespace Entity.Player {
             weaponController = GetComponentInChildren<WeaponController>();
             spriteRenderer = GetComponentsInChildren<SpriteRenderer>().First((SpriteRenderer spriteRenderer) => spriteRenderer.gameObject != weaponController.gameObject);
             attackSystem = null;
-            DebugInitialise();
+            GetComponent<Health>().onDeath += () => {
+                GetComponentInChildren<SpriteRenderer>().FadeColour(Color.clear, 0.5f, this);
+                Destroy(gameObject, 0.75f);
+                GameManager.instance.PlayerDeath();
+            };
+        }
+
+        private void Start() {
+            if (!GameManager.instance) {
+                DebugInitialise();
+            }
         }
 
         public void DebugInitialise(PlayerClass? newClass = null) {

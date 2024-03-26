@@ -14,7 +14,7 @@ namespace Data {
 
         [SerializeField] private List<ISerialize> serializeObjects;
 
-        public Entity.Player.PlayerClass playerSpawnClass { get; private set; }
+        public Entity.Player.PlayerClass playerSpawnClass;
 
         [SerializeField] string path;
 
@@ -23,6 +23,8 @@ namespace Data {
             path = Path.Combine(Application.dataPath, "Game.json");
             SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => Save();
         }
+
+        public string GetPath() => path;
 
         public void Save() {
             StartCoroutine(SaveIEnumerator());

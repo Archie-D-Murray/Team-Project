@@ -75,9 +75,13 @@ namespace Utilities {
             }
         }
 
-        public void Restart(float newTime) {
-            _initialTime = newTime;
-            _time = newTime;
+        public void Restart(float? newTime = null) {
+            if (!newTime.HasValue) {
+                _time = _initialTime;
+            } else {
+                _initialTime = newTime.Value;
+                _time = newTime.Value;
+            }
             isRunning = true;
         }
     }

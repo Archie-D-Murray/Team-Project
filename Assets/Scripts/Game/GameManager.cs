@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.IO;
 
 using Data;
 
@@ -17,10 +18,10 @@ public class GameManager : Singleton<GameManager> {
     public GameObject levelDoor;
     public Fading screenFader;
     public Action onLevelClear = delegate { };
+    public Action onPlayerDeath = delegate { };
     public BossState bossState;
 
     private Coroutine levelLoad = null;
-    [SerializeField] private GameObject playerPrefab;
 
     private void Start() {
         levelDoor = FindFirstObjectByType<LevelDoor>(FindObjectsInactive.Include).OrNull()?.gameObject;
@@ -35,6 +36,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     private void InitPlayer() {
+        Debug.Log("Initialised Player!");
         FindFirstObjectByType<PlayerController>().DebugInitialise(SaveManager.instance.playerSpawnClass);
     }
 
@@ -62,7 +64,7 @@ public class GameManager : Singleton<GameManager> {
         yield return Yielders.waitForEndOfFrame;
     }
 
-    internal void LoadMainMenu() {
+    public void LoadMainMenu() {
         StartCoroutine(MainMenu());
     }
 
@@ -72,5 +74,13 @@ public class GameManager : Singleton<GameManager> {
             yield return Yielders.waitForEndOfFrame;
         }
         SceneManager.LoadScene(0);
+    }
+
+    public void PlayerDeath() {
+        onPlayerDeath?.Invoke();
+        if (File.Exists(SaveManager.instance.GetPath())) {
+            File.Delete(SaveManager.instance.GetPath());
+        }
+        LoadMainMenu();
     }
 }

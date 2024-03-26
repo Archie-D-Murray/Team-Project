@@ -33,20 +33,10 @@ namespace Entity.Player {
 
         protected override IEnumerator WeaponAttack(float attackTime) {
             renderer.sprite = frames[0];
-            CountDownTimer frameTimer = new CountDownTimer(attackTime / (frames.Length - 1));
-            int frame = 0;
-            while (frame != frames.Length) {
-                frameTimer.Update(Time.fixedDeltaTime);
-                if (frameTimer.isFinished && frame < frames.Length) {
-                    frame++;
-                    if (frame < frames.Length) {
-                    renderer.sprite = frames[frame];
-                    } else {
-                        break;
-                    }
-                    frameTimer.Reset();
-                    frameTimer.Start();
-                }
+            float timer = 0f;
+            while (timer < attackTime) {
+                timer += Time.fixedDeltaTime;
+                renderer.sprite = frames[Mathf.Clamp(Mathf.FloorToInt(3f * (timer / attackTime)), 0, frames.Length - 1)];
                 yield return Yielders.waitForFixedUpdate;
             }
             renderer.sprite = frames[frames.Length - 1];

@@ -57,10 +57,6 @@ namespace Entity.Enemy {
         private void Spawn() {
             EnemyScript enemy = Instantiate(enemyPrefab, spawnPoints[0].position, Quaternion.AngleAxis(Random.Range(-180f, 180f), Vector3.forward)).GetComponent<EnemyScript>();
             enemy.SetEnemyManager(enemyManager);
-            enemyManager.RegisterEnemy(enemy);
-            enemy.GetComponent<Health>().onDeath += () => {
-                enemyManager.UnregisterEnemy(enemy);
-            };
         }
     }
 }
