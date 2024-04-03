@@ -72,7 +72,7 @@ namespace Entity.Player {
         }
 
         public void LevelUpStat(StatType type) {
-            stats.IncrementStat(type, Array.Find(config.levelIncrements, (Stat stat) => stat.type == type).value);
+            stats.UpdateStat(type, Array.Find(config.levelIncrements, (Stat stat) => stat.type == type).value);
             unappliedLevels--;
             Debug.Log($"Levelled up stat: {type}");
         }

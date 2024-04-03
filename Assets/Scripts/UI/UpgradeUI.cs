@@ -46,7 +46,7 @@ namespace UI {
                     float statAmount = upgrade.GetRandomStat();
                     GameObject prefabInstance = Instantiate(upgradePrefab, upgradeCanvas.transform);
                     Array.Find(prefabInstance.GetComponentsInChildren<Image>(), (Image image) => !image.raycastTarget).sprite = upgrade.icon;
-                    prefabInstance.GetComponentInChildren<Button>().onClick.AddListener(() => stats.IncrementStat(upgrade.stat, statAmount));
+                    prefabInstance.GetComponentInChildren<Button>().onClick.AddListener(() => stats.UpdateStat(upgrade.stat, statAmount));
                     prefabInstance.GetComponentInChildren<Button>().onClick.AddListener(() => origin.Loot());
                     prefabInstance.GetComponentInChildren<Button>().onClick.AddListener(() => Hide());
                     Array.Find(prefabInstance.GetComponentsInChildren<TMP_Text>(), (TMP_Text text) => !text.transform.parent.gameObject.HasComponent<Button>()).text = $"{upgrade.stat}:\n+{statAmount:0.0}";

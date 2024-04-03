@@ -40,12 +40,13 @@ namespace Entity {
         }
 
         private void UpdateMaxHealth(StatType type, float health) {
+            Debug.Log($"Updated max health for {name} to {health}");
             if (type != StatType.HEALTH) {
                 return;
             }
             float diff = health - currentHealth;
             maxHealth = health;
-            Damage(diff);
+            Heal(diff);
         }
 
         /// <summary>Damages an entity</summary>

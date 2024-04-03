@@ -73,6 +73,7 @@ namespace Entity {
         public void UpdateStat(StatType type, float amount, bool setToValue = false) {
             Stat stat = FindStat(type);
             stat.value = setToValue ? amount : stat.value + amount;
+            Debug.Log("Firing updateStat");
             updateStat?.Invoke(type, stat.value);
         }
 
@@ -115,15 +116,6 @@ namespace Entity {
             stats = new Stat[data.playerData.stats.Count];
             for (int i = 0; i < data.playerData.stats.Count; i++) {
                 stats[i] = data.playerData.stats[i];
-            }
-        }
-
-        public void IncrementStat(StatType type, float amount) {
-            Stat stat = FindStat(type);
-            if (stat != null) {
-                stat.value += amount;
-            } else {
-                Debug.LogWarning($"Tried to update stat that does not exist: {type}");
             }
         }
 
