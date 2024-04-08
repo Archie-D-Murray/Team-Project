@@ -7,7 +7,7 @@ using Data;
 
 namespace Items {
     public class Inventory : MonoBehaviour, ISerialize {
-        public const int MAX_ITEMS = 10;
+        public const int MAX_ITEMS = 12;
         public Item[] items = new Item[MAX_ITEMS];
         public SpellData[] spells = new SpellData[3];
         public Action onAddItem;

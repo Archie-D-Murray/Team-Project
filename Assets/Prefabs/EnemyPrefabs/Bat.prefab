@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 2391381286575771018}
   - component: {fileID: 630065963929560556}
   m_Layer: 6
-  m_Name: ShootingEnemy
+  m_Name: Bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
