@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorials:
   - {fileID: 11400000, guid: cf9518ed2e8c2820497a6c48b8851a21, type: 2}
+  - {fileID: 11400000, guid: 06b8e9d888da36ec9b62397024724924, type: 2}
   tutorialPrefab: {fileID: 462028665919932630, guid: 834e5859a07842c4aac9bb84e9e42bbe, type: 3}
   canvas: {fileID: 0}
   playerController: {fileID: 0}
