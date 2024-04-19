@@ -1,0 +1,20 @@
+{
+    "playerData": {
+        "playerClass": 0,
+        "stats": [],
+        "playerPos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "weaponIndex": 0,
+        "playerCurrentHealth": 0.0,
+        "playerCurrentMana": 0.0,
+        "items": [],
+        "spells": [],
+        "level": 0,
+        "xp": 0,
+        "unappliedLevels": 0
+    },
+    "sceneID": 1
+}
