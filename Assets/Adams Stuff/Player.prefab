@@ -41,7 +41,7 @@ Transform:
   - {fileID: 8356404200030366508}
   - {fileID: 8079533496211362142}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9078072900660920934
 MonoBehaviour:
@@ -55,19 +55,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ca91c687e75644b9fba95a72fda24e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statDict:
+  stats:
   - type: 0
-    value: 100
+    value: 10
   - type: 1
     value: 5
   - type: 2
-    value: 10
-  - type: 3
-    value: 7
+    value: 3
   - type: 4
     value: 1
+  - type: 3
+    value: 10
   - type: 5
-    value: 50
+    value: 10
 --- !u!114 &9077098794217014807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 0
+  maxHealth: 100
 --- !u!114 &5637498645153542547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - itemData: {fileID: 11400000, guid: 3f03bca02034de047b5a772471c15973, type: 2}
-    type: 2
+  - itemData: {fileID: 11400000, guid: 1dbafa3d22295dd4e98f3950c442582d, type: 2}
+    type: 3
     count: 1
   - itemData: {fileID: 11400000, guid: e17901be3dca61c4cae84994e204e3a0, type: 2}
     type: 1
@@ -119,15 +119,21 @@ MonoBehaviour:
   - itemData: {fileID: 11400000, guid: a378170a4e703fb4ca92e5e740dce1db, type: 2}
     type: 1
     count: 1
-  - itemData: {fileID: 11400000, guid: 734e42dbdc21afe449cc4a3909d8f896, type: 2}
+  - itemData: {fileID: 11400000, guid: 7b61c32e6b2b13a4099f816103150624, type: 2}
     type: 2
     count: 1
   - itemData: {fileID: 11400000, guid: 9bb4080d23d720f468d8c67613cc882d, type: 2}
     type: 4
     count: 1
-  - itemData: {fileID: 11400000, guid: 9b4d2b1c18ab3ea45a3ebe899d835094, type: 2}
+  - itemData: {fileID: 11400000, guid: aab1e16bee37ff84caf8d7e91841d556, type: 2}
     type: 3
     count: 1
+  - itemData: {fileID: 0}
+    type: 0
+    count: 0
+  - itemData: {fileID: 0}
+    type: 0
+    count: 0
   - itemData: {fileID: 0}
     type: 0
     count: 0
@@ -156,12 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb4f396ebd966642b845fb33de84417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerClass: 1
+  playerClass: 0
   animator: {fileID: 0}
   rb2D: {fileID: 0}
   weaponController: {fileID: 0}
   lastDir: {x: 0, y: 0}
   stats: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  level: {fileID: 0}
 --- !u!50 &2482941750940268363
 Rigidbody2D:
   serializedVersion: 4
@@ -300,6 +308,7 @@ GameObject:
   - component: {fileID: 8079533496211362142}
   - component: {fileID: 3776379182195436073}
   - component: {fileID: 6450699187699433588}
+  - component: {fileID: 1884077347819203816}
   m_Layer: 0
   m_Name: Temp sword
   m_TagString: Untagged
@@ -363,7 +372,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 827265d833db96d468903ef24b91a112, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -371,7 +380,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6450699187699433588
@@ -393,6 +402,41 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+--- !u!58 &1884077347819203816
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2430156140973952880}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.375}
+  serializedVersion: 2
+  m_Radius: 0.75
 --- !u!1 &6923347667607853242
 GameObject:
   m_ObjectHideFlags: 0
