@@ -19,7 +19,7 @@ MonoBehaviour:
   maxCount: 1
   damageModifier: 3
   drawTimeModifier: 1
-  projectileSpeed: 600
+  projectileSpeed: 6
   missileDuration: 2
   projectiles: 3
   spreadAngle: 45

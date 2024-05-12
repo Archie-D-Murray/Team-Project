@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 3776379182195436073}
   - component: {fileID: 6450699187699433588}
   - component: {fileID: 1884077347819203816}
+  - component: {fileID: 4937544375902889407}
   m_Layer: 0
   m_Name: Temp sword
   m_TagString: Untagged
@@ -403,6 +404,41 @@ MonoBehaviour:
     - rid: -2
       type: {class: , ns: , asm: }
 --- !u!58 &1884077347819203816
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2430156140973952880}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.375}
+  serializedVersion: 2
+  m_Radius: 0.75
+--- !u!58 &4937544375902889407
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
