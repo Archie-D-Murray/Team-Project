@@ -127,15 +127,18 @@ namespace Entity.Player {
             switch (playerClass) {
                 case PlayerClass.RANGED:
                     level.SetConfig(AssetServer.instance.rangedConfig);
+                    spriteRenderer.material = AssetServer.instance.rangedMaterial;
                     SetWeapon<BowData>(inventory.items[data.playerData.weaponIndex].itemData as BowData);
                     weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as BowData);
                     break;
                 case PlayerClass.MELEE:
+                    spriteRenderer.material = AssetServer.instance.meleeMaterial;
                     level.SetConfig(AssetServer.instance.meleeConfig);
                     SetWeapon<SwordData>(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
                     weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as SwordData);
                     break;
                 case PlayerClass.MAGE:
+                    spriteRenderer.material = AssetServer.instance.mageMaterial;
                     level.SetConfig(AssetServer.instance.mageConfig);
                     SetWeapon<MageStaffData>(inventory.items[data.playerData.weaponIndex].itemData as MageStaffData);
                     weaponController.SetWeapon(inventory.items[data.playerData.weaponIndex].itemData as MageStaffData);
