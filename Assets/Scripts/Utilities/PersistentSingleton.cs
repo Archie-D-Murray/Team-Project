@@ -26,6 +26,18 @@ namespace Utilities {
             }
         }
 
+        public static void StartSingleton() {
+            if (internalInstance == null) {
+                internalInstance = FindFirstObjectByType<T>();
+                if (internalInstance == null) {
+                    GameObject obj = new GameObject();
+                    obj.name = $"{typeof(T).Name} - AutoCreated";
+                    internalInstance = obj.AddComponent<T>();
+                    DontDestroyOnLoad(instance.gameObject);
+                }
+            }
+        }
+
         protected virtual void Awake() => InitializeSingleton();
 
         protected virtual void InitializeSingleton() {

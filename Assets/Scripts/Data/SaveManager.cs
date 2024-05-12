@@ -52,6 +52,8 @@ namespace Data {
             foreach (ISerialize serializeObject in serializeObjects) {
                 serializeObject?.OnDeserialize(data);
             }
+            // NOTE: Needed to ensure that PlayerController doesn't initialise as default
+            GameManager.StartSingleton();
         }
 
         public void Load() {

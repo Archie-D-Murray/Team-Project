@@ -19,6 +19,7 @@ public class MenuManager : MonoBehaviour {
     [SerializeField] private CanvasGroup classMenu;
 
     private void Start() {
+        SaveManager.StartSingleton();
         if (CheckForExistingSave()) {
             playButtonText.text = "Continue";
             playButton.onClick.RemoveAllListeners();
