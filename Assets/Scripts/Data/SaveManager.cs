@@ -21,7 +21,7 @@ namespace Data {
         private void Start() {
             serializeObjects = FindSerializeObjects();
             path = Path.Combine(Application.dataPath, "Game.json");
-            SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => Save();
+            SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => { serializeObjects = FindSerializeObjects(); Save(); };
         }
 
         public string GetPath() => path;
