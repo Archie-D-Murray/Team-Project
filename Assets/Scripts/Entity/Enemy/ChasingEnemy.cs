@@ -17,6 +17,9 @@ public class ChasingEnemy : EnemyScript {
     protected override void Start() {
         base.Start(); // Still need to get component references so need to call base
         agent = GetComponent<NavMeshAgent>();
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit pos, 20.0f, NavMesh.AllAreas)) {
+            agent.Warp(pos.position);
+        }
         agent.updateUpAxis = false;
         agent.updateRotation = false;
         health.onDamage += GetComponent<KnockbackHandler>().Knockback;
