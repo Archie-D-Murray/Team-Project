@@ -13,7 +13,6 @@ namespace Entity {
     [Serializable] public enum BossState { NONE, ALIVE, DEAD }
 
     public class BossEnemy : EnemyScript {
-
         public GameObject bossProjectilePrefab;
         public GameObject enemyMinion;
         NavMeshAgent agent;
