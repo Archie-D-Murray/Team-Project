@@ -14,7 +14,7 @@ R to swap out spells
 ## Screenshot
 Screen shot of the UI at the end of the module
 
-![Demo](./Share/Archie/UI Final.png)
+![Demo](./Share/Archie/UI_Final.png)
 
 ## Short Demo Video
-![Video](./Recordings/Run_Edited.mp4)
+[![Video](./Recordings/Thumbnail.png)](./Recordings/Run_Edited.mp4)
