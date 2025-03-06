@@ -12,7 +12,7 @@ namespace Entity {
         private static Stat[] DefaultStats = new Stat[6] { 
             new Stat(StatType.HEALTH      ,  10f),  
             new Stat(StatType.SPEED       ,   5f),
-            new Stat(StatType.DAMAGE      ,   1f),
+            new Stat(StatType.DAMAGE      ,   3f),
             new Stat(StatType.ATTACK_SPEED,   1f),
             new Stat(StatType.MAGIC       ,   10f),
             new Stat(StatType.MANA        ,  10f),

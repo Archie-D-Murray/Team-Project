@@ -1,17 +1,107 @@
 {
     "playerData": {
         "playerClass": 0,
-        "stats": [],
+        "stats": [
+            {
+                "type": 0,
+                "value": 10.0
+            },
+            {
+                "type": 1,
+                "value": 5.0
+            },
+            {
+                "type": 2,
+                "value": 1.0
+            },
+            {
+                "type": 4,
+                "value": 1.0
+            },
+            {
+                "type": 3,
+                "value": 10.0
+            },
+            {
+                "type": 5,
+                "value": 10.0
+            }
+        ],
         "playerPos": {
-            "x": 0.0,
-            "y": 0.0,
+            "x": 3.9200000762939455,
+            "y": 4.639999866485596,
             "z": 0.0
         },
-        "weaponIndex": 0,
-        "playerCurrentHealth": 0.0,
-        "playerCurrentMana": 0.0,
-        "items": [],
-        "spells": [],
+        "weaponIndex": -1,
+        "playerCurrentHealth": 10.0,
+        "playerCurrentMana": 10.0,
+        "items": [
+            {
+                "count": 1,
+                "type": 3,
+                "uid": 1033028136
+            },
+            {
+                "count": 1,
+                "type": 1,
+                "uid": -1485625236
+            },
+            {
+                "count": 1,
+                "type": 1,
+                "uid": 934320016
+            },
+            {
+                "count": 1,
+                "type": 2,
+                "uid": -1813082027
+            },
+            {
+                "count": 1,
+                "type": 4,
+                "uid": -64803719
+            },
+            {
+                "count": 1,
+                "type": 3,
+                "uid": -877540976
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            },
+            {
+                "count": -1,
+                "type": 0,
+                "uid": -2147483648
+            }
+        ],
+        "spells": [
+            432583936,
+            1913975003,
+            1541866193
+        ],
         "level": 0,
         "xp": 0,
         "unappliedLevels": 0

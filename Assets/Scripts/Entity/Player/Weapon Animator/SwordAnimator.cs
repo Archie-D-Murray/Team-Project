@@ -81,9 +81,9 @@ namespace Entity.Player {
                     float endAngle = positionAngle + swingDirection * swingRotation;
                     while (timer <= attackTime) {
                         timer += Time.fixedDeltaTime;
-                        currentAngle = Mathf.Lerp(startAngle, endAngle, timer / attackTime);
+                        currentAngle = Mathf.Lerp(startAngle, endAngle, 0.5f + 0.5f * Mathf.Sin(Mathf.PI * (timer / attackTime) - 0.5f * Mathf.PI));
                         weaponController.transform.localPosition = new Vector2(Mathf.Sin(currentAngle * Mathf.Deg2Rad), Mathf.Cos(currentAngle * Mathf.Deg2Rad));
-                        weaponController.transform.localRotation = Quaternion.RotateTowards(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, -currentAngle + spriteOffset + Mathf.Lerp(0f, -angleOffset * swingDirection, timer / attackTime)), 360f * Time.fixedDeltaTime / attackTime);
+                        weaponController.transform.localRotation = Quaternion.RotateTowards(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, -currentAngle + spriteOffset + Mathf.SmoothStep(0f, -angleOffset * swingDirection, timer / attackTime)), 360f * Time.fixedDeltaTime / attackTime);
                         yield return Yielders.waitForFixedUpdate;
                     }
                     swingDirection *= -1f;
@@ -125,7 +125,6 @@ namespace Entity.Player {
                         attackTick += Time.fixedDeltaTime;
                         weaponController.transform.localPosition = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0f) * radius;
                         weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.up, (Vector2) weaponController.transform.localPosition.normalized) + spriteOffset), Time.fixedDeltaTime * rotationSpeed);
-                        // weaponController.transform.localRotation = Quaternion.Slerp(weaponController.transform.localRotation, Quaternion.Euler(0f, 0f, angle), Time.fixedDeltaTime * rotationSpeed);
                         if (attackTick >= 0.25f) {
                             attackTick -= 0.25f;
                             ResetEnemies();
@@ -187,6 +186,10 @@ namespace Entity.Player {
                     }
                 }
             }
+        }
+
+        public float Damp(float magnitude, float t) {
+            return magnitude * (0.5f + 0.5f * Mathf.Sin(Mathf.PI * t - 0.5f * Mathf.PI));
         }
     }
 }

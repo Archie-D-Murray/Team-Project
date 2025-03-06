@@ -21,7 +21,7 @@ namespace Data {
         private void Start() {
             serializeObjects = FindSerializeObjects();
             path = Path.Combine(Application.dataPath, "Game.json");
-            SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => Save();
+            SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => { serializeObjects = FindSerializeObjects(); Save(); };
         }
 
         public string GetPath() => path;
@@ -46,12 +46,20 @@ namespace Data {
             string buffer = File.ReadAllText(path);
             yield return Yielders.waitForEndOfFrame;
             data = JsonUtility.FromJson<GameData>(buffer);
+
             if (switchScene) {
-                SceneManager.LoadSceneAsync(data.sceneID);
+                AsyncOperation loadOperation = SceneManager.LoadSceneAsync(data.sceneID);
+                while (!loadOperation.isDone) {
+                    yield return Yielders.waitForEndOfFrame;
+                }
+                GameManager.StartSingleton();
+            } else {
+                GameManager.StartSingleton();
             }
             foreach (ISerialize serializeObject in serializeObjects) {
                 serializeObject?.OnDeserialize(data);
             }
+            // NOTE: Needed to ensure that PlayerController doesn't initialise as default
         }
 
         public void Load() {
